@@ -500,7 +500,7 @@ PORTC.5 = 0;
 
 ucState = 0x01;
 
-PIND.3  = 0;
+PORTD.7  = 0;
 }
 
 unsigned long PLM_GetControlRegister(void){
@@ -512,7 +512,7 @@ PORTC.6 = 1;
 PORTC.5 = 1;
 
 ucState = 0x02;
-PIND.3  = 1;
+PORTD.7  = 0;
 
 while(PLM_IsRunning() != 0);
 
@@ -598,7 +598,7 @@ if(PLM_IsRunning()>0){
 
 PLM_Task();
 }else{
-PIND.3  = 1;
+PORTD.7  = 1;
 }
 }
 
@@ -609,7 +609,8 @@ interrupt [13] void spi_isr(void)
 
 void main(void)
 {
-PIND.3  = 1;
+int i;
+PORTD.7  = 1;
 
 IO_Init();
 TimerCounter_Init();
@@ -645,20 +646,22 @@ switch(ucCommand){
 case 0x00:
 {											 
 
-*((unsigned long*)&ucPacket[0]) = PLM_GetControlRegister();
+*((unsigned long*)&ucPacket[3]) = PLM_GetControlRegister();
 ByteReverse((unsigned long*)&ucPacket[3]);
 *ucPacket = 0b10101010;
 *(ucPacket + 1) = ucCommand;
 *(ucPacket + 2) = 3;
-RS232_SetData(ucPacket, 7);
+
+for(i=0;i<7;i++){
+delay_ms(10);
+putchar(ucPacket[i]);
+}
 break;
 }
 
 case 0x01:
 {											
 
-ByteReverse((unsigned long*)&ucPacket[0]);
-PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
 break;
 }
 case 0x03:

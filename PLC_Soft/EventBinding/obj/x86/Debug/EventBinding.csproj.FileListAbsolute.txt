@@ -13,3 +13,5 @@ F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\GenerateResource.read.1.tlog
 F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\GenerateResource.write.1.tlog
 F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\EventBinding.exe
 F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\EventBinding.pdb
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\EventBinding\obj\x86\Debug\EventBinding.exe
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\EventBinding\obj\x86\Debug\EventBinding.pdb
