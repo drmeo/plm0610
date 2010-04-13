@@ -1,0 +1,400 @@
+﻿<Window x:Class="PLC_Soft.frmSTRegister"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ST5540/ ST7538 Register Control"
+        Height="500"
+        Width="640"
+        ResizeMode="NoResize"
+        xmlns:my="clr-namespace:PLC_Soft"
+        xmlns:properties="clr-namespace:PLC_Soft.Properties">
+
+    <Grid Margin="5"
+          Height="Auto">
+        <Grid.Resources>
+            <properties:Settings x:Key="settings" />
+            <my:ChipTypeConverter x:Key="chipTypeConverter" />
+            <my:RegisterConverter x:Key="registerConverter" />
+            <my:Frequencies x:Key="frequencies" />
+            <my:BaudRates x:Key="baudrates" />
+            <my:Deviations x:Key="deviations" />
+            <my:WatchDogs x:Key="watchdogs" />
+            <my:TXTimeOuts x:Key="txtimeouts" />
+            <my:FreqDetTimes x:Key="freqdettimes" />
+            <my:ZeroCrossingSYNCs x:Key="zerocrossingsyncs" />
+            <my:MainInterfaces x:Key="maininterfaces" />
+            <my:OutputClocks x:Key="outputclocks" />
+            <my:SensitiveModes x:Key="sensitivemodes" />
+            <my:InputFilters x:Key="inputfilers" />
+            <my:DetectionMethods x:Key="detectionmethods" />
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Select ST 7538/7540 : "
+                   Margin="5" />
+            <ComboBox Grid.Column="1"
+                      Height="23"
+                      Margin="5"
+                      Name="cmbSTSelect"
+                      Width="120"
+                      SelectedIndex="{Binding Source={x:Static properties:Settings.Default},
+                               Path=SelectedChip}">
+                <ComboBoxItem Content="ST 7538" />
+                <ComboBoxItem Content="ST 7540" />
+            </ComboBox>
+        </Grid>
+        <Border Grid.Row="1"
+                Height="Auto">
+            <Grid Height="Auto">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Content="Frequency"
+                       Margin="2" />
+                <Label Content="Transmission Time Out"
+                       Margin="2"
+                       Grid.Row="2" />
+                <Label Content="Output Clock"
+                       Margin="2"
+                       Grid.Row="4" />
+                <Label Content="Output Vol Level Frezze"
+                       Margin="2"
+                       Grid.Row="6"
+                       Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+                <Label Content="Extended Register"
+                       Margin="2"
+                       Grid.Row="8"
+                       Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+                <Label Content="Baud Rate"
+                       Margin="2"
+                       Grid.Column="1" />
+                <Label Content="Sensitive Mode"
+                       Margin="2"
+                       Grid.Column="1"
+                       Grid.Row="4" />
+                <Label Content="Frequency Detection Time"
+                       Margin="2"
+                       Grid.Column="1"
+                       Grid.Row="2" />
+                <Label Content="Frame Header"
+                       Margin="2"
+                       Grid.Column="1"
+                       Grid.Row="8"
+                       Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+                <Label Content="Header Recognition"
+                       Margin="2"
+                       Grid.Column="1"
+                       Grid.Row="6"
+                       Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+                <Label Content="Deviation"
+                       Margin="2"
+                       Grid.Column="2" />
+                <Label Content="Input Filter"
+                       Grid.Row="4"
+                       Margin="2"
+                       Grid.Column="2" />
+                <Label Content="Zero Crossing SYNC"
+                       Grid.Row="2"
+                       Margin="2"
+                       Grid.Column="2" />
+                <Label Content="Frame Length Count"
+                       Grid.Row="6"
+                       Margin="2"
+                       Grid.Column="2"
+                       Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+                <Label Content="Frame Length"
+                       Grid.Row="8"
+                       Grid.Column="2"
+                       Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+                <Label Content="Watch Dog"
+                       Margin="2"
+                       Grid.Column="3" />
+                <Label Content="Detection Method"
+                       Grid.Row="4"
+                       Margin="2"
+                       Grid.Column="3" />
+                <Label Content="Interface Mode"
+                       Grid.Row="2"
+                       Margin="2"
+                       Grid.Column="3" />
+                <Label Content="Header Length"
+                       Grid.Row="6"
+                       Margin="2"
+                       Grid.Column="3"
+                       Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+                <ComboBox Grid.Row="1"
+                          Margin="3"
+                          Name="cmbFrequency"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="DisplayName"
+                          SelectedIndex="{Binding Source={x:Static properties:Settings.Default},
+                               Path=STFrequency}"
+                          ItemsSource="{Binding Path=Freqs, Source={StaticResource frequencies}}" />
+                <ComboBox Margin="3"
+                          Name="cmbBaudrate"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="DisplayName"
+                          SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=STBaudRate}"
+                          Grid.Column="1"
+                          Grid.Row="1"
+                          ItemsSource="{Binding Path=Bauds, Source={StaticResource baudrates}}" />
+                <ComboBox Margin="3"
+                          Name="cmbDeviation"
+                          Grid.Column="2"
+                          Grid.Row="1"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="DisplayName"
+                          SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=STDeviation}"
+                          ItemsSource="{Binding Source={StaticResource deviations}, Path=Devs}" />
+                <ComboBox Margin="3"
+                          Name="cmbWatchdog"
+                          Grid.Column="3"
+                          Grid.Row="1"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="DisplayName"
+                          SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=STWatchDog}"
+                          ItemsSource="{Binding Source={StaticResource watchdogs}, Path=WDs}" />
+                <ComboBox Margin="3"
+                          Name="cmbTXTimeout"
+                          Grid.Row="3"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="DisplayName"
+                          SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=STTXTimeout}"
+                          ItemsSource="{Binding Source={StaticResource txtimeouts}, Path=TXs}" />
+                <ComboBox Margin="3"
+                          Name="cmbFreDetTime"
+                          Grid.Column="1"
+                          Grid.Row="3"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="DisplayName"
+                          SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=STFreqDetTime}"
+                          ItemsSource="{Binding Source={StaticResource freqdettimes}, Path=FDTS}" />
+                <ComboBox Margin="3"
+                          Name="cmbZeroCrossingSYNC"
+                          Grid.Column="2"
+                          Grid.Row="3"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="DisplayName"
+                          SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=STZeroCrossingSYNC}"
+                          ItemsSource="{Binding Source={StaticResource zerocrossingsyncs}, Path=ZCRS}" />
+                <ComboBox Margin="3"
+                          Name="cmbInterface"
+                          Grid.Column="3"
+                          Grid.Row="3"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="DisplayName"
+                          SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=STInterfaceMode}"
+                          ItemsSource="{Binding Source={StaticResource maininterfaces}, Path=Minterfaces}" />
+                <ComboBox Margin="3"
+                          Name="cmbOutputClock"
+                          Grid.Row="5"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="DisplayName"
+                          SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=STOutputClock}"
+                          ItemsSource="{Binding Source={StaticResource outputclocks}, Path=OutputCLKs}" />
+                <ComboBox Margin="3"
+                          Name="cmbSensitiveMode"
+                          Grid.Column="1"
+                          Grid.Row="5"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="DisplayName"
+                          SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=STSensitiveMode}"
+                          ItemsSource="{Binding Source={StaticResource sensitivemodes}, Path=SMs}" />
+                <ComboBox Margin="3"
+                          Name="cmbInputFilter"
+                          Grid.Column="2"
+                          Grid.Row="5"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="DisplayName"
+                          SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=STInputFilter}"
+                          ItemsSource="{Binding Source={StaticResource inputfilers}, Path=Inputfilters}" />
+                <ComboBox Margin="3"
+                          Name="cmbDetMethod"
+                          Grid.Column="3"
+                          Grid.Row="5"
+                          SelectedValuePath="Value"
+                          DisplayMemberPath="DisplayName"
+                          SelectedIndex="{Binding Source={x:Static properties:Settings.Default}, Path=STDetectMethod}"
+                          ItemsSource="{Binding Source={StaticResource detectionmethods}, Path=DMs}" />
+                <ComboBox Margin="3"
+                          Name="cmbOutputVolFrezze"
+                          Grid.Row="7"
+                          Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+                <ComboBox Margin="3"
+                          Name="cmbHeaderRec"
+                          Grid.Column="1"
+                          Grid.Row="7"
+                          Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+                <ComboBox Margin="3"
+                          Name="cmbFrameLengthCount"
+                          Grid.Column="2"
+                          Grid.Row="7"
+                          Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+                <ComboBox Margin="3"
+                          Name="cmbHeaderCount"
+                          Grid.Column="3"
+                          Grid.Row="7"
+                          Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+                <ComboBox Margin="3"
+                          Name="cmbExtReg"
+                          Grid.Row="9"
+                          Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+                <ComboBox Margin="3"
+                          Name="cmbFrameHeader"
+                          Grid.Column="1"
+                          Grid.Row="9"
+                          Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+                <ComboBox Margin="3"
+                          Name="cmbFrameLength"
+                          Grid.Column="2"
+                          Grid.Row="9"
+                          Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+            </Grid>
+        </Border>
+        <Border Grid.Row="2"
+                Height="Auto">
+            <Grid Height="Auto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*" />
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition Width="0.2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="29" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="36" />
+                </Grid.RowDefinitions>
+                <Button Content="Read Register"
+                        Grid.Column="1"
+                        Grid.Row="3"
+                        Margin="10,4,10,4"
+                        Name="btnReadRegister"
+                        Click="btnReadRegister_Click" />
+                <Button Content="Write Register"
+                        Grid.Column="2"
+                        Grid.Row="3"
+                        Name="btnWriteRegister"
+                        Margin="10,4,10,4"
+                        Click="btnWriteRegister_Click" />
+                <Label Content="MSB"
+                       Grid.Column="1"
+                       Height="28"
+                       HorizontalAlignment="Left"
+                       Margin="12,5,0,0"
+                       VerticalAlignment="Top"
+                       Grid.RowSpan="2" />
+                <Label Content="LSB"
+                       Grid.Column="2"
+                       Height="28"
+                       HorizontalAlignment="Right"
+                       Margin="0,5,12,0"
+                       VerticalAlignment="Top"
+                       Grid.RowSpan="2" />
+                <Label Content="CONTROL REGISTER"
+                       Grid.Column="1"
+                       Grid.ColumnSpan="2"
+                       Height="28"
+                       Width="Auto"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"
+                       Grid.RowSpan="2" />
+                <TextBlock Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           Grid.Row="1"
+                           FontFamily="Tahoma"
+                           FontSize="16"
+                           Height="24"
+                           HorizontalAlignment="Left"
+                           Margin="30,3,0,3"
+                           Name="txtReg"
+                           TextAlignment="Center"
+                           Width="250"
+                           VerticalAlignment="Center">
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{StaticResource registerConverter}">
+                            <Binding ElementName="cmbFrequency"
+                                     Path="SelectedValue" />
+                            <Binding ElementName="cmbBaudrate"
+                                     Path="SelectedValue" />
+                            <Binding ElementName="cmbDeviation"
+                                     Path="SelectedValue" />
+                            <Binding ElementName="cmbWatchdog"
+                                     Path="SelectedValue" />
+                            <Binding ElementName="cmbTXTimeout"
+                                     Path="SelectedValue" />
+                            <Binding ElementName="cmbFreDetTime"
+                                     Path="SelectedValue" />
+                            <Binding ElementName="cmbZeroCrossingSYNC"
+                                     Path="SelectedValue" />
+                            <Binding ElementName="cmbDetMethod"
+                                     Path="SelectedValue" />
+                            <Binding ElementName="cmbInterface"
+                                     Path="SelectedValue" />
+                            <Binding ElementName="cmbOutputClock"
+                                     Path="SelectedValue" />
+                            <Binding ElementName="cmbSensitiveMode"
+                                     Path="SelectedValue" />
+                            <Binding ElementName="cmbInputFilter"
+                                     Path="SelectedValue" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <TextBlock Grid.Column="1"
+                           Grid.ColumnSpan="2"
+                           Grid.Row="2"
+                           FontFamily="Tahoma"
+                           FontSize="16"
+                           Height="24"
+                           HorizontalAlignment="Left"
+                           Margin="30,3,0,3"
+                           Name="txtExtendedReg"
+                           Text="00000000-00000000-00000000"
+                           TextAlignment="Center"
+                           VerticalAlignment="Center"
+                           Width="250"
+                           Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+                <Label Content="Bit 23-00"
+                       Grid.Column="2"
+                       Grid.Row="1"
+                       Height="24"
+                       HorizontalAlignment="Right"
+                       Margin="0,1,5,5"
+                       Width="60" />
+                <Label Content="Bit 47-24"
+                       Grid.Column="2"
+                       Grid.Row="2"
+                       Height="24"
+                       HorizontalAlignment="Right"
+                       Margin="0,1,5,5"
+                       Width="60"
+                       Visibility="{Binding ElementName=cmbSTSelect, Path=SelectedItem, Mode=OneWay, Converter={StaticResource chipTypeConverter}}" />
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

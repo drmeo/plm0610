@@ -1,0 +1,5 @@
+F:\04.HUT\FINAL\PLC_Soft\CommunicationCore\bin\Debug\CommunicationCore.dll
+F:\04.HUT\FINAL\PLC_Soft\CommunicationCore\bin\Debug\CommunicationCore.pdb
+F:\04.HUT\FINAL\PLC_Soft\CommunicationCore\obj\Debug\ResolveAssemblyReference.cache
+F:\04.HUT\FINAL\PLC_Soft\CommunicationCore\obj\Debug\CommunicationCore.dll
+F:\04.HUT\FINAL\PLC_Soft\CommunicationCore\obj\Debug\CommunicationCore.pdb
