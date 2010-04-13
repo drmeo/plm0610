@@ -1,0 +1,14 @@
+Pass: MM3JY3Zf5un4
+http://code.google.com/p/plm2010/
+
+Apr 14
+	- Kiem soat duoc ngat
+	- Thuc hien truyen thong tin qua RS232
+		+ Chua khong che duoc viec quan ly thong tin tu cong com (thieu tin)
+		+ Giai phap: tang thoi gian delay, tinh toan timeout dua vao so luong byte
+	- Toi viet code tren PC
+	- Hoan thanh cau hinh svn tren google doc
+	- Ke hoach Apr 15
+		+ Hoan thanh viec quan ly du lieu qua rs232
+		+ Test thu quan ly thanh ghi
+Apr 15

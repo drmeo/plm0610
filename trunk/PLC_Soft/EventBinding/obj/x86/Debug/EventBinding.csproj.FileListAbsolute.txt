@@ -1,0 +1,15 @@
+F:\04.HUT\FINAL\PLC_Soft\EventBinding\bin\Debug\EventBinding.exe
+F:\04.HUT\FINAL\PLC_Soft\EventBinding\bin\Debug\EventBinding.pdb
+F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\MainWindow.g.cs
+F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\App.g.cs
+F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\EventBinding_MarkupCompile.cache
+F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\EventBinding_MarkupCompile.lref
+F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\MainWindow.baml
+F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\EventBinding.g.resources
+F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\EventBinding.Properties.Resources.resources
+F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\EventBinding.exe
+F:\04.HUT\FINAL\PLC_Soft\EventBinding\obj\x86\Debug\EventBinding.pdb
