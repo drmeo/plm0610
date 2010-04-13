@@ -1,0 +1,42 @@
+﻿<Window x:Class="MultiBinding.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sum="clr-namespace:MultiBinding"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.Resources>
+            <sum:SumConverter x:Key="sumConverter" />
+        </Grid.Resources>
+        <Slider Height="23"
+                HorizontalAlignment="Left"
+                Margin="176,32,0,0"
+                Name="sldNum1"
+                Maximum="100"
+                Minimum="0"
+                VerticalAlignment="Top"
+                Width="247" />
+        <Slider Height="23"
+                HorizontalAlignment="Left"
+                Margin="176,94,0,0"
+                Name="sldNum2"
+                Maximum="100"
+                Minimum="0"
+                VerticalAlignment="Top"
+                Width="247" />
+        <Label Height="28"
+               HorizontalAlignment="Left"
+               Margin="176,149,0,0"
+               Name="lblResult"
+               VerticalAlignment="Top"
+               Width="247">
+            <Label.Content>
+                <MultiBinding Converter="{StaticResource sumConverter}">
+                    <Binding ElementName="sldNum1"
+                             Path="Value" />
+                    <Binding ElementName="sldNum2"
+                             Path="Value" />
+                </MultiBinding>
+            </Label.Content>
+        </Label>
+    </Grid>
+</Window>
