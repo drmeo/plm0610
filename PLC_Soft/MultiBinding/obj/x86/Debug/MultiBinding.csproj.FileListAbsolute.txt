@@ -1,0 +1,15 @@
+F:\04.HUT\FINAL\PLC_Soft\MultiBinding\bin\Debug\MultiBinding.exe
+F:\04.HUT\FINAL\PLC_Soft\MultiBinding\bin\Debug\MultiBinding.pdb
+F:\04.HUT\FINAL\PLC_Soft\MultiBinding\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\04.HUT\FINAL\PLC_Soft\MultiBinding\obj\x86\Debug\MainWindow.g.cs
+F:\04.HUT\FINAL\PLC_Soft\MultiBinding\obj\x86\Debug\App.g.cs
+F:\04.HUT\FINAL\PLC_Soft\MultiBinding\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+F:\04.HUT\FINAL\PLC_Soft\MultiBinding\obj\x86\Debug\MultiBinding_MarkupCompile.cache
+F:\04.HUT\FINAL\PLC_Soft\MultiBinding\obj\x86\Debug\MultiBinding_MarkupCompile.lref
+F:\04.HUT\FINAL\PLC_Soft\MultiBinding\obj\x86\Debug\MainWindow.baml
+F:\04.HUT\FINAL\PLC_Soft\MultiBinding\obj\x86\Debug\MultiBinding.g.resources
+F:\04.HUT\FINAL\PLC_Soft\MultiBinding\obj\x86\Debug\MultiBinding.Properties.Resources.resources
+F:\04.HUT\FINAL\PLC_Soft\MultiBinding\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\04.HUT\FINAL\PLC_Soft\MultiBinding\obj\x86\Debug\GenerateResource.write.1.tlog
+F:\04.HUT\FINAL\PLC_Soft\MultiBinding\obj\x86\Debug\MultiBinding.exe
+F:\04.HUT\FINAL\PLC_Soft\MultiBinding\obj\x86\Debug\MultiBinding.pdb
