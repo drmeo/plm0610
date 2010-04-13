@@ -398,7 +398,7 @@ unsigned long PLM_GetControlRegister(void){
     PLM_pinRXTX = 1;
     
     ucState = PLM_RX_REG;
-    pin_TASK = 1;
+    pin_TASK = 0;
     
     while(PLM_IsRunning() != 0);
     
@@ -518,6 +518,7 @@ interrupt [SPI_STC] void spi_isr(void)
 
 void main(void)
 {
+    int i;
     pin_TASK = 1;
     // Khai bao bien
 
@@ -565,12 +566,16 @@ void main(void)
                 case COM_GET_CTR:
                 {											 
                     // get control register (comm)
-			        *((unsigned long*)&ucPacket[0]) = PLM_GetControlRegister();
+			        *((unsigned long*)&ucPacket[3]) = PLM_GetControlRegister();
 					ByteReverse((unsigned long*)&ucPacket[3]);
                     *ucPacket = TX_START;// them header
                     *(ucPacket + 1) = ucCommand;// them code
                     *(ucPacket + 2) = 3;// them do dai
-					RS232_SetData(ucPacket, 7);
+					//RS232_SetData(ucPacket, 7);
+                    for(i=0;i<7;i++){
+                        delay_ms(10);
+                        putchar(ucPacket[i]);
+                    }
 					break;
 			    }
 		
@@ -578,8 +583,8 @@ void main(void)
 		        case COM_SET_CTR:
                 {											
                     // set control register (comm, byte0, byte1, byte2, byte3)
-					ByteReverse((unsigned long*)&ucPacket[0]);
-					PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
+//					ByteReverse((unsigned long*)&ucPacket[0]);
+//					PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
 					break;
 			    }
                 case COM_SET_PLM:

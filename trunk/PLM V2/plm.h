@@ -38,6 +38,6 @@
     #define PLM_pinREG_DATA PORTC.6
     #define PLM_pinCD_PD PINC.4
     
-    #define pin_TASK PIND.3 //bao ngat
+    #define pin_TASK PORTD.7 //bao ngat
 #pragma used-
 
