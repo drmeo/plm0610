@@ -254,11 +254,11 @@ void PLM_Task(void){
                             return;
                         }
                     }
-//                    if((ucByte&0x80)==0x80){
-//                        PLM_pinTxD = 1;
-//                    }else{
-//                        PLM_pinTxD = 0;
-//                    }
+                    if((ucByte&0x80)==0x80){
+                        PLM_pinTxD = 1;
+                    }else{
+                        PLM_pinTxD = 0;
+                    }
                     PLM_pinTxD = ucByte & 0x80;                        // transmit 1 bit
                     ucByte <<= 1;
                     ucBitCounter--;
@@ -371,7 +371,7 @@ void PLM_Task(void){
                     }
                     break;
             }
-        }    
+        }   
     }
 }
 
@@ -391,9 +391,7 @@ void PLM_SetControlRegister(unsigned long ulControlRegister)
 
     PLM_pinREG_DATA = 1;
     PLM_pinRXTX = 0;
-    
     ucState = PLM_TX_REG;
-
     pin_TASK = 0;
 }
 
@@ -528,13 +526,14 @@ interrupt [SPI_STC] void spi_isr(void)
 void main(void)
 {
     int i;
-    pin_TASK = 1;
+    
     // Khai bao bien
 
     // Khoi tao cac gia tri
     IO_Init();
     TimerCounter_Init();
     RS232_Init();
+    pin_TASK = 1;
     ExtInterupt_Init();
     
     PLM_Init();
@@ -545,7 +544,7 @@ void main(void)
     while(PLM_IsRunning() != 0);
     PLM_SetControlRegister(DEFAULT_CONTROL_REG);// dummy write
     // ket thuc khoi tao cho thanh ghi
-    
+    putchar('c');
     ucRS232Started = 0;
     // Chuong trinh chinh  
     while (1)
