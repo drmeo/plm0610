@@ -670,6 +670,9 @@ break;
 case 0x01:
 {											
 
+ByteReverse((unsigned long*)&ucPacket[0]);
+PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
+putchar('c');
 break;
 }
 case 0x03:

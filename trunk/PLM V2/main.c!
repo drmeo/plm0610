@@ -1,10 +1,10 @@
-VERSION:1 SOURCE_TIMESTAMP:3C8E754C
-NODE:I LEVEL:0 LINE:24 "C:\cvavr2\inc\mega32.h"
+VERSION:1 SOURCE_TIMESTAMP:3C8E7749
+NODE:I LEVEL:0 LINE:24 "G:\Program Files\CodeVisions\inc\mega32.h"
 NODE:I LEVEL:0 LINE:25 "plm.h"
 NODE:I LEVEL:0 LINE:26 "command.h"
 NODE:I LEVEL:0 LINE:27 "rs232.h"
-NODE:I LEVEL:0 LINE:28 "C:\cvavr2\inc\string.h"
-NODE:I LEVEL:0 LINE:29 "C:\cvavr2\inc\delay.h"
+NODE:I LEVEL:0 LINE:28 "G:\Program Files\CodeVisions\inc\string.h"
+NODE:I LEVEL:0 LINE:29 "G:\Program Files\CodeVisions\inc\delay.h"
 NODE:V LEVEL:0 LINE:41 "ucPacket -> RAM:????"
 NODE:V LEVEL:0 LINE:42 "ucIndex -> RAM:????"
 NODE:V LEVEL:0 LINE:43 "ucLength -> RAM:????"
