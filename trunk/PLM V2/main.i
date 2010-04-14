@@ -371,7 +371,11 @@ PORTC.6 = 0;
 return;
 }
 }
-
+if((ucByte&0x80)==0x80){
+PORTB.6 = 1;
+}else{
+PORTB.6 = 0;
+}
 PORTB.6 = ucByte & 0x80;                        
 ucByte <<= 1;
 ucBitCounter--;
@@ -484,7 +488,7 @@ PORTC.6 = 0;
 }
 break;
 }
-}    
+}   
 }
 }
 
@@ -502,9 +506,7 @@ ucByteCounter = 3;
 
 PORTC.6 = 1;
 PORTC.5 = 0;
-
 ucState = 0x01;
-
 PORTD.7  = 0;
 }
 
@@ -615,11 +617,11 @@ interrupt [13] void spi_isr(void)
 void main(void)
 {
 int i;
-PORTD.7  = 1;
 
 IO_Init();
 TimerCounter_Init();
 RS232_Init();
+PORTD.7  = 1;
 ExtInterupt_Init();
 
 PLM_Init();
@@ -628,6 +630,7 @@ PLM_SetControlRegister(0x1c321800	);
 while(PLM_IsRunning() != 0);
 PLM_SetControlRegister(0x1c321800	);
 
+putchar('c');
 ucRS232Started = 0;
 
 while (1)
