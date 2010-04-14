@@ -87,89 +87,26 @@ sfrb SREG=0x3f;
 	#endif
 #endasm
 
-typedef char *va_list;
-
 #pragma used+
-
-char getchar(void);
-void putchar(char c);
-void puts(char *str);
-void putsf(char flash *str);
-
-char *gets(char *str,unsigned int len);
-
-void printf(char flash *fmtstr,...);
-void sprintf(char *str, char flash *fmtstr,...);
-void snprintf(char *str, unsigned int size, char flash *fmtstr,...);
-void vprintf (char flash * fmtstr, va_list argptr);
-void vsprintf (char *str, char flash * fmtstr, va_list argptr);
-void vsnprintf (char *str, unsigned int size, char flash * fmtstr, va_list argptr);
-signed char scanf(char flash *fmtstr,...);
-signed char sscanf(char *str, char flash *fmtstr,...);
 
 #pragma used-
 
-#pragma library stdio.lib
+void SPI_Init(void){
 
-void IO_Init(void)
+SPCR=0xC0;
+SPSR=0x00;
+
+#asm
+    in   r30,spsr
+    in   r30,spdr
+    #endasm
+
+}
+
+void Start_SPI(void)
 {
-
-PORTA=0x00;
-DDRA=0xD8;
-
-PORTB=0x10;
-DDRB=0x40;
-
-PORTC=0x00;
-DDRC=0x69;
-
-PORTD=0x88;
-DDRD=0x82;   
+SPCR = SPCR|0x80;    
 }
-
-void TimerCounter_Init(void){
-
-TCCR0=0x00;
-TCNT0=0x00;
-OCR0=0x00;
-
-TCCR1A=0x00;
-TCCR1B=0x00;
-TCNT1H=0x00;
-TCNT1L=0x00;
-ICR1H=0x00;
-ICR1L=0x00;
-OCR1AH=0x00;
-OCR1AL=0x00;
-OCR1BH=0x00;
-OCR1BL=0x00;
-
-ASSR=0x00;
-TCCR2=0x00;
-TCNT2=0x00;
-OCR2=0x00;
-
-}
-
-void ExtInterupt_Init(void){
-
-GICR|=0x80;
-MCUCR=0x00;
-MCUCSR=0x00;
-GIFR=0x80;
-
-TIMSK=0x00;
-
-ACSR=0x80;
-SFIOR=0x00;
-
-}
-
-void RS232_Init(void){
-
-UCSRA=0x00;
-UCSRB=0xD8;
-UCSRC=0x86;
-UBRRH=0x00;
-UBRRL=0x47;
+void Stop_SPI(void){
+SPCR = 0x40;    
 }

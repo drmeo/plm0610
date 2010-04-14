@@ -8,12 +8,19 @@ void IO_Init(void)
     PORTA=0x00;
     DDRA=0xD8;
 
+    // Cau hinh cho su dung ngat
     // Port B initialization
     // Func7=In Func6=Out Func5=In Func4=Out Func3=In Func2=In Func1=In Func0=In 
     // State7=T State6=0 State5=T State4=0 State3=T State2=T State1=T State0=T 
-    PORTB=0x00;
-    DDRB=0x50;
+    // PORTB=0x00;
+    // DDRB=0x50;
 
+    // Port B initialization
+    // Func7=In Func6=Out Func5=In Func4=In Func3=In Func2=In Func1=In Func0=In 
+    // State7=T State6=0 State5=T State4=P State3=T State2=T State1=T State0=T 
+    PORTB=0x10;
+    DDRB=0x40;
+    
     // Port C initialization
     // Func7=In Func6=Out Func5=Out Func4=In Func3=Out Func2=In Func1=In Func0=Out 
     // State7=T State6=0 State5=0 State4=T State3=0 State2=T State1=T State0=0 
@@ -92,30 +99,13 @@ void ExtInterupt_Init(void){
     // Analog Comparator Input Capture by Timer/Counter 1: Off
     ACSR=0x80;
     SFIOR=0x00;
-    // Global enable interrupts
-    #asm("sei")
-
-
-}
-
-void SPI_Init(void){
-    // SPI initialization
-    // SPI Type: Slave
-    // SPI Clock Rate: 2764.800 kHz
-    // SPI Clock Phase: Cycle Half
-    // SPI Clock Polarity: Low
-    // SPI Data Order: MSB First
-    SPCR=0xC0;
-    SPSR=0x00;
-
-    // Clear the SPI interrupt flag
-    #asm
-    in   r30,spsr
-    in   r30,spdr
-    #endasm
-
     
+
+
+
 }
+
+
 
 
 void RS232_Init(void){

@@ -157,6 +157,10 @@ extern void putchar(char c);
 extern char getchar(void);
 extern unsigned char RS232_IsRunning(void);
 extern void ByteReverse(unsigned long* pul);
+extern void SPI_Init(void);
+extern void Start_SPI(void);
+extern void Stop_SPI(void);
+extern unsigned int CalcCRC(unsigned char *pucBuffer, unsigned char ucLength);
 
 volatile unsigned char ucPacket[270];
 volatile unsigned char ucIndex;
@@ -183,183 +187,42 @@ flash unsigned char ucCRC[] =    {
 0x00, 0x01, 0x0c, 0x20, 0x00, 0x00, 0x00, 0x00
 };
 
-flash unsigned int tableCRC[] =    {
-0x0000, 0x8005, 0x800f, 0x000a, 0x801b, 0x001e, 0x0014, 0x8011,
-0x8033, 0x0036, 0x003c, 0x8039, 0x0028, 0x802d, 0x8027, 0x0022,
-0x8063, 0x0066, 0x006c, 0x8069, 0x0078, 0x807d, 0x8077, 0x0072,
-0x0050, 0x8055, 0x805f, 0x005a, 0x804b, 0x004e, 0x0044, 0x8041,
-0x80c3, 0x00c6, 0x00cc, 0x80c9, 0x00d8, 0x80dd, 0x80d7, 0x00d2,
-0x00f0, 0x80f5, 0x80ff, 0x00fa, 0x80eb, 0x00ee, 0x00e4, 0x80e1,
-0x00a0, 0x80a5, 0x80af, 0x00aa, 0x80bb, 0x00be, 0x00b4, 0x80b1,
-0x8093, 0x0096, 0x009c, 0x8099, 0x0088, 0x808d, 0x8087, 0x0082,
-0x8183, 0x0186, 0x018c, 0x8189, 0x0198, 0x819d, 0x8197, 0x0192,
-0x01b0, 0x81b5, 0x81bf, 0x01ba, 0x81ab, 0x01ae, 0x01a4, 0x81a1,
-0x01e0, 0x81e5, 0x81ef, 0x01ea, 0x81fb, 0x01fe, 0x01f4, 0x81f1,
-0x81d3, 0x01d6, 0x01dc, 0x81d9, 0x01c8, 0x81cd, 0x81c7, 0x01c2,
-0x0140, 0x8145, 0x814f, 0x014a, 0x815b, 0x015e, 0x0154, 0x8151,
-0x8173, 0x0176, 0x017c, 0x8179, 0x0168, 0x816d, 0x8167, 0x0162,
-0x8123, 0x0126, 0x012c, 0x8129, 0x0138, 0x813d, 0x8137, 0x0132,
-0x0110, 0x8115, 0x811f, 0x011a, 0x810b, 0x010e, 0x0104, 0x8101,
-0x8303, 0x0306, 0x030c, 0x8309, 0x0318, 0x831d, 0x8317, 0x0312,
-0x0330, 0x8335, 0x833f, 0x033a, 0x832b, 0x032e, 0x0324, 0x8321,
-0x0360, 0x8365, 0x836f, 0x036a, 0x837b, 0x037e, 0x0374, 0x8371,
-0x8353, 0x0356, 0x035c, 0x8359, 0x0348, 0x834d, 0x8347, 0x0342,
-0x03c0, 0x83c5, 0x83cf, 0x03ca, 0x83db, 0x03de, 0x03d4, 0x83d1,
-0x83f3, 0x03f6, 0x03fc, 0x83f9, 0x03e8, 0x83ed, 0x83e7, 0x03e2,
-0x83a3, 0x03a6, 0x03ac, 0x83a9, 0x03b8, 0x83bd, 0x83b7, 0x03b2,
-0x0390, 0x8395, 0x839f, 0x039a, 0x838b, 0x038e, 0x0384, 0x8381,
-0x0280, 0x8285, 0x828f, 0x028a, 0x829b, 0x029e, 0x0294, 0x8291,
-0x82b3, 0x02b6, 0x02bc, 0x82b9, 0x02a8, 0x82ad, 0x82a7, 0x02a2,
-0x82e3, 0x02e6, 0x02ec, 0x82e9, 0x02f8, 0x82fd, 0x82f7, 0x02f2,
-0x02d0, 0x82d5, 0x82df, 0x02da, 0x82cb, 0x02ce, 0x02c4, 0x82c1,
-0x8243, 0x0246, 0x024c, 0x8249, 0x0258, 0x825d, 0x8257, 0x0252,
-0x0270, 0x8275, 0x827f, 0x027a, 0x826b, 0x026e, 0x0264, 0x8261,
-0x0220, 0x8225, 0x822f, 0x022a, 0x823b, 0x023e, 0x0234, 0x8231,
-0x8213, 0x0216, 0x021c, 0x8219, 0x0208, 0x820d, 0x8207, 0x0202
-};
+void PLM_Stop(void){
+ucState = 0x00;  
+
+PORTC.6 = 0;
+PORTC.5 = 1; 
+}
 
 void PLM_Task(void){
-static bit bLastCLRT;
 static unsigned char ucByte,
 ucFec;
-
-if(PINB.7){                                                
-if(!bLastCLRT){                                                
-bLastCLRT = 1;                                            
-
 switch(ucState){
 case 0x00:
+{
+PLM_Stop();
 break;
-
+}
 case 0x02:
-ucByte = (ucByte << 1) | PINB.5;            
-ucBitCounter--;
-
-if(!ucBitCounter){
-ucPacket[ucIndex++] = ucByte;
-ucBitCounter = 8;
+{
+ucPacket[ucIndex++] = SPDR;
 ucByteCounter--;
 
 if(!ucByteCounter){
 ucState = 0x00;                        
-
 PORTC.5 = 1;                        
 PORTC.6 = 0;                    
 
 return;
 }                                        
-}
-
-break;
-
-case 0x09:
-ucState++;
-break;
-
-case 0x0a:
-ucByte = (ucByte << 1) | PINB.5;            
-
-if(ucByte == 0xe9){
-bAck = 1;
-
-ucBitCounter = 8;
-ucState++;
-}
-
-if(ucByte == 0x9b){
-bAck = 0;
-
-ucBitCounter = 8;
-ucState++;
-}
-
-break;
-
-case 0x0b:
-ucByte = (ucByte << 1) | PINB.5;            
-ucBitCounter--;
-
-if(!ucBitCounter){
-if(ucByte == 0x58){
-if(bAck){
-ucByteCounter = 2;                    
-}
-
-ucBitCounter = 8;
-ucFec = 0;
-ucState++;
-}
-else{
-ucState = 0x09;
-}
-}
-break;
-
-case 0x0c:
-ucByte = (ucByte << 1) | PINB.5;            
-ucBitCounter--;
-
-ucFec = (ucFec << 1) | PINB.5;
-if(ucFec & 0x40){
-ucFec ^= 0x39;
-}
-
-if(!ucBitCounter){
-ucBitCounter = 6;
-ucState++;
-}
-
-break;
-
-case 0x0d:
-ucFec = (ucFec << 1) | ~PINB.5;
-ucBitCounter--;
-
-if(ucFec & 0x40){
-ucFec ^= 0x39;
-}
-
-if(!ucBitCounter){
-ucFec &= 0x3f;
-if(ucFec){
-ucByte ^= ucCRC[ucFec];
-ucCorrectionCounter++;
-}
-
-ucPacket[ucIndex++] = ucByte;
-ucByteCounter--;
-
-if(!ucByteCounter){
-ucState = 0x00;                        
-
-PORTC.5 = 1;                        
-PORTC.6 = 0;                    
-
-return;
-}
-
-ucBitCounter = 8;
-ucFec = 0;
-ucState = 0x0c;
-}
 
 break;
 }
-}
-}
-else{                                                            
-if(bLastCLRT){                                                
-bLastCLRT = 0;                                            
-
-switch(ucState){
-case 0x00:
-break;
-
 case 0x01:
-if(!ucBitCounter){
+{
+
 if(ucByteCounter){
-ucByte = ucPacket[ucIndex++];
-ucBitCounter = 8;
+SPDR = ucPacket[ucIndex++];
 ucByteCounter--;
 }
 else{
@@ -370,125 +233,9 @@ PORTC.6 = 0;
 
 return;
 }
-}
-if((ucByte&0x80)==0x80){
-PORTB.6 = 1;
-}else{
-PORTB.6 = 0;
-}
-PORTB.6 = ucByte & 0x80;                        
-ucByte <<= 1;
-ucBitCounter--;
 
 break;
-
-case 0x03:
-PORTB.6 = --ucBitCounter & 0x01;
-
-if(!ucBitCounter){
-if(bAck){
-ucByte = 0xe9;
 }
-else{
-ucByte = 0x9b;
-}
-ucBitCounter = 8;
-ucState++;
-}
-break;
-
-case 0x04:
-{
-if(ucByte & 0x80){
-PORTB.6 = 1;
-}else{
-PORTB.6 = 0;
-}
-ucByte <<= 1;
-ucBitCounter--;
-
-if(!ucBitCounter){
-ucByte = 0x58;
-ucBitCounter = 8;
-ucState++;
-}
-break;
-}
-case 0x05:
-PORTB.6 = ucByte & 0x80;
-ucByte <<= 1;
-ucBitCounter--;
-
-if(!ucBitCounter){
-ucByte = ucPacket[ucIndex++];
-ucBitCounter = 8;
-ucByteCounter--;
-ucFec = 0;
-ucState++;
-}
-
-break;
-
-case 0x06:
-PORTB.6 = ucByte & 0x80;
-ucByte <<= 1;
-ucBitCounter--;
-
-ucFec = (ucFec << 1) | PORTB.6;
-if(ucFec & 0x40){
-ucFec ^= 0x39;
-}
-
-if(!ucBitCounter){
-ucBitCounter = 6;
-while(ucBitCounter){
-ucFec <<= 1;
-if(ucFec & 0x40){
-ucFec ^= 0x39;
-}
-ucBitCounter--;
-}
-ucFec ^= 0xff;
-
-ucBitCounter = 6;
-ucState++;
-}
-break;
-
-case 0x07:
-PORTB.6 = ucFec & 0x20;
-ucFec <<= 1;
-ucBitCounter--;
-
-if(!ucBitCounter){
-if(!ucByteCounter){
-ucFec = PORTB.6 ^ 0x01;
-ucBitCounter = ucPostableBits;
-ucState++;                                
-}
-else{
-ucByte = ucPacket[ucIndex++];
-ucBitCounter = 8;
-ucByteCounter--;
-ucFec = 0;
-ucState = 0x06;
-}
-}
-break;
-
-case 0x08:
-PORTB.6 = ucFec;
-ucBitCounter--;
-
-if(!ucBitCounter){
-ucState = 0x00;
-
-PORTC.5 = 1;                            
-PORTC.6 = 0;                        
-}
-break;
-}
-}   
 }
 }
 
@@ -507,7 +254,8 @@ ucByteCounter = 3;
 PORTC.6 = 1;
 PORTC.5 = 0;
 ucState = 0x01;
-PORTD.7  = 0;
+SPDR = ucPacket[0];
+Start_SPI();
 }
 
 unsigned long PLM_GetControlRegister(void){
@@ -519,20 +267,11 @@ PORTC.6 = 1;
 PORTC.5 = 1;
 
 ucState = 0x02;
-PORTD.7  = 0;
+Start_SPI();
 
 while(PLM_IsRunning() != 0);
 
 return (*(unsigned long*)&ucPacket[3]) & 0xffffff00;
-}
-
-unsigned int CalcCRC(unsigned char *pucBuffer, unsigned char ucLength){
-unsigned int uiCRC = 0;
-
-while(ucLength--)
-uiCRC = tableCRC[((uiCRC >> 8) ^ *pucBuffer++) & 0xff] ^ (uiCRC << 8);
-
-return uiCRC;
 }
 
 unsigned char PLM_GetCorrectionNumber(void){
@@ -547,13 +286,6 @@ ucState = 0x00;
 
 unsigned char PLM_IsAck(void){
 return bAck;
-}
-
-void PLM_Stop(void){
-ucState = 0x00;  
-
-PORTC.6 = 0;
-PORTC.5 = 1; 
 }
 
 void PLM_TransmitData(unsigned char ucLength, unsigned char ucAck){
@@ -599,19 +331,13 @@ for(iCounter = 0;iCounter < ucLength; iCounter++){
 ucRS232Started = 0;
 }
 
-interrupt [3] void ext_int1_isr(void)
-{
-if(PLM_IsRunning()>0){
-
-PLM_Task();
-}else{
-PORTD.7  = 1;
-}
-}
-
 interrupt [13] void spi_isr(void)
 {
-
+if(PLM_IsRunning()>0){
+PLM_Task();
+}else{
+Stop_SPI();
+}
 }
 
 void main(void)
@@ -621,20 +347,23 @@ int i;
 IO_Init();
 TimerCounter_Init();
 RS232_Init();
-PORTD.7  = 1;
-ExtInterupt_Init();
 
+SPI_Init();
 PLM_Init();
 
 PLM_SetControlRegister(0x1c321800	);
 while(PLM_IsRunning() != 0);
 PLM_SetControlRegister(0x1c321800	);
 
-putchar('c');
 ucRS232Started = 0;
 
+#asm("sei")
+
+PORTD.7 = 0; 
+
 while (1)
-{      
+{   
+
 if((RS232_IsRunning()>0)&&(ucRS232Started==0)){
 if(getchar()== 0b10101010)
 {
@@ -672,11 +401,11 @@ case 0x01:
 
 ByteReverse((unsigned long*)&ucPacket[0]);
 PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
-putchar('c');
 break;
 }
 case 0x03:
 {
+PLM_Stop();
 
 break;
 }

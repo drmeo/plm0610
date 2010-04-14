@@ -38,9 +38,8 @@
     #define PLM_pinRXTX PORTC.5
     #define PLM_pinREG_DATA PORTC.6
     #define PLM_pinCD_PD PINC.4
-    
-    #define PLM_pinREGOK PINA.0
-    
-    #define pin_TASK PORTD.7 //bao ngat
+        
+    //#define pin_TASK PORTD.7 //bao ngat
+    #define pin_SS PORTD.7
 #pragma used-
 
