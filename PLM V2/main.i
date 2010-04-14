@@ -394,7 +394,12 @@ ucState++;
 break;
 
 case 0x04:
-PORTB.6 = ucByte & 0x80;
+{
+if(ucByte & 0x80){
+PORTB.6 = 1;
+}else{
+PORTB.6 = 0;
+}
 ucByte <<= 1;
 ucBitCounter--;
 
@@ -404,7 +409,7 @@ ucBitCounter = 8;
 ucState++;
 }
 break;
-
+}
 case 0x05:
 PORTB.6 = ucByte & 0x80;
 ucByte <<= 1;
@@ -504,7 +509,7 @@ PORTD.7  = 0;
 }
 
 unsigned long PLM_GetControlRegister(void){
-ucIndex = 1;
+ucIndex = 4;
 ucBitCounter = 8;
 ucByteCounter = 3;
 
@@ -516,7 +521,7 @@ PORTD.7  = 0;
 
 while(PLM_IsRunning() != 0);
 
-return (*(unsigned long*)&ucPacket[3]) & 0x00ffffff;
+return (*(unsigned long*)&ucPacket[3]) & 0xffffff00;
 }
 
 unsigned int CalcCRC(unsigned char *pucBuffer, unsigned char ucLength){
@@ -619,9 +624,9 @@ ExtInterupt_Init();
 
 PLM_Init();
 
-PLM_SetControlRegister(0x0000321c);
+PLM_SetControlRegister(0x1c321800	);
 while(PLM_IsRunning() != 0);
-PLM_SetControlRegister(0x0000321c);
+PLM_SetControlRegister(0x1c321800	);
 
 ucRS232Started = 0;
 

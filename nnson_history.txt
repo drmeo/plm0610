@@ -17,3 +17,7 @@ Apr 15
 	- Ke hoach
 		+ Nghien cuu lai thuat toan
 		+ Xac dinh gia tri thanh ghi mac dinh de kiem tra
+Apr 16
+	- Doc dung duoc gia tri default cua thanh ghi
+	- Chua ghi duoc thanh ghi
+	

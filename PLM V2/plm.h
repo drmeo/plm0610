@@ -1,5 +1,6 @@
 #pragma used+
-    #define DEFAULT_CONTROL_REG		0x0000321c
+    #define DEFAULT_CONTROL_REG	0x1c321800	
+    //0x0000321c
     // Frame header
     #define HEADER_HIGH_DATA        0x9b
     #define HEADER_HIGH_ACK         0xe9
@@ -37,6 +38,8 @@
     #define PLM_pinRXTX PORTC.5
     #define PLM_pinREG_DATA PORTC.6
     #define PLM_pinCD_PD PINC.4
+    
+    #define PLM_pinREGOK PINA.0
     
     #define pin_TASK PORTD.7 //bao ngat
 #pragma used-
