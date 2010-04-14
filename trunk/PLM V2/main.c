@@ -254,7 +254,11 @@ void PLM_Task(void){
                             return;
                         }
                     }
-
+//                    if((ucByte&0x80)==0x80){
+//                        PLM_pinTxD = 1;
+//                    }else{
+//                        PLM_pinTxD = 0;
+//                    }
                     PLM_pinTxD = ucByte & 0x80;                        // transmit 1 bit
                     ucByte <<= 1;
                     ucBitCounter--;
@@ -277,7 +281,12 @@ void PLM_Task(void){
                     break;
 
                 case PLM_TX_HEADER_HIGH:
-                    PLM_pinTxD = ucByte & 0x80;
+                {
+                    if(ucByte & 0x80){
+                        PLM_pinTxD = 1;
+                    }else{
+                        PLM_pinTxD = 0;
+                    }
                     ucByte <<= 1;
                     ucBitCounter--;
 
@@ -287,7 +296,7 @@ void PLM_Task(void){
                         ucState++;
                     }
                     break;
-
+                }
                 case PLM_TX_HEADER_LOW:
                     PLM_pinTxD = ucByte & 0x80;
                     ucByte <<= 1;
@@ -390,7 +399,7 @@ void PLM_SetControlRegister(unsigned long ulControlRegister)
 
 //+++lay cac thong so thiet lap cau hinh
 unsigned long PLM_GetControlRegister(void){
-    ucIndex = 1;
+    ucIndex = 4;
     ucBitCounter = 8;
     ucByteCounter = 3;
                                         
@@ -403,7 +412,7 @@ unsigned long PLM_GetControlRegister(void){
     while(PLM_IsRunning() != 0);
     
     // return only 24 bits
-    return (*(unsigned long*)&ucPacket[3]) & 0x00ffffff;
+    return (*(unsigned long*)&ucPacket[3]) & 0xffffff00;
 }
 
 //+++tinh toan va sua loi
