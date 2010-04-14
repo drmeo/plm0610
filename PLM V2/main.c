@@ -591,8 +591,9 @@ void main(void)
 		        case COM_SET_CTR:
                 {											
                     // set control register (comm, byte0, byte1, byte2, byte3)
-//					ByteReverse((unsigned long*)&ucPacket[0]);
-//					PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
+					ByteReverse((unsigned long*)&ucPacket[0]);
+					PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
+                    putchar('c');
 					break;
 			    }
                 case COM_SET_PLM:

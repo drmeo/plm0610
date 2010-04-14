@@ -31,3 +31,24 @@ F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\PLC_Soft.pdb
 \\192.168.1.3\du lieu (d)\NNSon\PLM0610\PLC_Soft\PLC_Soft\bin\Debug\PLC_Soft.exe.config
 \\192.168.1.3\du lieu (d)\NNSon\PLM0610\PLC_Soft\PLC_Soft\obj\x86\Debug\PLC_Soft.exe
 \\192.168.1.3\du lieu (d)\NNSon\PLM0610\PLC_Soft\PLC_Soft\obj\x86\Debug\PLC_Soft.pdb
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\bin\Debug\PLC_Soft.exe
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\bin\Debug\PLC_Soft.pdb
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\bin\Debug\CommunicationCore.dll
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\bin\Debug\CommunicationCore.pdb
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\ResolveAssemblyReference.cache
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\frmIPConfig.baml
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\MainWindow.baml
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\frmIPConfig.g.cs
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\frmSerialPort.g.cs
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\frmSTRegister.g.cs
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\MainWindow.g.cs
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\App.g.cs
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\PLC_Soft_MarkupCompile.cache
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\PLC_Soft_MarkupCompile.lref
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\frmSerialPort.baml
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\frmSTRegister.baml
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\PLC_Soft.g.resources
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\PLC_Soft.Properties.Resources.resources
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\GenerateResource.read.1.tlog
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\GenerateResource.write.1.tlog

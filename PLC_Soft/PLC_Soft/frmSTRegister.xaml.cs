@@ -78,16 +78,17 @@ namespace PLC_Soft
 
 		void serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
 		{
-			Thread.Sleep(serial.ReadTimeout);
-			SerialPort serialPort = sender as SerialPort;
-			byte[] buffer = null;
-			buffer = RS232Task.ReadData(serialPort);
-			txtReg.Dispatcher.BeginInvoke(new Action(delegate()
-			{
-				reg = RS232Task.DataProcess(buffer);
-				MessageBox.Show(reg);
-				//ControlProcess(reg);
-			}));
+			MessageBox.Show(serial.ReadByte().ToString());
+			//Thread.Sleep(serial.ReadTimeout);
+			//SerialPort serialPort = sender as SerialPort;
+			//byte[] buffer = null;
+			//buffer = RS232Task.ReadData(serialPort);
+			//txtReg.Dispatcher.BeginInvoke(new Action(delegate()
+			//{
+			//    reg = RS232Task.DataProcess(buffer);
+			//    MessageBox.Show(reg);
+			//    //ControlProcess(reg);
+			//}));
 		}
 
 		void ControlProcess(string registerData)
@@ -132,12 +133,13 @@ namespace PLC_Soft
 			{
 				string regValue = txtReg.Text;
 				string[] bytes = regValue.Split('-');
-				byte[] regByte = new byte[6];
+				byte[] regByte = new byte[7];
+				regByte[6] = 0;
 				regByte[5] = (byte)Convert.ToInt16(bytes[2], 2);
 				regByte[4] = (byte)Convert.ToInt16(bytes[1], 2);
 				regByte[3] = (byte)Convert.ToInt16(bytes[0], 2);
 
-				regByte[2] = 3;
+				regByte[2] = 4;
 				regByte[1] = (byte)RS232Command.COM_SET_CTR;
 				regByte[0] = (byte)RS232Command.COM_HEADER;
 

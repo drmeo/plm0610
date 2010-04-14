@@ -2370,7 +2370,8 @@ _0x9B:
 _0x98:
 	LDS  R26,_ucRS232Started
 	CPI  R26,LOW(0x1)
-	BRNE _0x9C
+	BREQ PC+3
+	JMP _0x9C
 ; 0000 0233             // doc gia tri tu rs232
 ; 0000 0234             RS232_GetData();
 	RCALL _RS232_GetData
@@ -2430,63 +2431,84 @@ _0xA2:
 	RJMP _0xA2
 _0xA3:
 ; 0000 024B 					break;
+	RJMP _0x9F
 ; 0000 024C 			    }
 ; 0000 024D 
 ; 0000 024E                 // ghi thanh ghi st7538/7540
 ; 0000 024F 		        case COM_SET_CTR:
 _0xA0:
+	CPI  R30,LOW(0x1)
+	LDI  R26,HIGH(0x1)
+	CPC  R31,R26
+	BRNE _0xA4
 ; 0000 0250                 {
 ; 0000 0251                     // set control register (comm, byte0, byte1, byte2, byte3)
-; 0000 0252 //					ByteReverse((unsigned long*)&ucPacket[0]);
-; 0000 0253 //					PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
-; 0000 0254 					break;
-; 0000 0255 			    }
-; 0000 0256                 case COM_SET_PLM:
-; 0000 0257                 {
-; 0000 0258 //					PLM_Stop();
-; 0000 0259 
-; 0000 025A //					uiLastFCS = CalcCRC(&ucPacket[0], 72);
-; 0000 025B //					*(unsigned int*)&ucPacket[72] = uiLastFCS;
-; 0000 025C //
-; 0000 025D //                    ucPostableBits = 8-((78 * 14) % 8);
-; 0000 025E //
-; 0000 025F                     // truyen khong co ack
-; 0000 0260 //					PLM_TransmitData(74, 0);
-; 0000 0261 //                    while(PLM_pinCD_PD == 1);
-; 0000 0262 //                    pin_TASK = 1;
-; 0000 0263 //					while(PLM_IsRunning() != 0);
-; 0000 0264 //                    PLM_ReceiveData(74);
-; 0000 0265 					break;
-; 0000 0266 			    }
-; 0000 0267                 case COM_GET_PLM:
-; 0000 0268                 {
-; 0000 0269 //                    PLM_ReceiveData(74);
-; 0000 026A 					break;
-; 0000 026B 			    }
-; 0000 026C             }
+; 0000 0252 					ByteReverse((unsigned long*)&ucPacket[0]);
+	LDI  R30,LOW(_ucPacket)
+	LDI  R31,HIGH(_ucPacket)
+	ST   -Y,R31
+	ST   -Y,R30
+	CALL _ByteReverse
+; 0000 0253 					PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
+	LDS  R30,_ucPacket
+	LDS  R31,_ucPacket+1
+	LDS  R22,_ucPacket+2
+	LDS  R23,_ucPacket+3
+	CALL __PUTPARD1
+	RCALL _PLM_SetControlRegister
+; 0000 0254                     putchar('c');
+	LDI  R30,LOW(99)
+	ST   -Y,R30
+	CALL _putchar
+; 0000 0255 					break;
+; 0000 0256 			    }
+; 0000 0257                 case COM_SET_PLM:
+_0xA4:
+; 0000 0258                 {
+; 0000 0259 //					PLM_Stop();
+; 0000 025A 
+; 0000 025B //					uiLastFCS = CalcCRC(&ucPacket[0], 72);
+; 0000 025C //					*(unsigned int*)&ucPacket[72] = uiLastFCS;
+; 0000 025D //
+; 0000 025E //                    ucPostableBits = 8-((78 * 14) % 8);
+; 0000 025F //
+; 0000 0260                     // truyen khong co ack
+; 0000 0261 //					PLM_TransmitData(74, 0);
+; 0000 0262 //                    while(PLM_pinCD_PD == 1);
+; 0000 0263 //                    pin_TASK = 1;
+; 0000 0264 //					while(PLM_IsRunning() != 0);
+; 0000 0265 //                    PLM_ReceiveData(74);
+; 0000 0266 					break;
+; 0000 0267 			    }
+; 0000 0268                 case COM_GET_PLM:
+; 0000 0269                 {
+; 0000 026A //                    PLM_ReceiveData(74);
+; 0000 026B 					break;
+; 0000 026C 			    }
+; 0000 026D             }
 _0x9F:
-; 0000 026D         }
-; 0000 026E //        while(RS232_IsRunning()!=0);
-; 0000 026F //
-; 0000 0270 //        delay_ms(100);
-; 0000 0271 
-; 0000 0272 //		if(PLM_IsRunning() != 0){
-; 0000 0273 //            if(PLM_pinCD_PD == 0){
-; 0000 0274 //                pin_TASK = 1;
-; 0000 0275 //            }
-; 0000 0276 //        }
-; 0000 0277 
-; 0000 0278 //        if(PLM_IsRunning()==0){
-; 0000 0279 //            if(!PLM_IsAck()){
-; 0000 027A //                if(*(unsigned int*)&ucPacket[72] == CalcCRC(ucPacket, 72)){
-; 0000 027B //                    RS232_SetData(ucPacket, 72);
-; 0000 027C //                }
-; 0000 027D //            }
-; 0000 027E //        }
-; 0000 027F     };
+; 0000 026E         }
+; 0000 026F //        while(RS232_IsRunning()!=0);
+; 0000 0270 //
+; 0000 0271 //        delay_ms(100);
+; 0000 0272 
+; 0000 0273 //		if(PLM_IsRunning() != 0){
+; 0000 0274 //            if(PLM_pinCD_PD == 0){
+; 0000 0275 //                pin_TASK = 1;
+; 0000 0276 //            }
+; 0000 0277 //        }
+; 0000 0278 
+; 0000 0279 //        if(PLM_IsRunning()==0){
+; 0000 027A //            if(!PLM_IsAck()){
+; 0000 027B //                if(*(unsigned int*)&ucPacket[72] == CalcCRC(ucPacket, 72)){
+; 0000 027C //                    RS232_SetData(ucPacket, 72);
+; 0000 027D //                }
+; 0000 027E //            }
+; 0000 027F //        }
+; 0000 0280     };
 _0x9C:
 	RJMP _0x95
-; 0000 0280 }
+; 0000 0281 }
 _0xA7:
 	RJMP _0xA7
 ;#include <mega32.h>

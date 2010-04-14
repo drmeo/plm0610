@@ -1,12 +1,12 @@
 
-AVRASM ver. 2.1.17  D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm Wed Apr 14 14:42:36 2010
+AVRASM ver. 2.1.17  F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm Wed Apr 14 14:59:26 2010
 
-D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1026): warning: Register r5 already defined by the .DEF directive
-D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1027): warning: Register r4 already defined by the .DEF directive
-D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1028): warning: Register r7 already defined by the .DEF directive
-D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1029): warning: Register r6 already defined by the .DEF directive
-D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1030): warning: Register r9 already defined by the .DEF directive
-D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already defined by the .DEF directive
+F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1026): warning: Register r5 already defined by the .DEF directive
+F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1027): warning: Register r4 already defined by the .DEF directive
+F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1028): warning: Register r7 already defined by the .DEF directive
+F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1029): warning: Register r6 already defined by the .DEF directive
+F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1030): warning: Register r9 already defined by the .DEF directive
+F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already defined by the .DEF directive
                  
                  
                  ;CodeVisionAVR C Compiler V2.03.4 Standard
@@ -1057,9 +1057,9 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 000014 940c 0000 	JMP  0x00
 000016 940c 0000 	JMP  0x00
 000018 940c 03bc 	JMP  _spi_isr
-00001a 940c 0470 	JMP  _usart_rx_isr
+00001a 940c 048c 	JMP  _usart_rx_isr
 00001c 940c 0000 	JMP  0x00
-00001e 940c 04af 	JMP  _usart_tx_isr
+00001e 940c 04cb 	JMP  _usart_tx_isr
 000020 940c 0000 	JMP  0x00
 000022 940c 0000 	JMP  0x00
 000024 940c 0000 	JMP  0x00
@@ -1553,7 +1553,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 000174 c0b5      	RJMP _0x4
                  ; 0000 006F             bLastCLRT = 1;                                            // update last CLRT value
 000175 9468      	SET
-000176 940e 0506 	CALL SUBOPT_0x0
+000176 940e 0522 	CALL SUBOPT_0x0
                  ; 0000 0070 
                  ; 0000 0071             switch(ucState){
                  ; 0000 0072                 case PLM_STOP:
@@ -1568,16 +1568,16 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 00017c 07fa      	CPC  R31,R26
 00017d f479      	BRNE _0x9
                  ; 0000 0076                     ucByte = (ucByte << 1) | PLM_pinRxD;            // receive 1 bit and store it
-00017e 940e 050c 	CALL SUBOPT_0x1
+00017e 940e 0528 	CALL SUBOPT_0x1
                  ; 0000 0077                     ucBitCounter--;
-000180 940e 051a 	CALL SUBOPT_0x2
+000180 940e 0536 	CALL SUBOPT_0x2
                  ; 0000 0078 
                  ; 0000 0079                     if(!ucBitCounter){
 000182 f449      	BRNE _0xA
                  ; 0000 007A                         ucPacket[ucIndex++] = ucByte;
-000183 940e 0521 	CALL SUBOPT_0x3
+000183 940e 053d 	CALL SUBOPT_0x3
                  ; 0000 007B                         ucBitCounter = 8;
-000185 940e 052e 	CALL SUBOPT_0x4
+000185 940e 054a 	CALL SUBOPT_0x4
                  ; 0000 007C                         ucByteCounter--;
                  ; 0000 007D 
                  ; 0000 007E                         if(!ucByteCounter){
@@ -1618,7 +1618,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 000197 07fa      	CPC  R31,R26
 000198 f489      	BRNE _0x11
                  ; 0000 008F                     ucByte = (ucByte << 1) | PLM_pinRxD;            // receive 1 bit and store it
-000199 940e 050c 	CALL SUBOPT_0x1
+000199 940e 0528 	CALL SUBOPT_0x1
                  ; 0000 0090 
                  ; 0000 0091                     if(ucByte == HEADER_HIGH_ACK){
 00019b 91a0 0377 	LDS  R26,_ucByte_S0000000
@@ -1626,7 +1626,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 00019e f419      	BRNE _0x12
                  ; 0000 0092                         bAck = 1;
 00019f 9468      	SET
-0001a0 940e 0537 	CALL SUBOPT_0x5
+0001a0 940e 0553 	CALL SUBOPT_0x5
                  ; 0000 0093 
                  ; 0000 0094                         ucBitCounter = 8;
                  ; 0000 0095                         ucState++;
@@ -1639,7 +1639,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 0001a5 f419      	BRNE _0x13
                  ; 0000 0099                         bAck = 0;
 0001a6 94e8      	CLT
-0001a7 940e 0537 	CALL SUBOPT_0x5
+0001a7 940e 0553 	CALL SUBOPT_0x5
                  ; 0000 009A 
                  ; 0000 009B                         ucBitCounter = 8;
                  ; 0000 009C                         ucState++;
@@ -1656,9 +1656,9 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 0001ac 07fa      	CPC  R31,R26
 0001ad f4c1      	BRNE _0x14
                  ; 0000 00A2                     ucByte = (ucByte << 1) | PLM_pinRxD;            // receive 1 bit and store it
-0001ae 940e 050c 	CALL SUBOPT_0x1
+0001ae 940e 0528 	CALL SUBOPT_0x1
                  ; 0000 00A3                     ucBitCounter--;
-0001b0 940e 051a 	CALL SUBOPT_0x2
+0001b0 940e 0536 	CALL SUBOPT_0x2
                  ; 0000 00A4 
                  ; 0000 00A5                     if(!ucBitCounter){
 0001b2 f491      	BRNE _0x15
@@ -1676,7 +1676,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0000 00AA 
                  ; 0000 00AB                             ucBitCounter = 8;
                  _0x17:
-0001bc 940e 0541 	CALL SUBOPT_0x6
+0001bc 940e 055d 	CALL SUBOPT_0x6
                  ; 0000 00AC                             ucFec = 0;
                  ; 0000 00AD                             ucState++;
 0001be 91e0 0373 	LDS  R30,_ucState
@@ -1702,9 +1702,9 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 0001c8 07fa      	CPC  R31,R26
 0001c9 f4d9      	BRNE _0x19
                  ; 0000 00B6                     ucByte = (ucByte << 1) | PLM_pinRxD;            // receive 1 bit and store it
-0001ca 940e 050c 	CALL SUBOPT_0x1
+0001ca 940e 0528 	CALL SUBOPT_0x1
                  ; 0000 00B7                     ucBitCounter--;
-0001cc 940e 0548 	CALL SUBOPT_0x7
+0001cc 940e 0564 	CALL SUBOPT_0x7
                  ; 0000 00B8 
                  ; 0000 00B9                     ucFec = (ucFec << 1) | PLM_pinRxD;
 0001ce 0fee      	LSL  R30
@@ -1713,14 +1713,14 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 0001d1 e0e0      	LDI  R30,0
 0001d2 99b5      	SBIC 0x16,5
 0001d3 e0e1      	LDI  R30,1
-0001d4 940e 0551 	CALL SUBOPT_0x8
+0001d4 940e 056d 	CALL SUBOPT_0x8
                  ; 0000 00BA                     if(ucFec & 0x40){
-0001d6 940e 0556 	CALL SUBOPT_0x9
+0001d6 940e 0572 	CALL SUBOPT_0x9
 0001d8 74e0      	ANDI R30,LOW(0x40)
 0001d9 f021      	BREQ _0x1A
                  ; 0000 00BB                         ucFec ^= 0x39;
-0001da 940e 0556 	CALL SUBOPT_0x9
-0001dc 940e 055a 	CALL SUBOPT_0xA
+0001da 940e 0572 	CALL SUBOPT_0x9
+0001dc 940e 0576 	CALL SUBOPT_0xA
                  ; 0000 00BC                     }
                  ; 0000 00BD 
                  ; 0000 00BE                     if(!ucBitCounter){
@@ -1729,7 +1729,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 0001e0 30e0      	CPI  R30,0
 0001e1 f411      	BRNE _0x1B
                  ; 0000 00BF                         ucBitCounter = 6;
-0001e2 940e 0560 	CALL SUBOPT_0xB
+0001e2 940e 057c 	CALL SUBOPT_0xB
                  ; 0000 00C0                         ucState++;
                  ; 0000 00C1                     }
                  ; 0000 00C2 
@@ -1745,23 +1745,23 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 0001e8 f011      	BREQ PC+3
 0001e9 940c 022a 	JMP _0x7
                  ; 0000 00C6                     ucFec = (ucFec << 1) | ~PLM_pinRxD;
-0001eb 940e 0556 	CALL SUBOPT_0x9
+0001eb 940e 0572 	CALL SUBOPT_0x9
 0001ed 0fee      	LSL  R30
 0001ee 1fff      	ROL  R31
 0001ef 01df      	MOVW R26,R30
 0001f0 e0e0      	LDI  R30,0
 0001f1 9bb5      	SBIS 0x16,5
 0001f2 e0e1      	LDI  R30,1
-0001f3 940e 0551 	CALL SUBOPT_0x8
+0001f3 940e 056d 	CALL SUBOPT_0x8
                  ; 0000 00C7                     ucBitCounter--;
-0001f5 940e 0548 	CALL SUBOPT_0x7
+0001f5 940e 0564 	CALL SUBOPT_0x7
                  ; 0000 00C8 
                  ; 0000 00C9                     if(ucFec & 0x40){
 0001f7 74e0      	ANDI R30,LOW(0x40)
 0001f8 f021      	BREQ _0x1D
                  ; 0000 00CA                         ucFec ^= 0x39;
-0001f9 940e 0556 	CALL SUBOPT_0x9
-0001fb 940e 055a 	CALL SUBOPT_0xA
+0001f9 940e 0572 	CALL SUBOPT_0x9
+0001fb 940e 0576 	CALL SUBOPT_0xA
                  ; 0000 00CB                     }
                  ; 0000 00CC 
                  ; 0000 00CD                     if(!ucBitCounter){
@@ -1770,7 +1770,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 0001ff 30e0      	CPI  R30,0
 000200 f549      	BRNE _0x1E
                  ; 0000 00CE                         ucFec &= 0x3f;
-000201 940e 0556 	CALL SUBOPT_0x9
+000201 940e 0572 	CALL SUBOPT_0x9
 000203 73ef      	ANDI R30,LOW(0x3F)
 000204 70f0      	ANDI R31,HIGH(0x3F)
 000205 93e0 0378 	STS  _ucFec_S0000000,R30
@@ -1780,7 +1780,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0000 00D0                             ucByte ^= ucCRC[ucFec];
 000209 91a0 0377 	LDS  R26,_ucByte_S0000000
 00020b 27bb      	CLR  R27
-00020c 940e 0556 	CALL SUBOPT_0x9
+00020c 940e 0572 	CALL SUBOPT_0x9
 00020e 5aec      	SUBI R30,LOW(-_ucCRC*2)
 00020f 4fff      	SBCI R31,HIGH(-_ucCRC*2)
 000210 91e4      	LPM  R30,Z
@@ -1795,7 +1795,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0000 00D3 
                  ; 0000 00D4                         ucPacket[ucIndex++] = ucByte;
                  _0x1F:
-00021a 940e 0521 	CALL SUBOPT_0x3
+00021a 940e 053d 	CALL SUBOPT_0x3
                  ; 0000 00D5                         ucByteCounter--;
 00021c 91e0 0374 	LDS  R30,_ucByteCounter
 00021e 50e1      	SUBI R30,LOW(1)
@@ -1814,7 +1814,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0000 00DE                         }
                  ; 0000 00DF 
                  ; 0000 00E0                         ucBitCounter = 8;
-000225 940e 0541 	CALL SUBOPT_0x6
+000225 940e 055d 	CALL SUBOPT_0x6
                  ; 0000 00E1                         ucFec = 0;
                  ; 0000 00E2                         ucState = PLM_RX_DATA;
 000227 e0ec      	LDI  R30,LOW(12)
@@ -1837,7 +1837,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 00022c c113      	RJMP _0x26
                  ; 0000 00EB             bLastCLRT = 0;                                            // update last CLRT value
 00022d 94e8      	CLT
-00022e 940e 0506 	CALL SUBOPT_0x0
+00022e 940e 0522 	CALL SUBOPT_0x0
                  ; 0000 00EC 
                  ; 0000 00ED             switch(ucState){
                  ; 0000 00EE                 case PLM_STOP:
@@ -1860,7 +1860,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 00023c 30e0      	CPI  R30,0
 00023d f019      	BREQ _0x2D
                  ; 0000 00F4                             ucByte = ucPacket[ucIndex++];
-00023e 940e 0569 	CALL SUBOPT_0xC
+00023e 940e 0585 	CALL SUBOPT_0xC
                  ; 0000 00F5                             ucBitCounter = 8;
                  ; 0000 00F6                             ucByteCounter--;
                  ; 0000 00F7                         }
@@ -1884,7 +1884,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0000 0100                     }
                  ; 0000 0101                     if((ucByte&0x80)==0x80){
                  _0x2C:
-000247 940e 0576 	CALL SUBOPT_0xD
+000247 940e 0592 	CALL SUBOPT_0xD
 000249 78e0      	ANDI R30,LOW(0x80)
 00024a 38e0      	CPI  R30,LOW(0x80)
 00024b f411      	BRNE _0x33
@@ -1898,7 +1898,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0000 0105                     }
                  _0x36:
                  ; 0000 0106                     PLM_pinTxD = ucByte & 0x80;                        // transmit 1 bit
-00024f 940e 0576 	CALL SUBOPT_0xD
+00024f 940e 0592 	CALL SUBOPT_0xD
 000251 78e0      	ANDI R30,LOW(0x80)
 000252 70f0      	ANDI R31,HIGH(0x80)
 000253 30e0      	CPI  R30,0
@@ -1909,10 +1909,10 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 000257 9ac6      	SBI  0x18,6
                  _0x3A:
                  ; 0000 0107                     ucByte <<= 1;
-000258 940e 0576 	CALL SUBOPT_0xD
-00025a 940e 057a 	CALL SUBOPT_0xE
+000258 940e 0592 	CALL SUBOPT_0xD
+00025a 940e 0596 	CALL SUBOPT_0xE
                  ; 0000 0108                     ucBitCounter--;
-00025c 940e 057f 	CALL SUBOPT_0xF
+00025c 940e 059b 	CALL SUBOPT_0xF
                  ; 0000 0109 
                  ; 0000 010A                     break;
 00025e c0e1      	RJMP _0x29
@@ -1924,7 +1924,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 000261 07fa      	CPC  R31,R26
 000262 f4b1      	BRNE _0x3B
                  ; 0000 010D                     PLM_pinTxD = --ucBitCounter & 0x01;
-000263 940e 057f 	CALL SUBOPT_0xF
+000263 940e 059b 	CALL SUBOPT_0xF
 000265 e0f0      	LDI  R31,0
 000266 70e1      	ANDI R30,LOW(0x1)
 000267 f411      	BRNE _0x3C
@@ -1953,7 +1953,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 000274 93e0 0377 	STS  _ucByte_S0000000,R30
                  ; 0000 0115                         }
                  ; 0000 0116                         ucBitCounter = 8;
-000276 940e 0585 	CALL SUBOPT_0x10
+000276 940e 05a1 	CALL SUBOPT_0x10
                  ; 0000 0117                         ucState++;
                  ; 0000 0118                     }
                  ; 0000 0119                     break;
@@ -1968,7 +1968,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 00027c f4a1      	BRNE _0x41
                  ; 0000 011C                 {
                  ; 0000 011D                     if(ucByte & 0x80){
-00027d 940e 0576 	CALL SUBOPT_0xD
+00027d 940e 0592 	CALL SUBOPT_0xD
 00027f 78e0      	ANDI R30,LOW(0x80)
 000280 f011      	BREQ _0x42
                  ; 0000 011E                         PLM_pinTxD = 1;
@@ -1981,10 +1981,10 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0000 0121                     }
                  _0x45:
                  ; 0000 0122                     ucByte <<= 1;
-000284 940e 0576 	CALL SUBOPT_0xD
-000286 940e 057a 	CALL SUBOPT_0xE
+000284 940e 0592 	CALL SUBOPT_0xD
+000286 940e 0596 	CALL SUBOPT_0xE
                  ; 0000 0123                     ucBitCounter--;
-000288 940e 051a 	CALL SUBOPT_0x2
+000288 940e 0536 	CALL SUBOPT_0x2
                  ; 0000 0124 
                  ; 0000 0125                     if(!ucBitCounter){
 00028a f429      	BRNE _0x48
@@ -1992,7 +1992,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 00028b e5e8      	LDI  R30,LOW(88)
 00028c 93e0 0377 	STS  _ucByte_S0000000,R30
                  ; 0000 0127                         ucBitCounter = 8;
-00028e 940e 0585 	CALL SUBOPT_0x10
+00028e 940e 05a1 	CALL SUBOPT_0x10
                  ; 0000 0128                         ucState++;
                  ; 0000 0129                     }
                  ; 0000 012A                     break;
@@ -2006,7 +2006,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 000293 07fa      	CPC  R31,R26
 000294 f4d9      	BRNE _0x49
                  ; 0000 012D                     PLM_pinTxD = ucByte & 0x80;
-000295 940e 0576 	CALL SUBOPT_0xD
+000295 940e 0592 	CALL SUBOPT_0xD
 000297 78e0      	ANDI R30,LOW(0x80)
 000298 70f0      	ANDI R31,HIGH(0x80)
 000299 30e0      	CPI  R30,0
@@ -2017,15 +2017,15 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 00029d 9ac6      	SBI  0x18,6
                  _0x4B:
                  ; 0000 012E                     ucByte <<= 1;
-00029e 940e 0576 	CALL SUBOPT_0xD
-0002a0 940e 057a 	CALL SUBOPT_0xE
+00029e 940e 0592 	CALL SUBOPT_0xD
+0002a0 940e 0596 	CALL SUBOPT_0xE
                  ; 0000 012F                     ucBitCounter--;
-0002a2 940e 051a 	CALL SUBOPT_0x2
+0002a2 940e 0536 	CALL SUBOPT_0x2
                  ; 0000 0130 
                  ; 0000 0131                     if(!ucBitCounter){
 0002a4 f451      	BRNE _0x4C
                  ; 0000 0132                         ucByte = ucPacket[ucIndex++];
-0002a5 940e 0569 	CALL SUBOPT_0xC
+0002a5 940e 0585 	CALL SUBOPT_0xC
                  ; 0000 0133                         ucBitCounter = 8;
                  ; 0000 0134                         ucByteCounter--;
                  ; 0000 0135                         ucFec = 0;
@@ -2049,7 +2049,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 0002b3 f011      	BREQ PC+3
 0002b4 940c 02fb 	JMP _0x4D
                  ; 0000 013C                     PLM_pinTxD = ucByte & 0x80;
-0002b6 940e 0576 	CALL SUBOPT_0xD
+0002b6 940e 0592 	CALL SUBOPT_0xD
 0002b8 78e0      	ANDI R30,LOW(0x80)
 0002b9 70f0      	ANDI R31,HIGH(0x80)
 0002ba 30e0      	CPI  R30,0
@@ -2060,10 +2060,10 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 0002be 9ac6      	SBI  0x18,6
                  _0x4F:
                  ; 0000 013D                     ucByte <<= 1;
-0002bf 940e 0576 	CALL SUBOPT_0xD
-0002c1 940e 057a 	CALL SUBOPT_0xE
+0002bf 940e 0592 	CALL SUBOPT_0xD
+0002c1 940e 0596 	CALL SUBOPT_0xE
                  ; 0000 013E                     ucBitCounter--;
-0002c3 940e 0548 	CALL SUBOPT_0x7
+0002c3 940e 0564 	CALL SUBOPT_0x7
                  ; 0000 013F 
                  ; 0000 0140                     ucFec = (ucFec << 1) | PLM_pinTxD;
 0002c5 0fee      	LSL  R30
@@ -2072,14 +2072,14 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 0002c8 e0e0      	LDI  R30,0
 0002c9 99c6      	SBIC 0x18,6
 0002ca e0e1      	LDI  R30,1
-0002cb 940e 0551 	CALL SUBOPT_0x8
+0002cb 940e 056d 	CALL SUBOPT_0x8
                  ; 0000 0141                     if(ucFec & 0x40){
-0002cd 940e 0556 	CALL SUBOPT_0x9
+0002cd 940e 0572 	CALL SUBOPT_0x9
 0002cf 74e0      	ANDI R30,LOW(0x40)
 0002d0 f021      	BREQ _0x50
                  ; 0000 0142                         ucFec ^= 0x39;
-0002d1 940e 0556 	CALL SUBOPT_0x9
-0002d3 940e 055a 	CALL SUBOPT_0xA
+0002d1 940e 0572 	CALL SUBOPT_0x9
+0002d3 940e 0576 	CALL SUBOPT_0xA
                  ; 0000 0143                     }
                  ; 0000 0144 
                  ; 0000 0145                     if(!ucBitCounter){
@@ -2096,33 +2096,33 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 0002de 30e0      	CPI  R30,0
 0002df f089      	BREQ _0x54
                  ; 0000 0148                             ucFec <<= 1;
-0002e0 940e 0556 	CALL SUBOPT_0x9
+0002e0 940e 0572 	CALL SUBOPT_0x9
 0002e2 0fee      	LSL  R30
 0002e3 1fff      	ROL  R31
 0002e4 93e0 0378 	STS  _ucFec_S0000000,R30
                  ; 0000 0149                             if(ucFec & 0x40){
-0002e6 940e 0556 	CALL SUBOPT_0x9
+0002e6 940e 0572 	CALL SUBOPT_0x9
 0002e8 74e0      	ANDI R30,LOW(0x40)
 0002e9 f021      	BREQ _0x55
                  ; 0000 014A                                 ucFec ^= 0x39;
-0002ea 940e 0556 	CALL SUBOPT_0x9
-0002ec 940e 055a 	CALL SUBOPT_0xA
+0002ea 940e 0572 	CALL SUBOPT_0x9
+0002ec 940e 0576 	CALL SUBOPT_0xA
                  ; 0000 014B                             }
                  ; 0000 014C                             ucBitCounter--;
                  _0x55:
-0002ee 940e 057f 	CALL SUBOPT_0xF
+0002ee 940e 059b 	CALL SUBOPT_0xF
                  ; 0000 014D                         }
 0002f0 cfeb      	RJMP _0x52
                  _0x54:
                  ; 0000 014E                         ucFec ^= 0xff;
-0002f1 940e 0556 	CALL SUBOPT_0x9
+0002f1 940e 0572 	CALL SUBOPT_0x9
 0002f3 efaf      	LDI  R26,LOW(255)
 0002f4 e0b0      	LDI  R27,HIGH(255)
 0002f5 27ea      	EOR  R30,R26
 0002f6 93e0 0378 	STS  _ucFec_S0000000,R30
                  ; 0000 014F 
                  ; 0000 0150                         ucBitCounter = 6;
-0002f8 940e 0560 	CALL SUBOPT_0xB
+0002f8 940e 057c 	CALL SUBOPT_0xB
                  ; 0000 0151                         ucState++;
                  ; 0000 0152                     }
                  ; 0000 0153                     break;
@@ -2136,7 +2136,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 0002fd 07fa      	CPC  R31,R26
 0002fe f571      	BRNE _0x56
                  ; 0000 0156                     PLM_pinTxD = ucFec & 0x20;
-0002ff 940e 0556 	CALL SUBOPT_0x9
+0002ff 940e 0572 	CALL SUBOPT_0x9
 000301 72e0      	ANDI R30,LOW(0x20)
 000302 70f0      	ANDI R31,HIGH(0x20)
 000303 30e0      	CPI  R30,0
@@ -2147,12 +2147,12 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 000307 9ac6      	SBI  0x18,6
                  _0x58:
                  ; 0000 0157                     ucFec <<= 1;
-000308 940e 0556 	CALL SUBOPT_0x9
+000308 940e 0572 	CALL SUBOPT_0x9
 00030a 0fee      	LSL  R30
 00030b 1fff      	ROL  R31
 00030c 93e0 0378 	STS  _ucFec_S0000000,R30
                  ; 0000 0158                     ucBitCounter--;
-00030e 940e 051a 	CALL SUBOPT_0x2
+00030e 940e 0536 	CALL SUBOPT_0x2
                  ; 0000 0159 
                  ; 0000 015A                     if(!ucBitCounter){
 000310 f4d9      	BRNE _0x59
@@ -2178,7 +2178,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0000 0160                         else{
                  _0x5A:
                  ; 0000 0161                             ucByte = ucPacket[ucIndex++];
-000324 940e 0569 	CALL SUBOPT_0xC
+000324 940e 0585 	CALL SUBOPT_0xC
                  ; 0000 0162                             ucBitCounter = 8;
                  ; 0000 0163                             ucByteCounter--;
                  ; 0000 0164                             ucFec = 0;
@@ -2210,7 +2210,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 000337 9ac6      	SBI  0x18,6
                  _0x5E:
                  ; 0000 016C                     ucBitCounter--;
-000338 940e 051a 	CALL SUBOPT_0x2
+000338 940e 0536 	CALL SUBOPT_0x2
                  ; 0000 016D 
                  ; 0000 016E                     if(!ucBitCounter){
 00033a f429      	BRNE _0x5F
@@ -2265,7 +2265,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 000351 93e0 036e 	STS  _ucIndex,R30
                  ; 0000 0185     ucBitCounter = 0;
 000353 e0e0      	LDI  R30,LOW(0)
-000354 940e 058e 	CALL SUBOPT_0x11
+000354 940e 05aa 	CALL SUBOPT_0x11
                  ; 0000 0186     ucByteCounter = 3;
                  ; 0000 0187 
                  ; 0000 0188     PLM_pinREG_DATA = 1;
@@ -2289,7 +2289,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 00035e 93e0 036e 	STS  _ucIndex,R30
                  ; 0000 0191     ucBitCounter = 8;
 000360 e0e8      	LDI  R30,LOW(8)
-000361 940e 058e 	CALL SUBOPT_0x11
+000361 940e 05aa 	CALL SUBOPT_0x11
                  ; 0000 0192     ucByteCounter = 3;
                  ; 0000 0193 
                  ; 0000 0194     PLM_pinREG_DATA = 1;
@@ -2449,7 +2449,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 00038a 4ffd      	SBCI R31,HIGH(-_ucPacket)
 00038b 93ff      	PUSH R31
 00038c 93ef      	PUSH R30
-00038d 940e 049c 	CALL _getchar
+00038d 940e 04b8 	CALL _getchar
 00038f 91af      	POP  R26
 000390 91bf      	POP  R27
 000391 93ec      	ST   X,R30
@@ -2543,15 +2543,15 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0000 0214     // Khoi tao cac gia tri
                  ; 0000 0215     IO_Init();
                  ;	i -> R16,R17
-0003bd d072      	RCALL _IO_Init
+0003bd d08e      	RCALL _IO_Init
                  ; 0000 0216     TimerCounter_Init();
-0003be d082      	RCALL _TimerCounter_Init
+0003be d09e      	RCALL _TimerCounter_Init
                  ; 0000 0217     RS232_Init();
-0003bf d0a5      	RCALL _RS232_Init
+0003bf d0c1      	RCALL _RS232_Init
                  ; 0000 0218     pin_TASK = 1;
 0003c0 9a97      	SBI  0x12,7
                  ; 0000 0219     ExtInterupt_Init();
-0003c1 d092      	RCALL _ExtInterupt_Init
+0003c1 d0ae      	RCALL _ExtInterupt_Init
                  ; 0000 021A 
                  ; 0000 021B     PLM_Init();
 0003c2 dfb2      	RCALL _PLM_Init
@@ -2559,19 +2559,19 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0000 021D 
                  ; 0000 021E     // khoi tao cho thanh ghi ST
                  ; 0000 021F     PLM_SetControlRegister(DEFAULT_CONTROL_REG);// dummy write
-0003c3 940e 0595 	CALL SUBOPT_0x12
+0003c3 940e 05b1 	CALL SUBOPT_0x12
                  ; 0000 0220     while(PLM_IsRunning() != 0);
                  _0x92:
 0003c5 df7b      	RCALL _PLM_IsRunning
 0003c6 30e0      	CPI  R30,0
 0003c7 f7e9      	BRNE _0x92
                  ; 0000 0221     PLM_SetControlRegister(DEFAULT_CONTROL_REG);// dummy write
-0003c8 940e 0595 	CALL SUBOPT_0x12
+0003c8 940e 05b1 	CALL SUBOPT_0x12
                  ; 0000 0222     // ket thuc khoi tao cho thanh ghi
                  ; 0000 0223     putchar('c');
 0003ca e6e3      	LDI  R30,LOW(99)
 0003cb 93ea      	ST   -Y,R30
-0003cc 940e 04c6 	CALL _putchar
+0003cc 940e 04e2 	CALL _putchar
                  ; 0000 0224     ucRS232Started = 0;
 0003ce e0e0      	LDI  R30,LOW(0)
 0003cf 93e0 0370 	STS  _ucRS232Started,R30
@@ -2580,7 +2580,7 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  _0x95:
                  ; 0000 0227     {
                  ; 0000 0228         if((RS232_IsRunning()>0)&&(ucRS232Started==0)){
-0003d1 940e 04e2 	CALL _RS232_IsRunning
+0003d1 940e 04fe 	CALL _RS232_IsRunning
 0003d3 30e1      	CPI  R30,LOW(0x1)
 0003d4 f020      	BRLO _0x99
 0003d5 91a0 0370 	LDS  R26,_ucRS232Started
@@ -2590,30 +2590,30 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
 0003d9 c01c      	RJMP _0x98
                  _0x9A:
                  ; 0000 0229             if(getchar()== RX_START)
-0003da 940e 049c 	CALL _getchar
+0003da 940e 04b8 	CALL _getchar
 0003dc 3aea      	CPI  R30,LOW(0xAA)
 0003dd f4c1      	BRNE _0x9B
                  ; 0000 022A             {
                  ; 0000 022B                 delay_ms(200);
 0003de ece8      	LDI  R30,LOW(200)
 0003df e0f0      	LDI  R31,HIGH(200)
-0003e0 940e 059d 	CALL SUBOPT_0x13
+0003e0 940e 05b9 	CALL SUBOPT_0x13
                  ; 0000 022C                 ucRS232Started = 1;
 0003e2 e0e1      	LDI  R30,LOW(1)
 0003e3 93e0 0370 	STS  _ucRS232Started,R30
                  ; 0000 022D                 ucCommand = getchar();
-0003e5 940e 049c 	CALL _getchar
+0003e5 940e 04b8 	CALL _getchar
 0003e7 93e0 0371 	STS  _ucCommand,R30
                  ; 0000 022E                 ucLength = getchar();
-0003e9 940e 049c 	CALL _getchar
+0003e9 940e 04b8 	CALL _getchar
 0003eb 93e0 036f 	STS  _ucLength,R30
                  ; 0000 022F                 delay_ms(10*ucLength);
 0003ed 91e0 036f 	LDS  R30,_ucLength
 0003ef e0f0      	LDI  R31,0
 0003f0 e0aa      	LDI  R26,LOW(10)
 0003f1 e0b0      	LDI  R27,HIGH(10)
-0003f2 940e 05b9 	CALL __MULW12
-0003f4 940e 059d 	CALL SUBOPT_0x13
+0003f2 940e 05d5 	CALL __MULW12
+0003f4 940e 05b9 	CALL SUBOPT_0x13
                  ; 0000 0230             }
                  ; 0000 0231         }
                  _0x9B:
@@ -2621,10 +2621,11 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  _0x98:
 0003f6 91a0 0370 	LDS  R26,_ucRS232Started
 0003f8 30a1      	CPI  R26,LOW(0x1)
-0003f9 f5a1      	BRNE _0x9C
+0003f9 f011      	BREQ PC+3
+0003fa 940c 044a 	JMP _0x9C
                  ; 0000 0233             // doc gia tri tu rs232
                  ; 0000 0234             RS232_GetData();
-0003fa df80      	RCALL _RS232_GetData
+0003fc df7e      	RCALL _RS232_GetData
                  ; 0000 0235             /*
                  ; 0000 0236             for(i=0;i<ucLength;i++){
                  ; 0000 0237                 delay_ms(10);
@@ -2633,135 +2634,156 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0000 023A             */
                  ; 0000 023B             // kiem tra gia tri dau tien cua ucPacket
                  ; 0000 023C             switch(ucCommand){
-0003fb 91e0 0371 	LDS  R30,_ucCommand
-0003fd e0f0      	LDI  R31,0
+0003fd 91e0 0371 	LDS  R30,_ucCommand
+0003ff e0f0      	LDI  R31,0
                  ; 0000 023D                 // doc thanh ghi st7538/7540
                  ; 0000 023E                 case COM_GET_CTR:
-0003fe 9730      	SBIW R30,0
-0003ff f571      	BRNE _0xA0
+000400 9730      	SBIW R30,0
+000401 f579      	BRNE _0xA0
                  ; 0000 023F                 {
                  ; 0000 0240                     // get control register (comm)
                  ; 0000 0241 			        *((unsigned long*)&ucPacket[3]) = PLM_GetControlRegister();
-000400 df5c      	RCALL _PLM_GetControlRegister
+000402 df5a      	RCALL _PLM_GetControlRegister
                 +
-000401 93e0 0263+STS _ucPacket + 3 , R30
-000403 93f0 0264+STS _ucPacket + 3 + 1 , R31
-000405 9360 0265+STS _ucPacket + 3 + 2 , R22
-000407 9370 0266+STS _ucPacket + 3 + 3 , R23
+000403 93e0 0263+STS _ucPacket + 3 , R30
+000405 93f0 0264+STS _ucPacket + 3 + 1 , R31
+000407 9360 0265+STS _ucPacket + 3 + 2 , R22
+000409 9370 0266+STS _ucPacket + 3 + 3 , R23
                  	__PUTD1MN _ucPacket,3
                  ; 0000 0242 					ByteReverse((unsigned long*)&ucPacket[3]);
                 +
-000409 e6e3     +LDI R30 , LOW ( _ucPacket + 3 )
-00040a e0f2     +LDI R31 , HIGH ( _ucPacket + 3 )
+00040b e6e3     +LDI R30 , LOW ( _ucPacket + 3 )
+00040c e0f2     +LDI R31 , HIGH ( _ucPacket + 3 )
                  	__POINTW1MN _ucPacket,3
-00040b 93fa      	ST   -Y,R31
-00040c 93ea      	ST   -Y,R30
-00040d 940e 04e4 	CALL _ByteReverse
+00040d 93fa      	ST   -Y,R31
+00040e 93ea      	ST   -Y,R30
+00040f 940e 0500 	CALL _ByteReverse
                  ; 0000 0243                     *ucPacket = TX_START;// them header
-00040f eaea      	LDI  R30,LOW(170)
-000410 93e0 0260 	STS  _ucPacket,R30
+000411 eaea      	LDI  R30,LOW(170)
+000412 93e0 0260 	STS  _ucPacket,R30
                  ; 0000 0244                     *(ucPacket + 1) = ucCommand;// them code
-000412 91e0 0371 	LDS  R30,_ucCommand
+000414 91e0 0371 	LDS  R30,_ucCommand
                 +
-000414 93e0 0261+STS _ucPacket + 1 , R30
+000416 93e0 0261+STS _ucPacket + 1 , R30
                  	__PUTB1MN _ucPacket,1
                  ; 0000 0245                     *(ucPacket + 2) = 3;// them do dai
-000416 e0e3      	LDI  R30,LOW(3)
+000418 e0e3      	LDI  R30,LOW(3)
                 +
-000417 93e0 0262+STS _ucPacket + 2 , R30
+000419 93e0 0262+STS _ucPacket + 2 , R30
                  	__PUTB1MN _ucPacket,2
                  ; 0000 0246 					//RS232_SetData(ucPacket, 7);
                  ; 0000 0247                     for(i=0;i<7;i++){
                 +
-000419 e000     +LDI R16 , LOW ( 0 )
-00041a e010     +LDI R17 , HIGH ( 0 )
+00041b e000     +LDI R16 , LOW ( 0 )
+00041c e010     +LDI R17 , HIGH ( 0 )
                  	__GETWRN 16,17,0
                  _0xA2:
                 +
-00041b 3007     +CPI R16 , LOW ( 7 )
-00041c e0e0     +LDI R30 , HIGH ( 7 )
-00041d 071e     +CPC R17 , R30
+00041d 3007     +CPI R16 , LOW ( 7 )
+00041e e0e0     +LDI R30 , HIGH ( 7 )
+00041f 071e     +CPC R17 , R30
                  	__CPWRN 16,17,7
-00041e f47c      	BRGE _0xA3
+000420 f47c      	BRGE _0xA3
                  ; 0000 0248                         delay_ms(10);
-00041f e0ea      	LDI  R30,LOW(10)
-000420 e0f0      	LDI  R31,HIGH(10)
-000421 940e 059d 	CALL SUBOPT_0x13
+000421 e0ea      	LDI  R30,LOW(10)
+000422 e0f0      	LDI  R31,HIGH(10)
+000423 940e 05b9 	CALL SUBOPT_0x13
                  ; 0000 0249                         putchar(ucPacket[i]);
-000423 e6a0      	LDI  R26,LOW(_ucPacket)
-000424 e0b2      	LDI  R27,HIGH(_ucPacket)
-000425 0fa0      	ADD  R26,R16
-000426 1fb1      	ADC  R27,R17
-000427 91ec      	LD   R30,X
-000428 93ea      	ST   -Y,R30
-000429 940e 04c6 	CALL _putchar
+000425 e6a0      	LDI  R26,LOW(_ucPacket)
+000426 e0b2      	LDI  R27,HIGH(_ucPacket)
+000427 0fa0      	ADD  R26,R16
+000428 1fb1      	ADC  R27,R17
+000429 91ec      	LD   R30,X
+00042a 93ea      	ST   -Y,R30
+00042b 940e 04e2 	CALL _putchar
                  ; 0000 024A                     }
                 +
-00042b 5f0f     +SUBI R16 , LOW ( - 1 )
-00042c 4f1f     +SBCI R17 , HIGH ( - 1 )
+00042d 5f0f     +SUBI R16 , LOW ( - 1 )
+00042e 4f1f     +SBCI R17 , HIGH ( - 1 )
                  	__ADDWRN 16,17,1
-00042d cfed      	RJMP _0xA2
+00042f cfed      	RJMP _0xA2
                  _0xA3:
                  ; 0000 024B 					break;
+000430 c019      	RJMP _0x9F
                  ; 0000 024C 			    }
                  ; 0000 024D 
                  ; 0000 024E                 // ghi thanh ghi st7538/7540
                  ; 0000 024F 		        case COM_SET_CTR:
                  _0xA0:
+000431 30e1      	CPI  R30,LOW(0x1)
+000432 e0a0      	LDI  R26,HIGH(0x1)
+000433 07fa      	CPC  R31,R26
+000434 f4a9      	BRNE _0xA4
                  ; 0000 0250                 {
                  ; 0000 0251                     // set control register (comm, byte0, byte1, byte2, byte3)
-                 ; 0000 0252 //					ByteReverse((unsigned long*)&ucPacket[0]);
-                 ; 0000 0253 //					PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
-                 ; 0000 0254 					break;
-                 ; 0000 0255 			    }
-                 ; 0000 0256                 case COM_SET_PLM:
-                 ; 0000 0257                 {
-                 ; 0000 0258 //					PLM_Stop();
-                 ; 0000 0259 
-                 ; 0000 025A //					uiLastFCS = CalcCRC(&ucPacket[0], 72);
-                 ; 0000 025B //					*(unsigned int*)&ucPacket[72] = uiLastFCS;
-                 ; 0000 025C //
-                 ; 0000 025D //                    ucPostableBits = 8-((78 * 14) % 8);
-                 ; 0000 025E //
-                 ; 0000 025F                     // truyen khong co ack
-                 ; 0000 0260 //					PLM_TransmitData(74, 0);
-                 ; 0000 0261 //                    while(PLM_pinCD_PD == 1);
-                 ; 0000 0262 //                    pin_TASK = 1;
-                 ; 0000 0263 //					while(PLM_IsRunning() != 0);
-                 ; 0000 0264 //                    PLM_ReceiveData(74);
-                 ; 0000 0265 					break;
-                 ; 0000 0266 			    }
-                 ; 0000 0267                 case COM_GET_PLM:
-                 ; 0000 0268                 {
-                 ; 0000 0269 //                    PLM_ReceiveData(74);
-                 ; 0000 026A 					break;
-                 ; 0000 026B 			    }
-                 ; 0000 026C             }
+                 ; 0000 0252 					ByteReverse((unsigned long*)&ucPacket[0]);
+000435 e6e0      	LDI  R30,LOW(_ucPacket)
+000436 e0f2      	LDI  R31,HIGH(_ucPacket)
+000437 93fa      	ST   -Y,R31
+000438 93ea      	ST   -Y,R30
+000439 940e 0500 	CALL _ByteReverse
+                 ; 0000 0253 					PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
+00043b 91e0 0260 	LDS  R30,_ucPacket
+00043d 91f0 0261 	LDS  R31,_ucPacket+1
+00043f 9160 0262 	LDS  R22,_ucPacket+2
+000441 9170 0263 	LDS  R23,_ucPacket+3
+000443 940e 05e8 	CALL __PUTPARD1
+000445 defe      	RCALL _PLM_SetControlRegister
+                 ; 0000 0254                     putchar('c');
+000446 e6e3      	LDI  R30,LOW(99)
+000447 93ea      	ST   -Y,R30
+000448 940e 04e2 	CALL _putchar
+                 ; 0000 0255 					break;
+                 ; 0000 0256 			    }
+                 ; 0000 0257                 case COM_SET_PLM:
+                 _0xA4:
+                 ; 0000 0258                 {
+                 ; 0000 0259 //					PLM_Stop();
+                 ; 0000 025A 
+                 ; 0000 025B //					uiLastFCS = CalcCRC(&ucPacket[0], 72);
+                 ; 0000 025C //					*(unsigned int*)&ucPacket[72] = uiLastFCS;
+                 ; 0000 025D //
+                 ; 0000 025E //                    ucPostableBits = 8-((78 * 14) % 8);
+                 ; 0000 025F //
+                 ; 0000 0260                     // truyen khong co ack
+                 ; 0000 0261 //					PLM_TransmitData(74, 0);
+                 ; 0000 0262 //                    while(PLM_pinCD_PD == 1);
+                 ; 0000 0263 //                    pin_TASK = 1;
+                 ; 0000 0264 //					while(PLM_IsRunning() != 0);
+                 ; 0000 0265 //                    PLM_ReceiveData(74);
+                 ; 0000 0266 					break;
+                 ; 0000 0267 			    }
+                 ; 0000 0268                 case COM_GET_PLM:
+                 ; 0000 0269                 {
+                 ; 0000 026A //                    PLM_ReceiveData(74);
+                 ; 0000 026B 					break;
+                 ; 0000 026C 			    }
+                 ; 0000 026D             }
                  _0x9F:
-                 ; 0000 026D         }
-                 ; 0000 026E //        while(RS232_IsRunning()!=0);
-                 ; 0000 026F //
-                 ; 0000 0270 //        delay_ms(100);
-                 ; 0000 0271 
-                 ; 0000 0272 //		if(PLM_IsRunning() != 0){
-                 ; 0000 0273 //            if(PLM_pinCD_PD == 0){
-                 ; 0000 0274 //                pin_TASK = 1;
-                 ; 0000 0275 //            }
-                 ; 0000 0276 //        }
-                 ; 0000 0277 
-                 ; 0000 0278 //        if(PLM_IsRunning()==0){
-                 ; 0000 0279 //            if(!PLM_IsAck()){
-                 ; 0000 027A //                if(*(unsigned int*)&ucPacket[72] == CalcCRC(ucPacket, 72)){
-                 ; 0000 027B //                    RS232_SetData(ucPacket, 72);
-                 ; 0000 027C //                }
-                 ; 0000 027D //            }
-                 ; 0000 027E //        }
-                 ; 0000 027F     };
+                 ; 0000 026E         }
+                 ; 0000 026F //        while(RS232_IsRunning()!=0);
+                 ; 0000 0270 //
+                 ; 0000 0271 //        delay_ms(100);
+                 ; 0000 0272 
+                 ; 0000 0273 //		if(PLM_IsRunning() != 0){
+                 ; 0000 0274 //            if(PLM_pinCD_PD == 0){
+                 ; 0000 0275 //                pin_TASK = 1;
+                 ; 0000 0276 //            }
+                 ; 0000 0277 //        }
+                 ; 0000 0278 
+                 ; 0000 0279 //        if(PLM_IsRunning()==0){
+                 ; 0000 027A //            if(!PLM_IsAck()){
+                 ; 0000 027B //                if(*(unsigned int*)&ucPacket[72] == CalcCRC(ucPacket, 72)){
+                 ; 0000 027C //                    RS232_SetData(ucPacket, 72);
+                 ; 0000 027D //                }
+                 ; 0000 027E //            }
+                 ; 0000 027F //        }
+                 ; 0000 0280     };
                  _0x9C:
-00042e cfa2      	RJMP _0x95
-                 ; 0000 0280 }
+00044a cf86      	RJMP _0x95
+                 ; 0000 0281 }
                  _0xA7:
-00042f cfff      	RJMP _0xA7
+00044b cfff      	RJMP _0xA7
                  ;#include <mega32.h>
                  	#ifndef __SLEEP_DEFINED__
                  	#endif
@@ -2775,43 +2797,43 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0001 0006     // Func7=Out Func6=Out Func5=In Func4=Out Func3=Out Func2=In Func1=In Func0=In
                  ; 0001 0007     // State7=0 State6=0 State5=T State4=0 State3=0 State2=T State1=T State0=T
                  ; 0001 0008     PORTA=0x00;
-000430 e0e0      	LDI  R30,LOW(0)
-000431 bbeb      	OUT  0x1B,R30
+00044c e0e0      	LDI  R30,LOW(0)
+00044d bbeb      	OUT  0x1B,R30
                  ; 0001 0009     DDRA=0xD8;
-000432 ede8      	LDI  R30,LOW(216)
-000433 bbea      	OUT  0x1A,R30
+00044e ede8      	LDI  R30,LOW(216)
+00044f bbea      	OUT  0x1A,R30
                  ; 0001 000A 
                  ; 0001 000B     // Port B initialization
                  ; 0001 000C     // Func7=In Func6=Out Func5=In Func4=Out Func3=In Func2=In Func1=In Func0=In
                  ; 0001 000D     // State7=T State6=0 State5=T State4=0 State3=T State2=T State1=T State0=T
                  ; 0001 000E     PORTB=0x00;
-000434 e0e0      	LDI  R30,LOW(0)
-000435 bbe8      	OUT  0x18,R30
+000450 e0e0      	LDI  R30,LOW(0)
+000451 bbe8      	OUT  0x18,R30
                  ; 0001 000F     DDRB=0x50;
-000436 e5e0      	LDI  R30,LOW(80)
-000437 bbe7      	OUT  0x17,R30
+000452 e5e0      	LDI  R30,LOW(80)
+000453 bbe7      	OUT  0x17,R30
                  ; 0001 0010 
                  ; 0001 0011     // Port C initialization
                  ; 0001 0012     // Func7=In Func6=Out Func5=Out Func4=In Func3=Out Func2=In Func1=In Func0=Out
                  ; 0001 0013     // State7=T State6=0 State5=0 State4=T State3=0 State2=T State1=T State0=0
                  ; 0001 0014     PORTC=0x00;
-000438 e0e0      	LDI  R30,LOW(0)
-000439 bbe5      	OUT  0x15,R30
+000454 e0e0      	LDI  R30,LOW(0)
+000455 bbe5      	OUT  0x15,R30
                  ; 0001 0015     DDRC=0x69;
-00043a e6e9      	LDI  R30,LOW(105)
-00043b bbe4      	OUT  0x14,R30
+000456 e6e9      	LDI  R30,LOW(105)
+000457 bbe4      	OUT  0x14,R30
                  ; 0001 0016 
                  ; 0001 0017     // Port D initialization
                  ; 0001 0018     // Func7=Out Func6=In Func5=In Func4=In Func3=In Func2=In Func1=Out Func0=In
                  ; 0001 0019     // State7=1 State6=T State5=T State4=T State3=P State2=T State1=0 State0=T
                  ; 0001 001A     PORTD=0x88;
-00043c e8e8      	LDI  R30,LOW(136)
-00043d bbe2      	OUT  0x12,R30
+000458 e8e8      	LDI  R30,LOW(136)
+000459 bbe2      	OUT  0x12,R30
                  ; 0001 001B     DDRD=0x82;
-00043e e8e2      	LDI  R30,LOW(130)
-00043f bbe1      	OUT  0x11,R30
+00045a e8e2      	LDI  R30,LOW(130)
+00045b bbe1      	OUT  0x11,R30
                  ; 0001 001C }
-000440 9508      	RET
+00045c 9508      	RET
                  ;
                  ;void TimerCounter_Init(void){
                  ; 0001 001E void TimerCounter_Init(void){
@@ -2822,12 +2844,12 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0001 0022     // Mode: Normal top=FFh
                  ; 0001 0023     // OC0 output: Disconnected
                  ; 0001 0024     TCCR0=0x00;
-000441 e0e0      	LDI  R30,LOW(0)
-000442 bfe3      	OUT  0x33,R30
+00045d e0e0      	LDI  R30,LOW(0)
+00045e bfe3      	OUT  0x33,R30
                  ; 0001 0025     TCNT0=0x00;
-000443 bfe2      	OUT  0x32,R30
+00045f bfe2      	OUT  0x32,R30
                  ; 0001 0026     OCR0=0x00;
-000444 bfec      	OUT  0x3C,R30
+000460 bfec      	OUT  0x3C,R30
                  ; 0001 0027 
                  ; 0001 0028     // Timer/Counter 1 initialization
                  ; 0001 0029     // Clock source: System Clock
@@ -2842,25 +2864,25 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0001 0032     // Compare A Match Interrupt: Off
                  ; 0001 0033     // Compare B Match Interrupt: Off
                  ; 0001 0034     TCCR1A=0x00;
-000445 bdef      	OUT  0x2F,R30
+000461 bdef      	OUT  0x2F,R30
                  ; 0001 0035     TCCR1B=0x00;
-000446 bdee      	OUT  0x2E,R30
+000462 bdee      	OUT  0x2E,R30
                  ; 0001 0036     TCNT1H=0x00;
-000447 bded      	OUT  0x2D,R30
+000463 bded      	OUT  0x2D,R30
                  ; 0001 0037     TCNT1L=0x00;
-000448 bdec      	OUT  0x2C,R30
+000464 bdec      	OUT  0x2C,R30
                  ; 0001 0038     ICR1H=0x00;
-000449 bde7      	OUT  0x27,R30
+000465 bde7      	OUT  0x27,R30
                  ; 0001 0039     ICR1L=0x00;
-00044a bde6      	OUT  0x26,R30
+000466 bde6      	OUT  0x26,R30
                  ; 0001 003A     OCR1AH=0x00;
-00044b bdeb      	OUT  0x2B,R30
+000467 bdeb      	OUT  0x2B,R30
                  ; 0001 003B     OCR1AL=0x00;
-00044c bdea      	OUT  0x2A,R30
+000468 bdea      	OUT  0x2A,R30
                  ; 0001 003C     OCR1BH=0x00;
-00044d bde9      	OUT  0x29,R30
+000469 bde9      	OUT  0x29,R30
                  ; 0001 003D     OCR1BL=0x00;
-00044e bde8      	OUT  0x28,R30
+00046a bde8      	OUT  0x28,R30
                  ; 0001 003E 
                  ; 0001 003F     // Timer/Counter 2 initialization
                  ; 0001 0040     // Clock source: System Clock
@@ -2868,17 +2890,17 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0001 0042     // Mode: Normal top=FFh
                  ; 0001 0043     // OC2 output: Disconnected
                  ; 0001 0044     ASSR=0x00;
-00044f bde2      	OUT  0x22,R30
+00046b bde2      	OUT  0x22,R30
                  ; 0001 0045     TCCR2=0x00;
-000450 bde5      	OUT  0x25,R30
+00046c bde5      	OUT  0x25,R30
                  ; 0001 0046     TCNT2=0x00;
-000451 bde4      	OUT  0x24,R30
+00046d bde4      	OUT  0x24,R30
                  ; 0001 0047     OCR2=0x00;
-000452 bde3      	OUT  0x23,R30
+00046e bde3      	OUT  0x23,R30
                  ; 0001 0048 
                  ; 0001 0049 
                  ; 0001 004A }
-000453 9508      	RET
+00046f 9508      	RET
                  ;
                  ;void ExtInterupt_Init(void){
                  ; 0001 004C void ExtInterupt_Init(void){
@@ -2889,40 +2911,40 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0001 0050     // INT1 Mode: Low level
                  ; 0001 0051     // INT2: Off
                  ; 0001 0052     GICR|=0x80;
-000454 b7eb      	IN   R30,0x3B
-000455 e0f0      	LDI  R31,0
-000456 68e0      	ORI  R30,0x80
-000457 bfeb      	OUT  0x3B,R30
+000470 b7eb      	IN   R30,0x3B
+000471 e0f0      	LDI  R31,0
+000472 68e0      	ORI  R30,0x80
+000473 bfeb      	OUT  0x3B,R30
                  ; 0001 0053     MCUCR=0x00;
-000458 e0e0      	LDI  R30,LOW(0)
-000459 bfe5      	OUT  0x35,R30
+000474 e0e0      	LDI  R30,LOW(0)
+000475 bfe5      	OUT  0x35,R30
                  ; 0001 0054     MCUCSR=0x00;
-00045a bfe4      	OUT  0x34,R30
+000476 bfe4      	OUT  0x34,R30
                  ; 0001 0055     GIFR=0x80;
-00045b e8e0      	LDI  R30,LOW(128)
-00045c bfea      	OUT  0x3A,R30
+000477 e8e0      	LDI  R30,LOW(128)
+000478 bfea      	OUT  0x3A,R30
                  ; 0001 0056 
                  ; 0001 0057     // Timer(s)/Counter(s) Interrupt(s) initialization
                  ; 0001 0058     TIMSK=0x00;
-00045d e0e0      	LDI  R30,LOW(0)
-00045e bfe9      	OUT  0x39,R30
+000479 e0e0      	LDI  R30,LOW(0)
+00047a bfe9      	OUT  0x39,R30
                  ; 0001 0059 
                  ; 0001 005A     // Analog Comparator initialization
                  ; 0001 005B     // Analog Comparator: Off
                  ; 0001 005C     // Analog Comparator Input Capture by Timer/Counter 1: Off
                  ; 0001 005D     ACSR=0x80;
-00045f e8e0      	LDI  R30,LOW(128)
-000460 b9e8      	OUT  0x8,R30
+00047b e8e0      	LDI  R30,LOW(128)
+00047c b9e8      	OUT  0x8,R30
                  ; 0001 005E     SFIOR=0x00;
-000461 e0e0      	LDI  R30,LOW(0)
-000462 bfe0      	OUT  0x30,R30
+00047d e0e0      	LDI  R30,LOW(0)
+00047e bfe0      	OUT  0x30,R30
                  ; 0001 005F     // Global enable interrupts
                  ; 0001 0060     #asm("sei")
-000463 9478      	sei
+00047f 9478      	sei
                  ; 0001 0061 
                  ; 0001 0062 
                  ; 0001 0063 }
-000464 9508      	RET
+000480 9508      	RET
                  ;
                  ;void SPI_Init(void){
                  ; 0001 0065 void SPI_Init(void){
@@ -2955,22 +2977,22 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0001 007E     // USART Mode: Asynchronous
                  ; 0001 007F     // USART Baud Rate: 9600
                  ; 0001 0080     UCSRA=0x00;
-000465 e0e0      	LDI  R30,LOW(0)
-000466 b9eb      	OUT  0xB,R30
+000481 e0e0      	LDI  R30,LOW(0)
+000482 b9eb      	OUT  0xB,R30
                  ; 0001 0081     UCSRB=0xD8;
-000467 ede8      	LDI  R30,LOW(216)
-000468 b9ea      	OUT  0xA,R30
+000483 ede8      	LDI  R30,LOW(216)
+000484 b9ea      	OUT  0xA,R30
                  ; 0001 0082     UCSRC=0x86;
-000469 e8e6      	LDI  R30,LOW(134)
-00046a bde0      	OUT  0x20,R30
+000485 e8e6      	LDI  R30,LOW(134)
+000486 bde0      	OUT  0x20,R30
                  ; 0001 0083     UBRRH=0x00;
-00046b e0e0      	LDI  R30,LOW(0)
-00046c bde0      	OUT  0x20,R30
+000487 e0e0      	LDI  R30,LOW(0)
+000488 bde0      	OUT  0x20,R30
                  ; 0001 0084     UBRRL=0x47;
-00046d e4e7      	LDI  R30,LOW(71)
-00046e b9e9      	OUT  0x9,R30
+000489 e4e7      	LDI  R30,LOW(71)
+00048a b9e9      	OUT  0x9,R30
                  ; 0001 0085 }
-00046f 9508      	RET
+00048b 9508      	RET
                  ;#include <mega32.h>
                  	#ifndef __SLEEP_DEFINED__
                  	#endif
@@ -3010,71 +3032,71 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  
                  	.CSEG
                  _usart_rx_isr:
-000470 93aa      	ST   -Y,R26
-000471 93ba      	ST   -Y,R27
-000472 93ea      	ST   -Y,R30
-000473 93fa      	ST   -Y,R31
-000474 b7ef      	IN   R30,SREG
-000475 93ea      	ST   -Y,R30
+00048c 93aa      	ST   -Y,R26
+00048d 93ba      	ST   -Y,R27
+00048e 93ea      	ST   -Y,R30
+00048f 93fa      	ST   -Y,R31
+000490 b7ef      	IN   R30,SREG
+000491 93ea      	ST   -Y,R30
                  ; 0002 0023 
                  ; 0002 0024     char status,data;
                  ; 0002 0025     status=UCSRA;
-000476 931a      	ST   -Y,R17
-000477 930a      	ST   -Y,R16
+000492 931a      	ST   -Y,R17
+000493 930a      	ST   -Y,R16
                  ;	status -> R17
                  ;	data -> R16
-000478 b11b      	IN   R17,11
+000494 b11b      	IN   R17,11
                  ; 0002 0026     data=UDR;
-000479 b10c      	IN   R16,12
+000495 b10c      	IN   R16,12
                  ; 0002 0027     if ((status & (FRAMING_ERROR | PARITY_ERROR | DATA_OVERRUN))==0)
-00047a 2fa1      	MOV  R26,R17
-00047b e0b0      	LDI  R27,0
-00047c e1ec      	LDI  R30,LOW(28)
-00047d e0f0      	LDI  R31,HIGH(28)
-00047e 23ea      	AND  R30,R26
-00047f 23fb      	AND  R31,R27
-000480 9730      	SBIW R30,0
-000481 f489      	BRNE _0x40003
+000496 2fa1      	MOV  R26,R17
+000497 e0b0      	LDI  R27,0
+000498 e1ec      	LDI  R30,LOW(28)
+000499 e0f0      	LDI  R31,HIGH(28)
+00049a 23ea      	AND  R30,R26
+00049b 23fb      	AND  R31,R27
+00049c 9730      	SBIW R30,0
+00049d f489      	BRNE _0x40003
                  ; 0002 0028     {
                  ; 0002 0029         rx_buffer[rx_wr_index]=data;
-000482 2de5      	MOV  R30,R5
-000483 e0f0      	LDI  R31,0
-000484 58e7      	SUBI R30,LOW(-_rx_buffer)
-000485 4ffc      	SBCI R31,HIGH(-_rx_buffer)
-000486 8300      	ST   Z,R16
+00049e 2de5      	MOV  R30,R5
+00049f e0f0      	LDI  R31,0
+0004a0 58e7      	SUBI R30,LOW(-_rx_buffer)
+0004a1 4ffc      	SBCI R31,HIGH(-_rx_buffer)
+0004a2 8300      	ST   Z,R16
                  ; 0002 002A 
                  ; 0002 002B         if (++rx_wr_index == RX_BUFFER_SIZE) rx_wr_index=0;
-000487 9453      	INC  R5
-000488 efef      	LDI  R30,LOW(255)
-000489 15e5      	CP   R30,R5
-00048a f409      	BRNE _0x40004
-00048b 2455      	CLR  R5
+0004a3 9453      	INC  R5
+0004a4 efef      	LDI  R30,LOW(255)
+0004a5 15e5      	CP   R30,R5
+0004a6 f409      	BRNE _0x40004
+0004a7 2455      	CLR  R5
                  ; 0002 002C         if (++rx_counter == RX_BUFFER_SIZE)
                  _0x40004:
-00048c 9473      	INC  R7
-00048d efef      	LDI  R30,LOW(255)
-00048e 15e7      	CP   R30,R7
-00048f f419      	BRNE _0x40005
+0004a8 9473      	INC  R7
+0004a9 efef      	LDI  R30,LOW(255)
+0004aa 15e7      	CP   R30,R7
+0004ab f419      	BRNE _0x40005
                  ; 0002 002D         {
                  ; 0002 002E             rx_counter=0;
-000490 2477      	CLR  R7
+0004ac 2477      	CLR  R7
                  ; 0002 002F             rx_buffer_overflow=1;
-000491 9468      	SET
-000492 f822      	BLD  R2,2
+0004ad 9468      	SET
+0004ae f822      	BLD  R2,2
                  ; 0002 0030         };
                  _0x40005:
                  ; 0002 0031     };
                  _0x40003:
                  ; 0002 0032 }
-000493 9109      	LD   R16,Y+
-000494 9119      	LD   R17,Y+
-000495 91e9      	LD   R30,Y+
-000496 bfef      	OUT  SREG,R30
-000497 91f9      	LD   R31,Y+
-000498 91e9      	LD   R30,Y+
-000499 91b9      	LD   R27,Y+
-00049a 91a9      	LD   R26,Y+
-00049b 9518      	RETI
+0004af 9109      	LD   R16,Y+
+0004b0 9119      	LD   R17,Y+
+0004b1 91e9      	LD   R30,Y+
+0004b2 bfef      	OUT  SREG,R30
+0004b3 91f9      	LD   R31,Y+
+0004b4 91e9      	LD   R30,Y+
+0004b5 91b9      	LD   R27,Y+
+0004b6 91a9      	LD   R26,Y+
+0004b7 9518      	RETI
                  ;
                  ;#ifndef _DEBUG_TERMINAL_IO_
                  ;// Get a character from the USART Receiver buffer
@@ -3085,34 +3107,34 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  _getchar:
                  ; 0002 003A     char data;
                  ; 0002 003B     while (rx_counter==0);
-00049c 931a      	ST   -Y,R17
+0004b8 931a      	ST   -Y,R17
                  ;	data -> R17
                  _0x40006:
-00049d 2077      	TST  R7
-00049e f3f1      	BREQ _0x40006
+0004b9 2077      	TST  R7
+0004ba f3f1      	BREQ _0x40006
                  ; 0002 003C     data=rx_buffer[rx_rd_index];
-00049f 2de4      	MOV  R30,R4
-0004a0 e0f0      	LDI  R31,0
-0004a1 58e7      	SUBI R30,LOW(-_rx_buffer)
-0004a2 4ffc      	SBCI R31,HIGH(-_rx_buffer)
-0004a3 8110      	LD   R17,Z
+0004bb 2de4      	MOV  R30,R4
+0004bc e0f0      	LDI  R31,0
+0004bd 58e7      	SUBI R30,LOW(-_rx_buffer)
+0004be 4ffc      	SBCI R31,HIGH(-_rx_buffer)
+0004bf 8110      	LD   R17,Z
                  ; 0002 003D     if (++rx_rd_index == RX_BUFFER_SIZE) rx_rd_index=0;
-0004a4 9443      	INC  R4
-0004a5 efef      	LDI  R30,LOW(255)
-0004a6 15e4      	CP   R30,R4
-0004a7 f409      	BRNE _0x40009
-0004a8 2444      	CLR  R4
+0004c0 9443      	INC  R4
+0004c1 efef      	LDI  R30,LOW(255)
+0004c2 15e4      	CP   R30,R4
+0004c3 f409      	BRNE _0x40009
+0004c4 2444      	CLR  R4
                  ; 0002 003E     #asm("cli")
                  _0x40009:
-0004a9 94f8      	cli
+0004c5 94f8      	cli
                  ; 0002 003F     --rx_counter;
-0004aa 947a      	DEC  R7
+0004c6 947a      	DEC  R7
                  ; 0002 0040     #asm("sei")
-0004ab 9478      	sei
+0004c7 9478      	sei
                  ; 0002 0041     return data;
-0004ac 2fe1      	MOV  R30,R17
-0004ad 9119      	LD   R17,Y+
-0004ae 9508      	RET
+0004c8 2fe1      	MOV  R30,R17
+0004c9 9119      	LD   R17,Y+
+0004ca 9508      	RET
                  ; 0002 0042 }
                  ;#pragma used-
                  ;#endif
@@ -3131,38 +3153,38 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ;interrupt [USART_TXC] void usart_tx_isr(void)
                  ; 0002 0052 {
                  _usart_tx_isr:
-0004af 93ea      	ST   -Y,R30
-0004b0 93fa      	ST   -Y,R31
-0004b1 b7ef      	IN   R30,SREG
-0004b2 93ea      	ST   -Y,R30
+0004cb 93ea      	ST   -Y,R30
+0004cc 93fa      	ST   -Y,R31
+0004cd b7ef      	IN   R30,SREG
+0004ce 93ea      	ST   -Y,R30
                  ; 0002 0053     if (tx_counter)
-0004b3 2088      	TST  R8
-0004b4 f061      	BREQ _0x4000A
+0004cf 2088      	TST  R8
+0004d0 f061      	BREQ _0x4000A
                  ; 0002 0054     {
                  ; 0002 0055         --tx_counter;
-0004b5 948a      	DEC  R8
+0004d1 948a      	DEC  R8
                  ; 0002 0056         UDR=tx_buffer[tx_rd_index];
-0004b6 2de9      	MOV  R30,R9
-0004b7 e0f0      	LDI  R31,0
-0004b8 58e8      	SUBI R30,LOW(-_tx_buffer)
-0004b9 4ffb      	SBCI R31,HIGH(-_tx_buffer)
-0004ba 81e0      	LD   R30,Z
-0004bb b9ec      	OUT  0xC,R30
+0004d2 2de9      	MOV  R30,R9
+0004d3 e0f0      	LDI  R31,0
+0004d4 58e8      	SUBI R30,LOW(-_tx_buffer)
+0004d5 4ffb      	SBCI R31,HIGH(-_tx_buffer)
+0004d6 81e0      	LD   R30,Z
+0004d7 b9ec      	OUT  0xC,R30
                  ; 0002 0057         if (++tx_rd_index == TX_BUFFER_SIZE) tx_rd_index=0;
-0004bc 9493      	INC  R9
-0004bd efef      	LDI  R30,LOW(255)
-0004be 15e9      	CP   R30,R9
-0004bf f409      	BRNE _0x4000B
-0004c0 2499      	CLR  R9
+0004d8 9493      	INC  R9
+0004d9 efef      	LDI  R30,LOW(255)
+0004da 15e9      	CP   R30,R9
+0004db f409      	BRNE _0x4000B
+0004dc 2499      	CLR  R9
                  ; 0002 0058     };
                  _0x4000B:
                  _0x4000A:
                  ; 0002 0059 }
-0004c1 91e9      	LD   R30,Y+
-0004c2 bfef      	OUT  SREG,R30
-0004c3 91f9      	LD   R31,Y+
-0004c4 91e9      	LD   R30,Y+
-0004c5 9518      	RETI
+0004dd 91e9      	LD   R30,Y+
+0004de bfef      	OUT  SREG,R30
+0004df 91f9      	LD   R31,Y+
+0004e0 91e9      	LD   R30,Y+
+0004e1 9518      	RETI
                  ;
                  ;#ifndef _DEBUG_TERMINAL_IO_
                  ;// Write a character to the USART Transmitter buffer
@@ -3174,49 +3196,49 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0002 0061     while (tx_counter == TX_BUFFER_SIZE);
                  ;	c -> Y+0
                  _0x4000C:
-0004c6 efef      	LDI  R30,LOW(255)
-0004c7 15e8      	CP   R30,R8
-0004c8 f3e9      	BREQ _0x4000C
+0004e2 efef      	LDI  R30,LOW(255)
+0004e3 15e8      	CP   R30,R8
+0004e4 f3e9      	BREQ _0x4000C
                  ; 0002 0062     #asm("cli")
-0004c9 94f8      	cli
+0004e5 94f8      	cli
                  ; 0002 0063     if (tx_counter || ((UCSRA & DATA_REGISTER_EMPTY)==0))
-0004ca 2088      	TST  R8
-0004cb f421      	BRNE _0x40010
-0004cc b1eb      	IN   R30,0xB
-0004cd e0f0      	LDI  R31,0
-0004ce 72e0      	ANDI R30,LOW(0x20)
-0004cf f469      	BRNE _0x4000F
+0004e6 2088      	TST  R8
+0004e7 f421      	BRNE _0x40010
+0004e8 b1eb      	IN   R30,0xB
+0004e9 e0f0      	LDI  R31,0
+0004ea 72e0      	ANDI R30,LOW(0x20)
+0004eb f469      	BRNE _0x4000F
                  _0x40010:
                  ; 0002 0064     {
                  ; 0002 0065         tx_buffer[tx_wr_index]=c;
-0004d0 2de6      	MOV  R30,R6
-0004d1 e0f0      	LDI  R31,0
-0004d2 58e8      	SUBI R30,LOW(-_tx_buffer)
-0004d3 4ffb      	SBCI R31,HIGH(-_tx_buffer)
-0004d4 81a8      	LD   R26,Y
-0004d5 83a0      	STD  Z+0,R26
+0004ec 2de6      	MOV  R30,R6
+0004ed e0f0      	LDI  R31,0
+0004ee 58e8      	SUBI R30,LOW(-_tx_buffer)
+0004ef 4ffb      	SBCI R31,HIGH(-_tx_buffer)
+0004f0 81a8      	LD   R26,Y
+0004f1 83a0      	STD  Z+0,R26
                  ; 0002 0066         if (++tx_wr_index == TX_BUFFER_SIZE) tx_wr_index=0;
-0004d6 9463      	INC  R6
-0004d7 efef      	LDI  R30,LOW(255)
-0004d8 15e6      	CP   R30,R6
-0004d9 f409      	BRNE _0x40012
-0004da 2466      	CLR  R6
+0004f2 9463      	INC  R6
+0004f3 efef      	LDI  R30,LOW(255)
+0004f4 15e6      	CP   R30,R6
+0004f5 f409      	BRNE _0x40012
+0004f6 2466      	CLR  R6
                  ; 0002 0067         ++tx_counter;
                  _0x40012:
-0004db 9483      	INC  R8
+0004f7 9483      	INC  R8
                  ; 0002 0068     }
                  ; 0002 0069     else
-0004dc c002      	RJMP _0x40013
+0004f8 c002      	RJMP _0x40013
                  _0x4000F:
                  ; 0002 006A         UDR=c;
-0004dd 81e8      	LD   R30,Y
-0004de b9ec      	OUT  0xC,R30
+0004f9 81e8      	LD   R30,Y
+0004fa b9ec      	OUT  0xC,R30
                  ; 0002 006B     #asm("sei")
                  _0x40013:
-0004df 9478      	sei
+0004fb 9478      	sei
                  ; 0002 006C }
-0004e0 9621      	ADIW R28,1
-0004e1 9508      	RET
+0004fc 9621      	ADIW R28,1
+0004fd 9508      	RET
                  ;#pragma used-
                  ;#endif
                  ;
@@ -3225,8 +3247,8 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0002 0071 unsigned char RS232_IsRunning(void){
                  _RS232_IsRunning:
                  ; 0002 0072     return (unsigned char) rx_counter;
-0004e2 2de7      	MOV  R30,R7
-0004e3 9508      	RET
+0004fe 2de7      	MOV  R30,R7
+0004ff 9508      	RET
                  ; 0002 0073 }
                  ;#include <mega32.h>
                  	#ifndef __SLEEP_DEFINED__
@@ -3239,57 +3261,57 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  ; 0003 0003     unsigned char uc;
                  ; 0003 0004 
                  ; 0003 0005     uc = *((unsigned char*)pul + 0);                                // msb
-0004e4 931a      	ST   -Y,R17
+000500 931a      	ST   -Y,R17
                  ;	*pul -> Y+1
                  ;	uc -> R17
-0004e5 81a9      	LDD  R26,Y+1
-0004e6 81ba      	LDD  R27,Y+1+1
-0004e7 9610      	ADIW R26,0
-0004e8 911c      	LD   R17,X
+000501 81a9      	LDD  R26,Y+1
+000502 81ba      	LDD  R27,Y+1+1
+000503 9610      	ADIW R26,0
+000504 911c      	LD   R17,X
                  ; 0003 0006     *((unsigned char*)pul + 0) = *((unsigned char*)pul + 3);        // lsb
-0004e9 81a9      	LDD  R26,Y+1
-0004ea 81ba      	LDD  R27,Y+1+1
-0004eb 9613      	ADIW R26,3
-0004ec 91ec      	LD   R30,X
+000505 81a9      	LDD  R26,Y+1
+000506 81ba      	LDD  R27,Y+1+1
+000507 9613      	ADIW R26,3
+000508 91ec      	LD   R30,X
                 +
-0004ed 81a9     +LDD R26 , Y + 1
-0004ee 81ba     +LDD R27 , Y + 1 + 1
-0004ef 9610     +ADIW R26 , 0
-0004f0 93ec     +ST X , R30
+000509 81a9     +LDD R26 , Y + 1
+00050a 81ba     +LDD R27 , Y + 1 + 1
+00050b 9610     +ADIW R26 , 0
+00050c 93ec     +ST X , R30
                  	__PUTB1SNS 1,0
                  ; 0003 0007     *((unsigned char*)pul + 3) = uc;
-0004f1 81e9      	LDD  R30,Y+1
-0004f2 81fa      	LDD  R31,Y+1+1
+00050d 81e9      	LDD  R30,Y+1
+00050e 81fa      	LDD  R31,Y+1+1
                 +
-0004f3 8313     +STD Z + 3 , R17
+00050f 8313     +STD Z + 3 , R17
                  	__PUTBZR 17,3
                  ; 0003 0008 
                  ; 0003 0009     uc = *((unsigned char*)(pul) + 1);                                // msb
-0004f4 81a9      	LDD  R26,Y+1
-0004f5 81ba      	LDD  R27,Y+1+1
-0004f6 9611      	ADIW R26,1
-0004f7 911c      	LD   R17,X
+000510 81a9      	LDD  R26,Y+1
+000511 81ba      	LDD  R27,Y+1+1
+000512 9611      	ADIW R26,1
+000513 911c      	LD   R17,X
                  ; 0003 000A     *((unsigned char*)pul + 1) = *((unsigned char*)pul + 2);        // lsb
-0004f8 81a9      	LDD  R26,Y+1
-0004f9 81ba      	LDD  R27,Y+1+1
-0004fa 9612      	ADIW R26,2
-0004fb 91ec      	LD   R30,X
+000514 81a9      	LDD  R26,Y+1
+000515 81ba      	LDD  R27,Y+1+1
+000516 9612      	ADIW R26,2
+000517 91ec      	LD   R30,X
                 +
-0004fc 81a9     +LDD R26 , Y + 1
-0004fd 81ba     +LDD R27 , Y + 1 + 1
-0004fe 9611     +ADIW R26 , 1
-0004ff 93ec     +ST X , R30
+000518 81a9     +LDD R26 , Y + 1
+000519 81ba     +LDD R27 , Y + 1 + 1
+00051a 9611     +ADIW R26 , 1
+00051b 93ec     +ST X , R30
                  	__PUTB1SNS 1,1
                  ; 0003 000B     *((unsigned char*)pul + 2) = uc;
-000500 81e9      	LDD  R30,Y+1
-000501 81fa      	LDD  R31,Y+1+1
+00051c 81e9      	LDD  R30,Y+1
+00051d 81fa      	LDD  R31,Y+1+1
                 +
-000502 8312     +STD Z + 2 , R17
+00051e 8312     +STD Z + 2 , R17
                  	__PUTBZR 17,2
                  ; 0003 000C }
-000503 8118      	LDD  R17,Y+0
-000504 9623      	ADIW R28,3
-000505 9508      	RET
+00051f 8118      	LDD  R17,Y+0
+000520 9623      	ADIW R28,3
+000521 9508      	RET
                  ;
                  ;unsigned char Sum(unsigned char* pucBuffer, unsigned char ucLength){
                  ; 0003 000E unsigned char Sum(unsigned char* pucBuffer, unsigned char ucLength){
@@ -3350,250 +3372,250 @@ D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already
                  	.CSEG
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:2 WORDS
                  SUBOPT_0x0:
-000506 f821      	BLD  R2,1
-000507 91e0 0373 	LDS  R30,_ucState
-000509 e0f0      	LDI  R31,0
-00050a 9730      	SBIW R30,0
-00050b 9508      	RET
+000522 f821      	BLD  R2,1
+000523 91e0 0373 	LDS  R30,_ucState
+000525 e0f0      	LDI  R31,0
+000526 9730      	SBIW R30,0
+000527 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 4 TIMES, CODE SIZE REDUCTION:42 WORDS
                  SUBOPT_0x1:
-00050c 91e0 0377 	LDS  R30,_ucByte_S0000000
-00050e e0f0      	LDI  R31,0
-00050f 0fee      	LSL  R30
-000510 1fff      	ROL  R31
-000511 01df      	MOVW R26,R30
-000512 e0e0      	LDI  R30,0
-000513 99b5      	SBIC 0x16,5
-000514 e0e1      	LDI  R30,1
-000515 e0f0      	LDI  R31,0
-000516 2bea      	OR   R30,R26
-000517 93e0 0377 	STS  _ucByte_S0000000,R30
-000519 9508      	RET
+000528 91e0 0377 	LDS  R30,_ucByte_S0000000
+00052a e0f0      	LDI  R31,0
+00052b 0fee      	LSL  R30
+00052c 1fff      	ROL  R31
+00052d 01df      	MOVW R26,R30
+00052e e0e0      	LDI  R30,0
+00052f 99b5      	SBIC 0x16,5
+000530 e0e1      	LDI  R30,1
+000531 e0f0      	LDI  R31,0
+000532 2bea      	OR   R30,R26
+000533 93e0 0377 	STS  _ucByte_S0000000,R30
+000535 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 6 TIMES, CODE SIZE REDUCTION:27 WORDS
                  SUBOPT_0x2:
-00051a 91e0 0375 	LDS  R30,_ucBitCounter
-00051c 50e1      	SUBI R30,LOW(1)
-00051d 93e0 0375 	STS  _ucBitCounter,R30
-00051f 30e0      	CPI  R30,0
-000520 9508      	RET
+000536 91e0 0375 	LDS  R30,_ucBitCounter
+000538 50e1      	SUBI R30,LOW(1)
+000539 93e0 0375 	STS  _ucBitCounter,R30
+00053b 30e0      	CPI  R30,0
+00053c 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:9 WORDS
                  SUBOPT_0x3:
-000521 91e0 036e 	LDS  R30,_ucIndex
-000523 5fef      	SUBI R30,-LOW(1)
-000524 93e0 036e 	STS  _ucIndex,R30
-000526 50e1      	SUBI R30,LOW(1)
-000527 e0f0      	LDI  R31,0
-000528 5ae0      	SUBI R30,LOW(-_ucPacket)
-000529 4ffd      	SBCI R31,HIGH(-_ucPacket)
-00052a 91a0 0377 	LDS  R26,_ucByte_S0000000
-00052c 83a0      	STD  Z+0,R26
-00052d 9508      	RET
+00053d 91e0 036e 	LDS  R30,_ucIndex
+00053f 5fef      	SUBI R30,-LOW(1)
+000540 93e0 036e 	STS  _ucIndex,R30
+000542 50e1      	SUBI R30,LOW(1)
+000543 e0f0      	LDI  R31,0
+000544 5ae0      	SUBI R30,LOW(-_ucPacket)
+000545 4ffd      	SBCI R31,HIGH(-_ucPacket)
+000546 91a0 0377 	LDS  R26,_ucByte_S0000000
+000548 83a0      	STD  Z+0,R26
+000549 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 4 TIMES, CODE SIZE REDUCTION:15 WORDS
                  SUBOPT_0x4:
-00052e e0e8      	LDI  R30,LOW(8)
-00052f 93e0 0375 	STS  _ucBitCounter,R30
-000531 91e0 0374 	LDS  R30,_ucByteCounter
-000533 50e1      	SUBI R30,LOW(1)
-000534 93e0 0374 	STS  _ucByteCounter,R30
-000536 9508      	RET
+00054a e0e8      	LDI  R30,LOW(8)
+00054b 93e0 0375 	STS  _ucBitCounter,R30
+00054d 91e0 0374 	LDS  R30,_ucByteCounter
+00054f 50e1      	SUBI R30,LOW(1)
+000550 93e0 0374 	STS  _ucByteCounter,R30
+000552 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:4 WORDS
                  SUBOPT_0x5:
-000537 f820      	BLD  R2,0
-000538 e0e8      	LDI  R30,LOW(8)
-000539 93e0 0375 	STS  _ucBitCounter,R30
-00053b 91e0 0373 	LDS  R30,_ucState
-00053d 5fef      	SUBI R30,-LOW(1)
-00053e 93e0 0373 	STS  _ucState,R30
-000540 9508      	RET
+000553 f820      	BLD  R2,0
+000554 e0e8      	LDI  R30,LOW(8)
+000555 93e0 0375 	STS  _ucBitCounter,R30
+000557 91e0 0373 	LDS  R30,_ucState
+000559 5fef      	SUBI R30,-LOW(1)
+00055a 93e0 0373 	STS  _ucState,R30
+00055c 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:1 WORDS
                  SUBOPT_0x6:
-000541 e0e8      	LDI  R30,LOW(8)
-000542 93e0 0375 	STS  _ucBitCounter,R30
-000544 e0e0      	LDI  R30,LOW(0)
-000545 93e0 0378 	STS  _ucFec_S0000000,R30
-000547 9508      	RET
+00055d e0e8      	LDI  R30,LOW(8)
+00055e 93e0 0375 	STS  _ucBitCounter,R30
+000560 e0e0      	LDI  R30,LOW(0)
+000561 93e0 0378 	STS  _ucFec_S0000000,R30
+000563 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 3 TIMES, CODE SIZE REDUCTION:13 WORDS
                  SUBOPT_0x7:
-000548 91e0 0375 	LDS  R30,_ucBitCounter
-00054a 50e1      	SUBI R30,LOW(1)
-00054b 93e0 0375 	STS  _ucBitCounter,R30
-00054d 91e0 0378 	LDS  R30,_ucFec_S0000000
-00054f e0f0      	LDI  R31,0
-000550 9508      	RET
+000564 91e0 0375 	LDS  R30,_ucBitCounter
+000566 50e1      	SUBI R30,LOW(1)
+000567 93e0 0375 	STS  _ucBitCounter,R30
+000569 91e0 0378 	LDS  R30,_ucFec_S0000000
+00056b e0f0      	LDI  R31,0
+00056c 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 3 TIMES, CODE SIZE REDUCTION:5 WORDS
                  SUBOPT_0x8:
-000551 e0f0      	LDI  R31,0
-000552 2bea      	OR   R30,R26
-000553 93e0 0378 	STS  _ucFec_S0000000,R30
-000555 9508      	RET
+00056d e0f0      	LDI  R31,0
+00056e 2bea      	OR   R30,R26
+00056f 93e0 0378 	STS  _ucFec_S0000000,R30
+000571 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 14 TIMES, CODE SIZE REDUCTION:36 WORDS
                  SUBOPT_0x9:
-000556 91e0 0378 	LDS  R30,_ucFec_S0000000
-000558 e0f0      	LDI  R31,0
-000559 9508      	RET
+000572 91e0 0378 	LDS  R30,_ucFec_S0000000
+000574 e0f0      	LDI  R31,0
+000575 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 4 TIMES, CODE SIZE REDUCTION:6 WORDS
                  SUBOPT_0xA:
-00055a e3a9      	LDI  R26,LOW(57)
-00055b e0b0      	LDI  R27,HIGH(57)
-00055c 27ea      	EOR  R30,R26
-00055d 93e0 0378 	STS  _ucFec_S0000000,R30
-00055f 9508      	RET
+000576 e3a9      	LDI  R26,LOW(57)
+000577 e0b0      	LDI  R27,HIGH(57)
+000578 27ea      	EOR  R30,R26
+000579 93e0 0378 	STS  _ucFec_S0000000,R30
+00057b 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:3 WORDS
                  SUBOPT_0xB:
-000560 e0e6      	LDI  R30,LOW(6)
-000561 93e0 0375 	STS  _ucBitCounter,R30
-000563 91e0 0373 	LDS  R30,_ucState
-000565 5fef      	SUBI R30,-LOW(1)
-000566 93e0 0373 	STS  _ucState,R30
-000568 9508      	RET
+00057c e0e6      	LDI  R30,LOW(6)
+00057d 93e0 0375 	STS  _ucBitCounter,R30
+00057f 91e0 0373 	LDS  R30,_ucState
+000581 5fef      	SUBI R30,-LOW(1)
+000582 93e0 0373 	STS  _ucState,R30
+000584 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 3 TIMES, CODE SIZE REDUCTION:25 WORDS
                  SUBOPT_0xC:
-000569 91e0 036e 	LDS  R30,_ucIndex
-00056b 5fef      	SUBI R30,-LOW(1)
-00056c 93e0 036e 	STS  _ucIndex,R30
-00056e 50e1      	SUBI R30,LOW(1)
-00056f e0f0      	LDI  R31,0
-000570 5ae0      	SUBI R30,LOW(-_ucPacket)
-000571 4ffd      	SBCI R31,HIGH(-_ucPacket)
-000572 81e0      	LD   R30,Z
-000573 93e0 0377 	STS  _ucByte_S0000000,R30
-000575 cfb8      	RJMP SUBOPT_0x4
+000585 91e0 036e 	LDS  R30,_ucIndex
+000587 5fef      	SUBI R30,-LOW(1)
+000588 93e0 036e 	STS  _ucIndex,R30
+00058a 50e1      	SUBI R30,LOW(1)
+00058b e0f0      	LDI  R31,0
+00058c 5ae0      	SUBI R30,LOW(-_ucPacket)
+00058d 4ffd      	SBCI R31,HIGH(-_ucPacket)
+00058e 81e0      	LD   R30,Z
+00058f 93e0 0377 	STS  _ucByte_S0000000,R30
+000591 cfb8      	RJMP SUBOPT_0x4
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 9 TIMES, CODE SIZE REDUCTION:21 WORDS
                  SUBOPT_0xD:
-000576 91e0 0377 	LDS  R30,_ucByte_S0000000
-000578 e0f0      	LDI  R31,0
-000579 9508      	RET
+000592 91e0 0377 	LDS  R30,_ucByte_S0000000
+000594 e0f0      	LDI  R31,0
+000595 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 4 TIMES, CODE SIZE REDUCTION:3 WORDS
                  SUBOPT_0xE:
-00057a 0fee      	LSL  R30
-00057b 1fff      	ROL  R31
-00057c 93e0 0377 	STS  _ucByte_S0000000,R30
-00057e 9508      	RET
+000596 0fee      	LSL  R30
+000597 1fff      	ROL  R31
+000598 93e0 0377 	STS  _ucByte_S0000000,R30
+00059a 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 3 TIMES, CODE SIZE REDUCTION:3 WORDS
                  SUBOPT_0xF:
-00057f 91e0 0375 	LDS  R30,_ucBitCounter
-000581 50e1      	SUBI R30,LOW(1)
-000582 93e0 0375 	STS  _ucBitCounter,R30
-000584 9508      	RET
+00059b 91e0 0375 	LDS  R30,_ucBitCounter
+00059d 50e1      	SUBI R30,LOW(1)
+00059e 93e0 0375 	STS  _ucBitCounter,R30
+0005a0 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:3 WORDS
                  SUBOPT_0x10:
-000585 e0e8      	LDI  R30,LOW(8)
-000586 93e0 0375 	STS  _ucBitCounter,R30
-000588 91e0 0373 	LDS  R30,_ucState
-00058a 5fef      	SUBI R30,-LOW(1)
-00058b 93e0 0373 	STS  _ucState,R30
-00058d 9508      	RET
+0005a1 e0e8      	LDI  R30,LOW(8)
+0005a2 93e0 0375 	STS  _ucBitCounter,R30
+0005a4 91e0 0373 	LDS  R30,_ucState
+0005a6 5fef      	SUBI R30,-LOW(1)
+0005a7 93e0 0373 	STS  _ucState,R30
+0005a9 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:1 WORDS
                  SUBOPT_0x11:
-00058e 93e0 0375 	STS  _ucBitCounter,R30
-000590 e0e3      	LDI  R30,LOW(3)
-000591 93e0 0374 	STS  _ucByteCounter,R30
-000593 9aae      	SBI  0x15,6
-000594 9508      	RET
+0005aa 93e0 0375 	STS  _ucBitCounter,R30
+0005ac e0e3      	LDI  R30,LOW(3)
+0005ad 93e0 0374 	STS  _ucByteCounter,R30
+0005af 9aae      	SBI  0x15,6
+0005b0 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:3 WORDS
                  SUBOPT_0x12:
                 +
-000595 e0e0     +LDI R30 , LOW ( 0x1C321800 )
-000596 e1f8     +LDI R31 , HIGH ( 0x1C321800 )
-000597 e362     +LDI R22 , BYTE3 ( 0x1C321800 )
-000598 e17c     +LDI R23 , BYTE4 ( 0x1C321800 )
+0005b1 e0e0     +LDI R30 , LOW ( 0x1C321800 )
+0005b2 e1f8     +LDI R31 , HIGH ( 0x1C321800 )
+0005b3 e362     +LDI R22 , BYTE3 ( 0x1C321800 )
+0005b4 e17c     +LDI R23 , BYTE4 ( 0x1C321800 )
                  	__GETD1N 0x1C321800
-000599 940e 05cc 	CALL __PUTPARD1
-00059b 940c 0344 	JMP  _PLM_SetControlRegister
+0005b5 940e 05e8 	CALL __PUTPARD1
+0005b7 940c 0344 	JMP  _PLM_SetControlRegister
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 3 TIMES, CODE SIZE REDUCTION:1 WORDS
                  SUBOPT_0x13:
-00059d 93fa      	ST   -Y,R31
-00059e 93ea      	ST   -Y,R30
-00059f 940c 05a1 	JMP  _delay_ms
+0005b9 93fa      	ST   -Y,R31
+0005ba 93ea      	ST   -Y,R30
+0005bb 940c 05bd 	JMP  _delay_ms
                  
                  
                  	.CSEG
                  _delay_ms:
-0005a1 91e9      	ld   r30,y+
-0005a2 91f9      	ld   r31,y+
-0005a3 9630      	adiw r30,0
-0005a4 f039      	breq __delay_ms1
+0005bd 91e9      	ld   r30,y+
+0005be 91f9      	ld   r31,y+
+0005bf 9630      	adiw r30,0
+0005c0 f039      	breq __delay_ms1
                  __delay_ms0:
                 +
-0005a5 ec8d     +LDI R24 , LOW ( 0xACD )
-0005a6 e09a     +LDI R25 , HIGH ( 0xACD )
+0005c1 ec8d     +LDI R24 , LOW ( 0xACD )
+0005c2 e09a     +LDI R25 , HIGH ( 0xACD )
                 +__DELAY_USW_LOOP :
-0005a7 9701     +SBIW R24 , 1
-0005a8 f7f1     +BRNE __DELAY_USW_LOOP
+0005c3 9701     +SBIW R24 , 1
+0005c4 f7f1     +BRNE __DELAY_USW_LOOP
                  	__DELAY_USW 0xACD
-0005a9 95a8      	wdr
-0005aa 9731      	sbiw r30,1
-0005ab f7c9      	brne __delay_ms0
+0005c5 95a8      	wdr
+0005c6 9731      	sbiw r30,1
+0005c7 f7c9      	brne __delay_ms0
                  __delay_ms1:
-0005ac 9508      	ret
+0005c8 9508      	ret
                  
                  __ANEGW1:
-0005ad 95f1      	NEG  R31
-0005ae 95e1      	NEG  R30
-0005af 40f0      	SBCI R31,0
-0005b0 9508      	RET
+0005c9 95f1      	NEG  R31
+0005ca 95e1      	NEG  R30
+0005cb 40f0      	SBCI R31,0
+0005cc 9508      	RET
                  
                  __MULW12U:
-0005b1 9ffa      	MUL  R31,R26
-0005b2 2df0      	MOV  R31,R0
-0005b3 9feb      	MUL  R30,R27
-0005b4 0df0      	ADD  R31,R0
-0005b5 9fea      	MUL  R30,R26
-0005b6 2de0      	MOV  R30,R0
-0005b7 0df1      	ADD  R31,R1
-0005b8 9508      	RET
+0005cd 9ffa      	MUL  R31,R26
+0005ce 2df0      	MOV  R31,R0
+0005cf 9feb      	MUL  R30,R27
+0005d0 0df0      	ADD  R31,R0
+0005d1 9fea      	MUL  R30,R26
+0005d2 2de0      	MOV  R30,R0
+0005d3 0df1      	ADD  R31,R1
+0005d4 9508      	RET
                  
                  __MULW12:
-0005b9 d004      	RCALL __CHKSIGNW
-0005ba dff6      	RCALL __MULW12U
-0005bb f40e      	BRTC __MULW121
-0005bc dff0      	RCALL __ANEGW1
+0005d5 d004      	RCALL __CHKSIGNW
+0005d6 dff6      	RCALL __MULW12U
+0005d7 f40e      	BRTC __MULW121
+0005d8 dff0      	RCALL __ANEGW1
                  __MULW121:
-0005bd 9508      	RET
+0005d9 9508      	RET
                  
                  __CHKSIGNW:
-0005be 94e8      	CLT
-0005bf fff7      	SBRS R31,7
-0005c0 c002      	RJMP __CHKSW1
-0005c1 dfeb      	RCALL __ANEGW1
-0005c2 9468      	SET
+0005da 94e8      	CLT
+0005db fff7      	SBRS R31,7
+0005dc c002      	RJMP __CHKSW1
+0005dd dfeb      	RCALL __ANEGW1
+0005de 9468      	SET
                  __CHKSW1:
-0005c3 ffb7      	SBRS R27,7
-0005c4 c006      	RJMP __CHKSW2
-0005c5 95a0      	COM  R26
-0005c6 95b0      	COM  R27
-0005c7 9611      	ADIW R26,1
-0005c8 f800      	BLD  R0,0
-0005c9 9403      	INC  R0
-0005ca fa00      	BST  R0,0
+0005df ffb7      	SBRS R27,7
+0005e0 c006      	RJMP __CHKSW2
+0005e1 95a0      	COM  R26
+0005e2 95b0      	COM  R27
+0005e3 9611      	ADIW R26,1
+0005e4 f800      	BLD  R0,0
+0005e5 9403      	INC  R0
+0005e6 fa00      	BST  R0,0
                  __CHKSW2:
-0005cb 9508      	RET
+0005e7 9508      	RET
                  
                  __PUTPARD1:
-0005cc 937a      	ST   -Y,R23
-0005cd 936a      	ST   -Y,R22
-0005ce 93fa      	ST   -Y,R31
-0005cf 93ea      	ST   -Y,R30
-0005d0 9508      	RET
+0005e8 937a      	ST   -Y,R23
+0005e9 936a      	ST   -Y,R22
+0005ea 93fa      	ST   -Y,R31
+0005eb 93ea      	ST   -Y,R30
+0005ec 9508      	RET
                  
                  ;END OF CODE MARKER
                  __END_OF_CODE:
@@ -3616,37 +3638,37 @@ counted separately from r26..r31 here.
 ATmega32 register use summary:
 r0 :   8 r1 :   3 r2 :   7 r3 :   0 r4 :   4 r5 :   4 r6 :   4 r7 :   6 
 r8 :   5 r9 :   4 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   2 
-r16:  15 r17:  23 r18:   0 r19:   0 r20:   0 r21:   0 r22:   8 r23:   8 
-r24:   8 r25:   4 r26:  85 r27:  24 r28:   4 r29:   1 r30: 376 r31:  88 
-x  :  10 y  :  86 z  :   9 
+r16:  15 r17:  23 r18:   0 r19:   0 r20:   0 r21:   0 r22:   9 r23:   9 
+r24:   8 r25:   4 r26:  87 r27:  24 r28:   4 r29:   1 r30: 382 r31:  92 
+x  :  10 y  :  89 z  :   9 
 Registers used: 25 out of 35 (71.4%)
 
 ATmega32 instruction use summary:
 adc   :   1 add   :   3 adiw  :  11 and   :   2 andi  :  19 asr   :   0 
 bclr  :   0 bld   :   4 brbc  :   0 brbs  :   0 brcc  :   0 brcs  :   0 
-break :   0 breq  :  16 brge  :   2 brhc  :   0 brhs  :   0 brid  :   0 
+break :   0 breq  :  17 brge  :   2 brhc  :   0 brhs  :   0 brid  :   0 
 brie  :   0 brlo  :   2 brlt  :   0 brmi  :   0 brne  :  53 brpl  :   0 
 brsh  :   0 brtc  :   1 brts  :   0 brvc  :   0 brvs  :   0 bset  :   0 
-bst   :   1 call  :  83 cbi   :  14 cbr   :   0 clc   :   0 clh   :   0 
+bst   :   1 call  :  86 cbi   :  14 cbr   :   0 clc   :   0 clh   :   0 
 cli   :   3 cln   :   0 clr   :   8 cls   :   0 clt   :   3 clv   :   0 
-clz   :   0 com   :   2 cp    :   7 cpc   :  15 cpi   :  42 cpse  :   0 
+clz   :   0 com   :   2 cp    :   7 cpc   :  16 cpi   :  43 cpse  :   0 
 dec   :   3 des   :   0 eor   :   4 fmul  :   0 fmuls :   0 fmulsu:   0 
-icall :   0 ijmp  :   0 in    :   7 inc   :   7 jmp   :  26 ld    :  37 
-ldd   :  21 ldi   : 142 lds   :  48 lpm   :   2 lsl   :   7 lsr   :   0 
+icall :   0 ijmp  :   0 in    :   7 inc   :   7 jmp   :  27 ld    :  37 
+ldd   :  21 ldi   : 146 lds   :  52 lpm   :   2 lsl   :   7 lsr   :   0 
 mov   :   9 movw  :   6 mul   :   3 muls  :   0 mulsu :   0 neg   :   2 
 nop   :   0 or    :   2 ori   :   1 out   :  50 pop   :   2 push  :   2 
-rcall :  15 ret   :  38 reti  :   4 rjmp  :  43 rol   :   7 ror   :   0 
+rcall :  16 ret   :  38 reti  :   4 rjmp  :  44 rol   :   7 ror   :   0 
 sbc   :   0 sbci  :  11 sbi   :  15 sbic  :   4 sbis  :   2 sbiw  :   6 
 sbr   :   0 sbrc  :   1 sbrs  :   5 sec   :   0 seh   :   0 sei   :   3 
 sen   :   0 ser   :   0 ses   :   0 set   :   4 sev   :   0 sez   :   0 
-sleep :   0 spm   :   0 st    :  42 std   :   4 sts   :  64 sub   :   0 
+sleep :   0 spm   :   0 st    :  45 std   :   4 sts   :  64 sub   :   0 
 subi  :  27 swap  :   0 tst   :   3 wdr   :   1 
 Instructions used: 61 out of 112 (54.5%)
 
 ATmega32 memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000ba2   2384    594   2978   32768   9.1%
+[.cseg] 0x000000 0x000bda   2440    594   3034   32768   9.3%
 [.dseg] 0x000060 0x000579      0    793    793    2048  38.7%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 
