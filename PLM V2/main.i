@@ -161,6 +161,8 @@ extern void SPI_Init(void);
 extern void Start_SPI(void);
 extern void Stop_SPI(void);
 extern unsigned int CalcCRC(unsigned char *pucBuffer, unsigned char ucLength);
+extern void AnalogCompare_Init(void);
+extern void TimerCounterInter_Init(void);
 
 volatile unsigned char ucPacket[270];
 volatile unsigned char ucIndex;
@@ -204,7 +206,7 @@ PLM_Stop();
 break;
 }
 case 0x02:
-{
+{   
 ucPacket[ucIndex++] = SPDR;
 ucByteCounter--;
 
@@ -213,11 +215,13 @@ ucState = 0x00;
 PORTC.5 = 1;                        
 PORTC.6 = 0;                    
 
+Stop_SPI();
 return;
 }                                        
 
 break;
 }
+
 case 0x01:
 {
 
@@ -259,6 +263,7 @@ Start_SPI();
 }
 
 unsigned long PLM_GetControlRegister(void){
+Stop_SPI();
 ucIndex = 4;
 ucBitCounter = 8;
 ucByteCounter = 3;
@@ -333,33 +338,29 @@ ucRS232Started = 0;
 
 interrupt [13] void spi_isr(void)
 {
-if(PLM_IsRunning()>0){
 PLM_Task();
-}else{
-Stop_SPI();
-}
 }
 
 void main(void)
 {
 int i;
+bit a=0;
 
 IO_Init();
 TimerCounter_Init();
+TimerCounterInter_Init(); 
+
 RS232_Init();
+AnalogCompare_Init();
 
 SPI_Init();
 PLM_Init();
-
-PLM_SetControlRegister(0x1c321800	);
-while(PLM_IsRunning() != 0);
-PLM_SetControlRegister(0x1c321800	);
 
 ucRS232Started = 0;
 
 #asm("sei")
 
-PORTD.7 = 0; 
+PORTD.7  = 0; 
 
 while (1)
 {   
@@ -376,12 +377,17 @@ delay_ms(10*ucLength);
 }      
 if(ucRS232Started == 1){
 
-RS232_GetData(); 
+RS232_GetData();
+
+for(i=0;i<ucLength;i++){
+delay_ms(10);
+putchar(ucPacket[i]);
+}
 
 switch(ucCommand){
 
 case 0x00:
-{											 
+{								 
 
 *((unsigned long*)&ucPacket[3]) = PLM_GetControlRegister();
 ByteReverse((unsigned long*)&ucPacket[3]);
@@ -396,24 +402,6 @@ putchar(ucPacket[i]);
 break;
 }
 
-case 0x01:
-{											
-
-ByteReverse((unsigned long*)&ucPacket[0]);
-PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
-break;
-}
-case 0x03:
-{
-PLM_Stop();
-
-break;
-}
-case 0x02:
-{
-
-break;
-} 
 }  
 }
 

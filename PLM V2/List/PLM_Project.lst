@@ -1,12 +1,12 @@
 
-AVRASM ver. 2.1.17  F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm Wed Apr 14 23:32:42 2010
+AVRASM ver. 2.1.17  D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm Thu Apr 15 16:51:51 2010
 
-F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1026): warning: Register r5 already defined by the .DEF directive
-F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1027): warning: Register r4 already defined by the .DEF directive
-F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1028): warning: Register r7 already defined by the .DEF directive
-F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1029): warning: Register r6 already defined by the .DEF directive
-F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1030): warning: Register r9 already defined by the .DEF directive
-F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already defined by the .DEF directive
+D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1026): warning: Register r5 already defined by the .DEF directive
+D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1027): warning: Register r4 already defined by the .DEF directive
+D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1028): warning: Register r7 already defined by the .DEF directive
+D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1029): warning: Register r6 already defined by the .DEF directive
+D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1030): warning: Register r9 already defined by the .DEF directive
+D:\NNSon\PLM0610\PLM V2\List\PLM_Project.asm(1031): warning: Register r8 already defined by the .DEF directive
                  
                  
                  ;CodeVisionAVR C Compiler V2.03.4 Standard
@@ -15,7 +15,7 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  
                  ;Chip type              : ATmega32
                  ;Program type           : Application
-                 ;Clock frequency        : 11.059200 MHz
+                 ;Clock frequency        : 16.000000 MHz
                  ;Memory model           : Small
                  ;Optimize for           : Size
                  ;(s)printf features     : int, width
@@ -1056,10 +1056,10 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
 000012 940c 0000 	JMP  0x00
 000014 940c 0000 	JMP  0x00
 000016 940c 0000 	JMP  0x00
-000018 940c 01e9 	JMP  _spi_isr
-00001a 940c 02c9 	JMP  _usart_rx_isr
+000018 940c 01d6 	JMP  _spi_isr
+00001a 940c 029e 	JMP  _usart_rx_isr
 00001c 940c 0000 	JMP  0x00
-00001e 940c 0308 	JMP  _usart_tx_isr
+00001e 940c 02dd 	JMP  _usart_tx_isr
 000020 940c 0000 	JMP  0x00
 000022 940c 0000 	JMP  0x00
 000024 940c 0000 	JMP  0x00
@@ -1380,7 +1380,7 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
 00014d e6c0      	LDI  R28,LOW(0x260)
 00014e e0d2      	LDI  R29,HIGH(0x260)
                  
-00014f 940c 020b 	JMP  _main
+00014f 940c 01f2 	JMP  _main
                  
                  	.ESEG
                  	.ORG 0
@@ -1443,6 +1443,8 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  ;extern void Start_SPI(void);
                  ;extern void Stop_SPI(void);
                  ;extern unsigned int CalcCRC(unsigned char *pucBuffer, unsigned char ucLength);
+                 ;extern void AnalogCompare_Init(void);
+                 ;extern void TimerCounterInter_Init(void);
                  ;
                  ;volatile unsigned char ucPacket[270];
                  ;volatile unsigned char ucIndex;
@@ -1473,335 +1475,321 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  ;
                  ;
                  ;void PLM_Stop(void){
-                 ; 0000 0049 void PLM_Stop(void){
+                 ; 0000 004B void PLM_Stop(void){
                  
                  	.CSEG
                  _PLM_Stop:
-                 ; 0000 004A     ucState = PLM_STOP;
+                 ; 0000 004C     ucState = PLM_STOP;
 000151 e0e0      	LDI  R30,LOW(0)
 000152 93e0 0372 	STS  _ucState,R30
-                 ; 0000 004B 
-                 ; 0000 004C     PLM_pinREG_DATA = 0;
+                 ; 0000 004D 
+                 ; 0000 004E     PLM_pinREG_DATA = 0;
 000154 98ae      	CBI  0x15,6
-                 ; 0000 004D     PLM_pinRXTX = 1;
+                 ; 0000 004F     PLM_pinRXTX = 1;
 000155 9aad      	SBI  0x15,5
-                 ; 0000 004E }
+                 ; 0000 0050 }
 000156 9508      	RET
                  ;
                  ;//cong viec plm thuc hien
                  ;void PLM_Task(void){
-                 ; 0000 0051 void PLM_Task(void){
+                 ; 0000 0053 void PLM_Task(void){
                  _PLM_Task:
-                 ; 0000 0052     static unsigned char ucByte,
-                 ; 0000 0053                          ucFec;
-                 ; 0000 0054     switch(ucState){
+                 ; 0000 0054     static unsigned char ucByte,
+                 ; 0000 0055                          ucFec;
+                 ; 0000 0056     switch(ucState){
 000157 91e0 0372 	LDS  R30,_ucState
 000159 e0f0      	LDI  R31,0
-                 ; 0000 0055         case PLM_STOP:
+                 ; 0000 0057         case PLM_STOP:
 00015a 9730      	SBIW R30,0
 00015b f411      	BRNE _0xA
-                 ; 0000 0056         {
-                 ; 0000 0057             PLM_Stop();
+                 ; 0000 0058         {
+                 ; 0000 0059             PLM_Stop();
 00015c dff4      	RCALL _PLM_Stop
-                 ; 0000 0058             break;
-00015d c02b      	RJMP _0x9
-                 ; 0000 0059         }
-                 ; 0000 005A         case PLM_RX_REG:
+                 ; 0000 005A             break;
+00015d c033      	RJMP _0x9
+                 ; 0000 005B         }
+                 ; 0000 005C         case PLM_RX_REG:
                  _0xA:
 00015e 30e2      	CPI  R30,LOW(0x2)
 00015f e0a0      	LDI  R26,HIGH(0x2)
 000160 07fa      	CPC  R31,R26
-000161 f479      	BRNE _0xB
-                 ; 0000 005B         {
-                 ; 0000 005C             ucPacket[ucIndex++] = SPDR;
-000162 940e 036d 	CALL SUBOPT_0x0
+000161 f4b9      	BRNE _0xB
+                 ; 0000 005D         {
+                 ; 0000 005E             ucPacket[ucIndex++] = SPDR;
+000162 940e 0340 	CALL SUBOPT_0x0
 000164 01df      	MOVW R26,R30
 000165 b1ef      	IN   R30,0xF
 000166 93ec      	ST   X,R30
-                 ; 0000 005D             ucByteCounter--;
+                 ; 0000 005F             ucByteCounter--;
 000167 91e0 0373 	LDS  R30,_ucByteCounter
 000169 50e1      	SUBI R30,LOW(1)
 00016a 93e0 0373 	STS  _ucByteCounter,R30
-                 ; 0000 005E 
-                 ; 0000 005F             if(!ucByteCounter){
+                 ; 0000 0060 
+                 ; 0000 0061             if(!ucByteCounter){
 00016c 91e0 0373 	LDS  R30,_ucByteCounter
 00016e 30e0      	CPI  R30,0
-00016f f099      	BREQ _0x2060002
-                 ; 0000 0060                 ucState = PLM_STOP;                        // stop PLM
-                 ; 0000 0061                 PLM_pinRXTX = 1;                        // Rx session
-                 ; 0000 0062                 PLM_pinREG_DATA = 0;                    // mains access
-                 ; 0000 0063 
-                 ; 0000 0064                 return;
-                 ; 0000 0065             }
-                 ; 0000 0066 
-                 ; 0000 0067             break;
-000170 c018      	RJMP _0x9
-                 ; 0000 0068         }
-                 ; 0000 0069         case PLM_TX_REG:
+00016f f441      	BRNE _0xC
+                 ; 0000 0062                 ucState = PLM_STOP;                        // stop PLM
+000170 e0e0      	LDI  R30,LOW(0)
+000171 93e0 0372 	STS  _ucState,R30
+                 ; 0000 0063                 PLM_pinRXTX = 1;                        // Rx session
+000173 9aad      	SBI  0x15,5
+                 ; 0000 0064                 PLM_pinREG_DATA = 0;                    // mains access
+000174 98ae      	CBI  0x15,6
+                 ; 0000 0065 
+                 ; 0000 0066                 Stop_SPI();
+000175 940e 033d 	CALL _Stop_SPI
+                 ; 0000 0067                 return;
+000177 9508      	RET
+                 ; 0000 0068             }
+                 ; 0000 0069 
+                 ; 0000 006A             break;
+                 _0xC:
+000178 c018      	RJMP _0x9
+                 ; 0000 006B         }
+                 ; 0000 006C 
+                 ; 0000 006D         case PLM_TX_REG:
                  _0xB:
-000171 30e1      	CPI  R30,LOW(0x1)
-000172 e0a0      	LDI  R26,HIGH(0x1)
-000173 07fa      	CPC  R31,R26
-000174 f4a1      	BRNE _0x9
-                 ; 0000 006A         {
-                 ; 0000 006B 
-                 ; 0000 006C             if(ucByteCounter){
-000175 91e0 0373 	LDS  R30,_ucByteCounter
-000177 30e0      	CPI  R30,0
-000178 f051      	BREQ _0x12
-                 ; 0000 006D                 SPDR = ucPacket[ucIndex++];
-000179 940e 036d 	CALL SUBOPT_0x0
-00017b 81e0      	LD   R30,Z
-00017c b9ef      	OUT  0xF,R30
-                 ; 0000 006E                 ucByteCounter--;
+000179 30e1      	CPI  R30,LOW(0x1)
+00017a e0a0      	LDI  R26,HIGH(0x1)
+00017b 07fa      	CPC  R31,R26
+00017c f4a1      	BRNE _0x9
+                 ; 0000 006E         {
+                 ; 0000 006F 
+                 ; 0000 0070             if(ucByteCounter){
 00017d 91e0 0373 	LDS  R30,_ucByteCounter
-00017f 50e1      	SUBI R30,LOW(1)
-000180 93e0 0373 	STS  _ucByteCounter,R30
-                 ; 0000 006F             }
-                 ; 0000 0070             else{
-000182 c006      	RJMP _0x13
+00017f 30e0      	CPI  R30,0
+000180 f051      	BREQ _0x12
+                 ; 0000 0071                 SPDR = ucPacket[ucIndex++];
+000181 940e 0340 	CALL SUBOPT_0x0
+000183 81e0      	LD   R30,Z
+000184 b9ef      	OUT  0xF,R30
+                 ; 0000 0072                 ucByteCounter--;
+000185 91e0 0373 	LDS  R30,_ucByteCounter
+000187 50e1      	SUBI R30,LOW(1)
+000188 93e0 0373 	STS  _ucByteCounter,R30
+                 ; 0000 0073             }
+                 ; 0000 0074             else{
+00018a c006      	RJMP _0x13
                  _0x12:
-                 ; 0000 0071                 ucState = PLM_STOP;                        // stop PLM
-                 _0x2060002:
-000183 e0e0      	LDI  R30,LOW(0)
-000184 93e0 0372 	STS  _ucState,R30
-                 ; 0000 0072 
-                 ; 0000 0073                 PLM_pinRXTX = 1;                        // Rx session
-000186 9aad      	SBI  0x15,5
-                 ; 0000 0074                 PLM_pinREG_DATA = 0;                    // mains access
-000187 98ae      	CBI  0x15,6
-                 ; 0000 0075 
-                 ; 0000 0076                 return;
-000188 9508      	RET
-                 ; 0000 0077             }
+                 ; 0000 0075                 ucState = PLM_STOP;                        // stop PLM
+00018b e0e0      	LDI  R30,LOW(0)
+00018c 93e0 0372 	STS  _ucState,R30
+                 ; 0000 0076 
+                 ; 0000 0077                 PLM_pinRXTX = 1;                        // Rx session
+00018e 9aad      	SBI  0x15,5
+                 ; 0000 0078                 PLM_pinREG_DATA = 0;                    // mains access
+00018f 98ae      	CBI  0x15,6
+                 ; 0000 0079 
+                 ; 0000 007A                 return;
+000190 9508      	RET
+                 ; 0000 007B             }
                  _0x13:
-                 ; 0000 0078 
-                 ; 0000 0079             break;
-                 ; 0000 007A         }
-                 ; 0000 007B     }
+                 ; 0000 007C 
+                 ; 0000 007D             break;
+                 ; 0000 007E         }
+                 ; 0000 007F     }
                  _0x9:
-                 ; 0000 007C }
-000189 9508      	RET
+                 ; 0000 0080 }
+000191 9508      	RET
                  ;
                  ;//kiem tra xem co dang chay hay khong
                  ;unsigned char PLM_IsRunning(void){
-                 ; 0000 007F unsigned char PLM_IsRunning(void){
+                 ; 0000 0083 unsigned char PLM_IsRunning(void){
                  _PLM_IsRunning:
-                 ; 0000 0080     return ucState;
-00018a 91e0 0372 	LDS  R30,_ucState
-00018c 9508      	RET
-                 ; 0000 0081 }
+                 ; 0000 0084     return ucState;
+000192 91e0 0372 	LDS  R30,_ucState
+000194 9508      	RET
+                 ; 0000 0085 }
                  ;
                  ;//+++cau hinh cho thanh ghi
                  ;void PLM_SetControlRegister(unsigned long ulControlRegister)
-                 ; 0000 0085 {
-                 _PLM_SetControlRegister:
-                 ; 0000 0086     *(unsigned long*)&ucPacket[0] = ulControlRegister;
+                 ; 0000 0089 {
+                 ; 0000 008A     *(unsigned long*)&ucPacket[0] = ulControlRegister;
                  ;	ulControlRegister -> Y+0
-                +
-00018d 81e8     +LDD R30 , Y + 0
-00018e 81f9     +LDD R31 , Y + 0 + 1
-00018f 816a     +LDD R22 , Y + 0 + 2
-000190 817b     +LDD R23 , Y + 0 + 3
-                 	__GETD1S 0
-000191 93e0 0260 	STS  _ucPacket,R30
-000193 93f0 0261 	STS  _ucPacket+1,R31
-000195 9360 0262 	STS  _ucPacket+2,R22
-000197 9370 0263 	STS  _ucPacket+3,R23
-                 ; 0000 0087 
-                 ; 0000 0088     ucIndex = 1;
-000199 e0e1      	LDI  R30,LOW(1)
-00019a 93e0 036e 	STS  _ucIndex,R30
-                 ; 0000 0089     ucBitCounter = 0;
-00019c e0e0      	LDI  R30,LOW(0)
-00019d 940e 0377 	CALL SUBOPT_0x1
-                 ; 0000 008A     ucByteCounter = 3;
                  ; 0000 008B 
-                 ; 0000 008C     PLM_pinREG_DATA = 1;
-                 ; 0000 008D     PLM_pinRXTX = 0;
-00019f 98ad      	CBI  0x15,5
-                 ; 0000 008E     ucState = PLM_TX_REG;
-0001a0 e0e1      	LDI  R30,LOW(1)
-0001a1 93e0 0372 	STS  _ucState,R30
-                 ; 0000 008F     SPDR = ucPacket[0];
-0001a3 91e0 0260 	LDS  R30,_ucPacket
-0001a5 b9ef      	OUT  0xF,R30
-                 ; 0000 0090     Start_SPI();
-0001a6 940e 0366 	CALL _Start_SPI
-                 ; 0000 0091 }
-0001a8 9624      	ADIW R28,4
-0001a9 9508      	RET
+                 ; 0000 008C     ucIndex = 1;
+                 ; 0000 008D     ucBitCounter = 0;
+                 ; 0000 008E     ucByteCounter = 3;
+                 ; 0000 008F 
+                 ; 0000 0090     PLM_pinREG_DATA = 1;
+                 ; 0000 0091     PLM_pinRXTX = 0;
+                 ; 0000 0092     ucState = PLM_TX_REG;
+                 ; 0000 0093     SPDR = ucPacket[0];
+                 ; 0000 0094     Start_SPI();
+                 ; 0000 0095 }
                  ;
                  ;//+++lay cac thong so thiet lap cau hinh
                  ;unsigned long PLM_GetControlRegister(void){
-                 ; 0000 0094 unsigned long PLM_GetControlRegister(void){
+                 ; 0000 0098 unsigned long PLM_GetControlRegister(void){
                  _PLM_GetControlRegister:
-                 ; 0000 0095     ucIndex = 4;
-0001aa e0e4      	LDI  R30,LOW(4)
-0001ab 93e0 036e 	STS  _ucIndex,R30
-                 ; 0000 0096     ucBitCounter = 8;
-0001ad e0e8      	LDI  R30,LOW(8)
-0001ae 940e 0377 	CALL SUBOPT_0x1
-                 ; 0000 0097     ucByteCounter = 3;
-                 ; 0000 0098 
-                 ; 0000 0099     PLM_pinREG_DATA = 1;
-                 ; 0000 009A     PLM_pinRXTX = 1;
-0001b0 9aad      	SBI  0x15,5
-                 ; 0000 009B 
-                 ; 0000 009C     ucState = PLM_RX_REG;
-0001b1 e0e2      	LDI  R30,LOW(2)
-0001b2 93e0 0372 	STS  _ucState,R30
-                 ; 0000 009D     Start_SPI();
-0001b4 940e 0366 	CALL _Start_SPI
-                 ; 0000 009E 
-                 ; 0000 009F     while(PLM_IsRunning() != 0);
-                 _0x20:
-0001b6 dfd3      	RCALL _PLM_IsRunning
-0001b7 30e0      	CPI  R30,0
-0001b8 f7e9      	BRNE _0x20
+                 ; 0000 0099     Stop_SPI();
+000195 940e 033d 	CALL _Stop_SPI
+                 ; 0000 009A     ucIndex = 4;
+000197 e0e4      	LDI  R30,LOW(4)
+000198 93e0 036e 	STS  _ucIndex,R30
+                 ; 0000 009B     ucBitCounter = 8;
+00019a e0e8      	LDI  R30,LOW(8)
+00019b 93e0 0374 	STS  _ucBitCounter,R30
+                 ; 0000 009C     ucByteCounter = 3;
+00019d e0e3      	LDI  R30,LOW(3)
+00019e 93e0 0373 	STS  _ucByteCounter,R30
+                 ; 0000 009D 
+                 ; 0000 009E     PLM_pinREG_DATA = 1;
+0001a0 9aae      	SBI  0x15,6
+                 ; 0000 009F     PLM_pinRXTX = 1;
+0001a1 9aad      	SBI  0x15,5
                  ; 0000 00A0 
-                 ; 0000 00A1     // return only 24 bits
-                 ; 0000 00A2     return (*(unsigned long*)&ucPacket[3]) & 0xffffff00;
+                 ; 0000 00A1     ucState = PLM_RX_REG;
+0001a2 e0e2      	LDI  R30,LOW(2)
+0001a3 93e0 0372 	STS  _ucState,R30
+                 ; 0000 00A2     Start_SPI();
+0001a5 940e 033b 	CALL _Start_SPI
+                 ; 0000 00A3 
+                 ; 0000 00A4     while(PLM_IsRunning() != 0);
+                 _0x20:
+0001a7 dfea      	RCALL _PLM_IsRunning
+0001a8 30e0      	CPI  R30,0
+0001a9 f7e9      	BRNE _0x20
+                 ; 0000 00A5 
+                 ; 0000 00A6     // return only 24 bits
+                 ; 0000 00A7     return (*(unsigned long*)&ucPacket[3]) & 0xffffff00;
                 +
-0001b9 91e0 0263+LDS R30 , _ucPacket + 3
-0001bb 91f0 0264+LDS R31 , _ucPacket + 3 + 1
-0001bd 9160 0265+LDS R22 , _ucPacket + 3 + 2
-0001bf 9170 0266+LDS R23 , _ucPacket + 3 + 3
+0001aa 91e0 0263+LDS R30 , _ucPacket + 3
+0001ac 91f0 0264+LDS R31 , _ucPacket + 3 + 1
+0001ae 9160 0265+LDS R22 , _ucPacket + 3 + 2
+0001b0 9170 0266+LDS R23 , _ucPacket + 3 + 3
                  	__GETD1MN _ucPacket,3
-0001c1 70e0      	ANDI R30,LOW(0xFFFFFF00)
-0001c2 9508      	RET
-                 ; 0000 00A3 }
+0001b2 70e0      	ANDI R30,LOW(0xFFFFFF00)
+0001b3 9508      	RET
+                 ; 0000 00A8 }
                  ;
                  ;
                  ;
                  ;//+++
                  ;unsigned char PLM_GetCorrectionNumber(void){
-                 ; 0000 00A8 unsigned char PLM_GetCorrectionNumber(void){
-                 ; 0000 00A9     return ucCorrectionCounter;
-                 ; 0000 00AA }
+                 ; 0000 00AD unsigned char PLM_GetCorrectionNumber(void){
+                 ; 0000 00AE     return ucCorrectionCounter;
+                 ; 0000 00AF }
                  ;
                  ;//khoi tao cho plm
                  ;void PLM_Init(void){
-                 ; 0000 00AD void PLM_Init(void){
+                 ; 0000 00B2 void PLM_Init(void){
                  _PLM_Init:
-                 ; 0000 00AE     PLM_pinREG_DATA = 0;
-0001c3 98ae      	CBI  0x15,6
-                 ; 0000 00AF     PLM_pinRXTX = 1;
-0001c4 9aad      	SBI  0x15,5
-                 ; 0000 00B0     ucState = PLM_STOP;
-0001c5 e0e0      	LDI  R30,LOW(0)
-0001c6 93e0 0372 	STS  _ucState,R30
-                 ; 0000 00B1 }
-0001c8 9508      	RET
+                 ; 0000 00B3     PLM_pinREG_DATA = 0;
+0001b4 98ae      	CBI  0x15,6
+                 ; 0000 00B4     PLM_pinRXTX = 1;
+0001b5 9aad      	SBI  0x15,5
+                 ; 0000 00B5     ucState = PLM_STOP;
+0001b6 e0e0      	LDI  R30,LOW(0)
+0001b7 93e0 0372 	STS  _ucState,R30
+                 ; 0000 00B6 }
+0001b9 9508      	RET
                  ;
                  ;//co phan hoi hay khong
                  ;unsigned char PLM_IsAck(void){
-                 ; 0000 00B4 unsigned char PLM_IsAck(void){
-                 ; 0000 00B5     return bAck;
-                 ; 0000 00B6 }
+                 ; 0000 00B9 unsigned char PLM_IsAck(void){
+                 ; 0000 00BA     return bAck;
+                 ; 0000 00BB }
                  ;
                  ;//set cac pin de dua ve che do idle
                  ;
                  ;
                  ;//chuyen sang che do truyen du lieu
                  ;void PLM_TransmitData(unsigned char ucLength, unsigned char ucAck){
-                 ; 0000 00BC void PLM_TransmitData(unsigned char ucLength, unsigned char ucAck){
-                 ; 0000 00BD     bAck = ucAck;
+                 ; 0000 00C1 void PLM_TransmitData(unsigned char ucLength, unsigned char ucAck){
+                 ; 0000 00C2     bAck = ucAck;
                  ;	ucLength -> Y+1
                  ;	ucAck -> Y+0
-                 ; 0000 00BE 
-                 ; 0000 00BF     ucIndex = 0;
-                 ; 0000 00C0     ucBitCounter = 16;                    // 16 bits preamble length
-                 ; 0000 00C1     ucByteCounter = ucLength;             // do dai byte
-                 ; 0000 00C2 
-                 ; 0000 00C3                                    // mains access
-                 ; 0000 00C4     PLM_pinREG_DATA = 0;
-                 ; 0000 00C5     PLM_pinRXTX = 0;
-                 ; 0000 00C6     ucState = PLM_TX_PREAMBLE;
-                 ; 0000 00C7 }
+                 ; 0000 00C3 
+                 ; 0000 00C4     ucIndex = 0;
+                 ; 0000 00C5     ucBitCounter = 16;                    // 16 bits preamble length
+                 ; 0000 00C6     ucByteCounter = ucLength;             // do dai byte
+                 ; 0000 00C7 
+                 ; 0000 00C8                                    // mains access
+                 ; 0000 00C9     PLM_pinREG_DATA = 0;
+                 ; 0000 00CA     PLM_pinRXTX = 0;
+                 ; 0000 00CB     ucState = PLM_TX_PREAMBLE;
+                 ; 0000 00CC }
                  ;
                  ;//+++chuyen sang che do nhan du lieu
                  ;void PLM_ReceiveData(unsigned char ucLength){
-                 ; 0000 00CA void PLM_ReceiveData(unsigned char ucLength){
-                 ; 0000 00CB     ucIndex = 0;
+                 ; 0000 00CF void PLM_ReceiveData(unsigned char ucLength){
+                 ; 0000 00D0     ucIndex = 0;
                  ;	ucLength -> Y+0
-                 ; 0000 00CC     ucByteCounter = ucLength;
-                 ; 0000 00CD     ucCorrectionCounter = 0;
-                 ; 0000 00CE 
-                 ; 0000 00CF     PLM_pinREG_DATA = 0;
-                 ; 0000 00D0     PLM_pinRXTX = 1;
-                 ; 0000 00D1 
-                 ; 0000 00D2     ucState = PLM_RX_PREAMBLE;
-                 ; 0000 00D3 }
+                 ; 0000 00D1     ucByteCounter = ucLength;
+                 ; 0000 00D2     ucCorrectionCounter = 0;
+                 ; 0000 00D3 
+                 ; 0000 00D4     PLM_pinREG_DATA = 0;
+                 ; 0000 00D5     PLM_pinRXTX = 1;
+                 ; 0000 00D6 
+                 ; 0000 00D7     ucState = PLM_RX_PREAMBLE;
+                 ; 0000 00D8 }
                  ;//---lay du lieu phuc vu nhan
                  ;void PLM_GetData(unsigned char *pucBuffer, unsigned char ucLength){
-                 ; 0000 00D5 void PLM_GetData(unsigned char *pucBuffer, unsigned char ucLength){
-                 ; 0000 00D6     memcpy(pucBuffer, &ucPacket[0], ucLength);
+                 ; 0000 00DA void PLM_GetData(unsigned char *pucBuffer, unsigned char ucLength){
+                 ; 0000 00DB     memcpy(pucBuffer, &ucPacket[0], ucLength);
                  ;	*pucBuffer -> Y+1
                  ;	ucLength -> Y+0
-                 ; 0000 00D7 }
+                 ; 0000 00DC }
                  ;
                  ;//+++gan du lieu de chuan bi gui qua rs232
                  ;void RS232_SetData(unsigned char *pucBuffer, unsigned char ucLength){
-                 ; 0000 00DA void RS232_SetData(unsigned char *pucBuffer, unsigned char ucLength){
-                 ; 0000 00DB     int iCounter = 0;
-                 ; 0000 00DC     while((ucLength-1)>iCounter){
+                 ; 0000 00DF void RS232_SetData(unsigned char *pucBuffer, unsigned char ucLength){
+                 ; 0000 00E0     int iCounter = 0;
+                 ; 0000 00E1     while((ucLength-1)>iCounter){
                  ;	*pucBuffer -> Y+3
                  ;	ucLength -> Y+2
                  ;	iCounter -> R16,R17
-                 ; 0000 00DD         putchar(*(pucBuffer+iCounter));
-                 ; 0000 00DE         iCounter++;
-                 ; 0000 00DF     }
-                 ; 0000 00E0 }
+                 ; 0000 00E2         putchar(*(pucBuffer+iCounter));
+                 ; 0000 00E3         iCounter++;
+                 ; 0000 00E4     }
+                 ; 0000 00E5 }
                  ;
                  ;//+++lay du lieu tu pc gui xuong qua rs232
                  ;void RS232_GetData(){
-                 ; 0000 00E3 void RS232_GetData(){
+                 ; 0000 00E8 void RS232_GetData(){
                  _RS232_GetData:
-                 ; 0000 00E4     int iCounter = 0;
-                 ; 0000 00E5     for(iCounter = 0;iCounter < ucLength; iCounter++){
-0001c9 931a      	ST   -Y,R17
-0001ca 930a      	ST   -Y,R16
+                 ; 0000 00E9     int iCounter = 0;
+                 ; 0000 00EA     for(iCounter = 0;iCounter < ucLength; iCounter++){
+0001ba 931a      	ST   -Y,R17
+0001bb 930a      	ST   -Y,R16
                  ;	iCounter -> R16,R17
                 +
-0001cb e000     +LDI R16 , LOW ( 0 )
-0001cc e010     +LDI R17 , HIGH ( 0 )
+0001bc e000     +LDI R16 , LOW ( 0 )
+0001bd e010     +LDI R17 , HIGH ( 0 )
                  	__GETWRN 16,17,0
                 +
-0001cd e000     +LDI R16 , LOW ( 0 )
-0001ce e010     +LDI R17 , HIGH ( 0 )
+0001be e000     +LDI R16 , LOW ( 0 )
+0001bf e010     +LDI R17 , HIGH ( 0 )
                  	__GETWRN 16,17,0
                  _0x33:
-0001cf 91e0 036f 	LDS  R30,_ucLength
-0001d1 01d8      	MOVW R26,R16
-0001d2 e0f0      	LDI  R31,0
-0001d3 17ae      	CP   R26,R30
-0001d4 07bf      	CPC  R27,R31
-0001d5 f46c      	BRGE _0x34
-                 ; 0000 00E6         *(ucPacket+iCounter) = getchar();
-0001d6 01f8      	MOVW R30,R16
-0001d7 5ae0      	SUBI R30,LOW(-_ucPacket)
-0001d8 4ffd      	SBCI R31,HIGH(-_ucPacket)
-0001d9 93ff      	PUSH R31
-0001da 93ef      	PUSH R30
-0001db 940e 02f5 	CALL _getchar
-0001dd 91af      	POP  R26
-0001de 91bf      	POP  R27
-0001df 93ec      	ST   X,R30
-                 ; 0000 00E7     }
+0001c0 940e 034a 	CALL SUBOPT_0x1
+0001c2 f46c      	BRGE _0x34
+                 ; 0000 00EB         *(ucPacket+iCounter) = getchar();
+0001c3 01f8      	MOVW R30,R16
+0001c4 5ae0      	SUBI R30,LOW(-_ucPacket)
+0001c5 4ffd      	SBCI R31,HIGH(-_ucPacket)
+0001c6 93ff      	PUSH R31
+0001c7 93ef      	PUSH R30
+0001c8 940e 02ca 	CALL _getchar
+0001ca 91af      	POP  R26
+0001cb 91bf      	POP  R27
+0001cc 93ec      	ST   X,R30
+                 ; 0000 00EC     }
                 +
-0001e0 5f0f     +SUBI R16 , LOW ( - 1 )
-0001e1 4f1f     +SBCI R17 , HIGH ( - 1 )
+0001cd 5f0f     +SUBI R16 , LOW ( - 1 )
+0001ce 4f1f     +SBCI R17 , HIGH ( - 1 )
                  	__ADDWRN 16,17,1
-0001e2 cfec      	RJMP _0x33
+0001cf cff0      	RJMP _0x33
                  _0x34:
-                 ; 0000 00E8     ucRS232Started = 0;
-0001e3 e0e0      	LDI  R30,LOW(0)
-0001e4 93e0 0370 	STS  _ucRS232Started,R30
-                 ; 0000 00E9 }
-0001e6 9109      	LD   R16,Y+
-0001e7 9119      	LD   R17,Y+
-0001e8 9508      	RET
+                 ; 0000 00ED     ucRS232Started = 0;
+0001d0 e0e0      	LDI  R30,LOW(0)
+0001d1 93e0 0370 	STS  _ucRS232Started,R30
+                 ; 0000 00EE }
+0001d3 9109      	LD   R16,Y+
+0001d4 9119      	LD   R17,Y+
+0001d5 9508      	RET
                  ;
                  ;/*-----------RS233---------------*/
                  ;
@@ -1819,49 +1807,38 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  ;
                  ;// Trien khai spi
                  ;interrupt [SPI_STC] void spi_isr(void)
-                 ; 0000 00FB {
+                 ; 0000 0100 {
                  _spi_isr:
-0001e9 920a      	ST   -Y,R0
-0001ea 921a      	ST   -Y,R1
-0001eb 92fa      	ST   -Y,R15
-0001ec 936a      	ST   -Y,R22
-0001ed 937a      	ST   -Y,R23
-0001ee 938a      	ST   -Y,R24
-0001ef 939a      	ST   -Y,R25
-0001f0 93aa      	ST   -Y,R26
-0001f1 93ba      	ST   -Y,R27
-0001f2 93ea      	ST   -Y,R30
-0001f3 93fa      	ST   -Y,R31
-0001f4 b7ef      	IN   R30,SREG
-0001f5 93ea      	ST   -Y,R30
-                 ; 0000 00FC     if(PLM_IsRunning()>0){
-0001f6 df93      	RCALL _PLM_IsRunning
-0001f7 30e1      	CPI  R30,LOW(0x1)
-0001f8 f010      	BRLO _0x35
-                 ; 0000 00FD         PLM_Task();
-0001f9 df5d      	RCALL _PLM_Task
-                 ; 0000 00FE     }else{
-0001fa c002      	RJMP _0x36
-                 _0x35:
-                 ; 0000 00FF         Stop_SPI();
-0001fb 940e 036a 	CALL _Stop_SPI
-                 ; 0000 0100     }
-                 _0x36:
-                 ; 0000 0101 }
-0001fd 91e9      	LD   R30,Y+
-0001fe bfef      	OUT  SREG,R30
-0001ff 91f9      	LD   R31,Y+
-000200 91e9      	LD   R30,Y+
-000201 91b9      	LD   R27,Y+
-000202 91a9      	LD   R26,Y+
-000203 9199      	LD   R25,Y+
-000204 9189      	LD   R24,Y+
-000205 9179      	LD   R23,Y+
-000206 9169      	LD   R22,Y+
-000207 90f9      	LD   R15,Y+
-000208 9019      	LD   R1,Y+
-000209 9009      	LD   R0,Y+
-00020a 9518      	RETI
+0001d6 920a      	ST   -Y,R0
+0001d7 921a      	ST   -Y,R1
+0001d8 92fa      	ST   -Y,R15
+0001d9 936a      	ST   -Y,R22
+0001da 937a      	ST   -Y,R23
+0001db 938a      	ST   -Y,R24
+0001dc 939a      	ST   -Y,R25
+0001dd 93aa      	ST   -Y,R26
+0001de 93ba      	ST   -Y,R27
+0001df 93ea      	ST   -Y,R30
+0001e0 93fa      	ST   -Y,R31
+0001e1 b7ef      	IN   R30,SREG
+0001e2 93ea      	ST   -Y,R30
+                 ; 0000 0101     PLM_Task();
+0001e3 df73      	RCALL _PLM_Task
+                 ; 0000 0102 }
+0001e4 91e9      	LD   R30,Y+
+0001e5 bfef      	OUT  SREG,R30
+0001e6 91f9      	LD   R31,Y+
+0001e7 91e9      	LD   R30,Y+
+0001e8 91b9      	LD   R27,Y+
+0001e9 91a9      	LD   R26,Y+
+0001ea 9199      	LD   R25,Y+
+0001eb 9189      	LD   R24,Y+
+0001ec 9179      	LD   R23,Y+
+0001ed 9169      	LD   R22,Y+
+0001ee 90f9      	LD   R15,Y+
+0001ef 9019      	LD   R1,Y+
+0001f0 9009      	LD   R0,Y+
+0001f1 9518      	RETI
                  ;
                  ;// Declare your global variables here
                  ;
@@ -1871,258 +1848,264 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  ;
                  ;
                  ;void main(void)
-                 ; 0000 010B {
+                 ; 0000 010C {
                  _main:
-                 ; 0000 010C     int i;
-                 ; 0000 010D 
-                 ; 0000 010E     // Khai bao bien
-                 ; 0000 010F 
-                 ; 0000 0110     // Khoi tao cac gia tri
-                 ; 0000 0111     IO_Init();
+                 ; 0000 010D     int i;
+                 ; 0000 010E     bit a=0;
+                 ; 0000 010F     // Khai bao bien
+                 ; 0000 0110 
+                 ; 0000 0111     // Khoi tao cac gia tri
+                 ; 0000 0112     IO_Init();
                  ;	i -> R16,R17
-00020b d08e      	RCALL _IO_Init
-                 ; 0000 0112     TimerCounter_Init();
-00020c d09e      	RCALL _TimerCounter_Init
-                 ; 0000 0113     RS232_Init();
-00020d d0b0      	RCALL _RS232_Init
-                 ; 0000 0114     //pin_TASK = 1;
-                 ; 0000 0115     //ExtInterupt_Init();
-                 ; 0000 0116     SPI_Init();
-00020e 940e 035f 	CALL _SPI_Init
-                 ; 0000 0117     PLM_Init();
-000210 dfb2      	RCALL _PLM_Init
-                 ; 0000 0118     // ket thuc khoi tao
+                 ;	a -> R15.0
+0001f2 24ff      	CLR  R15
+0001f3 d073      	RCALL _IO_Init
+                 ; 0000 0113     TimerCounter_Init();
+0001f4 d083      	RCALL _TimerCounter_Init
+                 ; 0000 0114     TimerCounterInter_Init();
+0001f5 d09a      	RCALL _TimerCounterInter_Init
+                 ; 0000 0115     //pin_TASK = 1;
+                 ; 0000 0116     //ExtInterupt_Init();
+                 ; 0000 0117     RS232_Init();
+0001f6 d09c      	RCALL _RS232_Init
+                 ; 0000 0118     AnalogCompare_Init();
+0001f7 d093      	RCALL _AnalogCompare_Init
                  ; 0000 0119 
-                 ; 0000 011A     // khoi tao cho thanh ghi ST
-                 ; 0000 011B     PLM_SetControlRegister(DEFAULT_CONTROL_REG);// dummy write
-000211 940e 037e 	CALL SUBOPT_0x2
-                 ; 0000 011C     while(PLM_IsRunning() != 0);
-                 _0x37:
-000213 df76      	RCALL _PLM_IsRunning
-000214 30e0      	CPI  R30,0
-000215 f7e9      	BRNE _0x37
-                 ; 0000 011D     PLM_SetControlRegister(DEFAULT_CONTROL_REG);// dummy write
-000216 940e 037e 	CALL SUBOPT_0x2
-                 ; 0000 011E     // ket thuc khoi tao cho thanh ghi
+                 ; 0000 011A     SPI_Init();
+0001f8 940e 0334 	CALL _SPI_Init
+                 ; 0000 011B     PLM_Init();
+0001fa dfb9      	RCALL _PLM_Init
+                 ; 0000 011C     // ket thuc khoi tao
+                 ; 0000 011D 
+                 ; 0000 011E 
                  ; 0000 011F 
                  ; 0000 0120     ucRS232Started = 0;
-000218 e0e0      	LDI  R30,LOW(0)
-000219 93e0 0370 	STS  _ucRS232Started,R30
-                 ; 0000 0121 
-                 ; 0000 0122     // Global enable interrupts
-                 ; 0000 0123     #asm("sei")
-00021b 9478      	sei
-                 ; 0000 0124 
-                 ; 0000 0125     // Dua ve hoat dong la slave
-                 ; 0000 0126     pin_SS = 0;
-00021c 9897      	CBI  0x12,7
-                 ; 0000 0127     // Chuong trinh chinh
-                 ; 0000 0128     while (1)
+0001fb e0e0      	LDI  R30,LOW(0)
+0001fc 93e0 0370 	STS  _ucRS232Started,R30
+                 ; 0000 0121     // Global enable interrupts
+                 ; 0000 0122     #asm("sei")
+0001fe 9478      	sei
+                 ; 0000 0123 
+                 ; 0000 0124     // Dua ve hoat dong la slave
+                 ; 0000 0125     pin_SS = 0;
+0001ff 9897      	CBI  0x12,7
+                 ; 0000 0126     // khoi tao cho thanh ghi ST
+                 ; 0000 0127 //    PLM_SetControlRegister(DEFAULT_CONTROL_REG);// dummy write
+                 ; 0000 0128 //    while(PLM_IsRunning() != 0);
+                 ; 0000 0129 //    PLM_SetControlRegister(DEFAULT_CONTROL_REG);// dummy write
+                 ; 0000 012A //    putchar('c');
+                 ; 0000 012B     // ket thuc khoi tao cho thanh ghi
+                 ; 0000 012C     // Chuong trinh chinh
+                 ; 0000 012D     while (1)
+                 _0x37:
+                 ; 0000 012E     {
+                 ; 0000 012F //        if((a==0)&&(PLM_pinCLRT==1))
+                 ; 0000 0130 //        {
+                 ; 0000 0131 //            a=1;
+                 ; 0000 0132 //            putchar(1);
+                 ; 0000 0133 //        }
+                 ; 0000 0134 //        if((a==1)&&(PLM_pinCLRT==0))
+                 ; 0000 0135 //        {
+                 ; 0000 0136 //            putchar(0);
+                 ; 0000 0137 //            a=0;
+                 ; 0000 0138 //        }
+                 ; 0000 0139 
+                 ; 0000 013A 
+                 ; 0000 013B 
+                 ; 0000 013C 
+                 ; 0000 013D         // doc va kiem tra khung du lieu tu
+                 ; 0000 013E         if((RS232_IsRunning()>0)&&(ucRS232Started==0)){
+000200 940e 0310 	CALL _RS232_IsRunning
+000202 30e1      	CPI  R30,LOW(0x1)
+000203 f020      	BRLO _0x3B
+000204 91a0 0370 	LDS  R26,_ucRS232Started
+000206 30a0      	CPI  R26,LOW(0x0)
+000207 f009      	BREQ _0x3C
+                 _0x3B:
+000208 c01c      	RJMP _0x3A
                  _0x3C:
-                 ; 0000 0129     {
-                 ; 0000 012A         // doc va kiem tra khung du lieu tu
-                 ; 0000 012B         if((RS232_IsRunning()>0)&&(ucRS232Started==0)){
-00021d 940e 033b 	CALL _RS232_IsRunning
-00021f 30e1      	CPI  R30,LOW(0x1)
-000220 f020      	BRLO _0x40
-000221 91a0 0370 	LDS  R26,_ucRS232Started
-000223 30a0      	CPI  R26,LOW(0x0)
-000224 f009      	BREQ _0x41
-                 _0x40:
-000225 c01c      	RJMP _0x3F
-                 _0x41:
-                 ; 0000 012C             if(getchar()== RX_START)
-000226 940e 02f5 	CALL _getchar
-000228 3aea      	CPI  R30,LOW(0xAA)
-000229 f4c1      	BRNE _0x42
-                 ; 0000 012D             {
-                 ; 0000 012E                 delay_ms(200);
-00022a ece8      	LDI  R30,LOW(200)
-00022b e0f0      	LDI  R31,HIGH(200)
-00022c 940e 0386 	CALL SUBOPT_0x3
-                 ; 0000 012F                 ucRS232Started = 1;
-00022e e0e1      	LDI  R30,LOW(1)
-00022f 93e0 0370 	STS  _ucRS232Started,R30
-                 ; 0000 0130                 ucCommand = getchar();
-000231 940e 02f5 	CALL _getchar
-000233 93e0 0371 	STS  _ucCommand,R30
-                 ; 0000 0131                 ucLength = getchar();
-000235 940e 02f5 	CALL _getchar
-000237 93e0 036f 	STS  _ucLength,R30
-                 ; 0000 0132                 delay_ms(10*ucLength);
-000239 91e0 036f 	LDS  R30,_ucLength
-00023b e0f0      	LDI  R31,0
-00023c e0aa      	LDI  R26,LOW(10)
-00023d e0b0      	LDI  R27,HIGH(10)
-00023e 940e 03a2 	CALL __MULW12
-000240 940e 0386 	CALL SUBOPT_0x3
-                 ; 0000 0133             }
-                 ; 0000 0134         }
-                 _0x42:
-                 ; 0000 0135         if(ucRS232Started == 1){
-                 _0x3F:
-000242 91a0 0370 	LDS  R26,_ucRS232Started
-000244 30a1      	CPI  R26,LOW(0x1)
-000245 f011      	BREQ PC+3
-000246 940c 0298 	JMP _0x43
-                 ; 0000 0136             // doc gia tri tu rs232
-                 ; 0000 0137             RS232_GetData();
-000248 df80      	RCALL _RS232_GetData
-                 ; 0000 0138             // kiem tra gia tri dau tien cua ucPacket
-                 ; 0000 0139             switch(ucCommand){
-000249 91e0 0371 	LDS  R30,_ucCommand
-00024b e0f0      	LDI  R31,0
-                 ; 0000 013A                 // doc thanh ghi st7538/7540
-                 ; 0000 013B                 case COM_GET_CTR:
-00024c 9730      	SBIW R30,0
-00024d f579      	BRNE _0x47
-                 ; 0000 013C                 {
-                 ; 0000 013D                     // get control register (comm)
-                 ; 0000 013E 			        *((unsigned long*)&ucPacket[3]) = PLM_GetControlRegister();
-00024e df5b      	RCALL _PLM_GetControlRegister
+                 ; 0000 013F             if(getchar()== RX_START)
+000209 940e 02ca 	CALL _getchar
+00020b 3aea      	CPI  R30,LOW(0xAA)
+00020c f4c1      	BRNE _0x3D
+                 ; 0000 0140             {
+                 ; 0000 0141                 delay_ms(200);
+00020d ece8      	LDI  R30,LOW(200)
+00020e e0f0      	LDI  R31,HIGH(200)
+00020f 940e 0351 	CALL SUBOPT_0x2
+                 ; 0000 0142                 ucRS232Started = 1;
+000211 e0e1      	LDI  R30,LOW(1)
+000212 93e0 0370 	STS  _ucRS232Started,R30
+                 ; 0000 0143                 ucCommand = getchar();
+000214 940e 02ca 	CALL _getchar
+000216 93e0 0371 	STS  _ucCommand,R30
+                 ; 0000 0144                 ucLength = getchar();
+000218 940e 02ca 	CALL _getchar
+00021a 93e0 036f 	STS  _ucLength,R30
+                 ; 0000 0145                 delay_ms(10*ucLength);
+00021c 91e0 036f 	LDS  R30,_ucLength
+00021e e0f0      	LDI  R31,0
+00021f e0aa      	LDI  R26,LOW(10)
+000220 e0b0      	LDI  R27,HIGH(10)
+000221 940e 0375 	CALL __MULW12
+000223 940e 0351 	CALL SUBOPT_0x2
+                 ; 0000 0146             }
+                 ; 0000 0147         }
+                 _0x3D:
+                 ; 0000 0148         if(ucRS232Started == 1){
+                 _0x3A:
+000225 91a0 0370 	LDS  R26,_ucRS232Started
+000227 30a1      	CPI  R26,LOW(0x1)
+000228 f5e1      	BRNE _0x3E
+                 ; 0000 0149             // doc gia tri tu rs232
+                 ; 0000 014A             RS232_GetData();
+000229 df90      	RCALL _RS232_GetData
+                 ; 0000 014B             //putchar(ucLength);
+                 ; 0000 014C             for(i=0;i<ucLength;i++){
                 +
-00024f 93e0 0263+STS _ucPacket + 3 , R30
-000251 93f0 0264+STS _ucPacket + 3 + 1 , R31
-000253 9360 0265+STS _ucPacket + 3 + 2 , R22
-000255 9370 0266+STS _ucPacket + 3 + 3 , R23
-                 	__PUTD1MN _ucPacket,3
-                 ; 0000 013F 					ByteReverse((unsigned long*)&ucPacket[3]);
-                +
-000257 e6e3     +LDI R30 , LOW ( _ucPacket + 3 )
-000258 e0f2     +LDI R31 , HIGH ( _ucPacket + 3 )
-                 	__POINTW1MN _ucPacket,3
-000259 93fa      	ST   -Y,R31
-00025a 93ea      	ST   -Y,R30
-00025b 940e 033d 	CALL _ByteReverse
-                 ; 0000 0140                     *ucPacket = TX_START;// them header
-00025d eaea      	LDI  R30,LOW(170)
-00025e 93e0 0260 	STS  _ucPacket,R30
-                 ; 0000 0141                     *(ucPacket + 1) = ucCommand;// them code
-000260 91e0 0371 	LDS  R30,_ucCommand
-                +
-000262 93e0 0261+STS _ucPacket + 1 , R30
-                 	__PUTB1MN _ucPacket,1
-                 ; 0000 0142                     *(ucPacket + 2) = 3;// them do dai
-000264 e0e3      	LDI  R30,LOW(3)
-                +
-000265 93e0 0262+STS _ucPacket + 2 , R30
-                 	__PUTB1MN _ucPacket,2
-                 ; 0000 0143 					//RS232_SetData(ucPacket, 7);
-                 ; 0000 0144                     for(i=0;i<7;i++){
-                +
-000267 e000     +LDI R16 , LOW ( 0 )
-000268 e010     +LDI R17 , HIGH ( 0 )
+00022a e000     +LDI R16 , LOW ( 0 )
+00022b e010     +LDI R17 , HIGH ( 0 )
                  	__GETWRN 16,17,0
-                 _0x49:
+                 _0x40:
+00022c 940e 034a 	CALL SUBOPT_0x1
+00022e f44c      	BRGE _0x41
+                 ; 0000 014D                 delay_ms(10);
+00022f e0ea      	LDI  R30,LOW(10)
+000230 e0f0      	LDI  R31,HIGH(10)
+000231 940e 0351 	CALL SUBOPT_0x2
+                 ; 0000 014E                 putchar(ucPacket[i]);
+000233 940e 0355 	CALL SUBOPT_0x3
+                 ; 0000 014F             }
                 +
-000269 3007     +CPI R16 , LOW ( 7 )
-00026a e0e0     +LDI R30 , HIGH ( 7 )
-00026b 071e     +CPC R17 , R30
-                 	__CPWRN 16,17,7
-00026c f47c      	BRGE _0x4A
-                 ; 0000 0145                         delay_ms(10);
-00026d e0ea      	LDI  R30,LOW(10)
-00026e e0f0      	LDI  R31,HIGH(10)
-00026f 940e 0386 	CALL SUBOPT_0x3
-                 ; 0000 0146                         putchar(ucPacket[i]);
-000271 e6a0      	LDI  R26,LOW(_ucPacket)
-000272 e0b2      	LDI  R27,HIGH(_ucPacket)
-000273 0fa0      	ADD  R26,R16
-000274 1fb1      	ADC  R27,R17
-000275 91ec      	LD   R30,X
-000276 93ea      	ST   -Y,R30
-000277 940e 031f 	CALL _putchar
-                 ; 0000 0147                     }
-                +
-000279 5f0f     +SUBI R16 , LOW ( - 1 )
-00027a 4f1f     +SBCI R17 , HIGH ( - 1 )
+000235 5f0f     +SUBI R16 , LOW ( - 1 )
+000236 4f1f     +SBCI R17 , HIGH ( - 1 )
                  	__ADDWRN 16,17,1
-00027b cfed      	RJMP _0x49
-                 _0x4A:
-                 ; 0000 0148 					break;
-00027c c01b      	RJMP _0x46
-                 ; 0000 0149 			    }
-                 ; 0000 014A 
-                 ; 0000 014B                 // ghi thanh ghi st7538/7540
-                 ; 0000 014C 		        case COM_SET_CTR:
-                 _0x47:
-00027d 30e1      	CPI  R30,LOW(0x1)
-00027e e0a0      	LDI  R26,HIGH(0x1)
-00027f 07fa      	CPC  R31,R26
-000280 f491      	BRNE _0x4B
-                 ; 0000 014D                 {
-                 ; 0000 014E                     // set control register (comm, byte0, byte1, byte2, byte3)
-                 ; 0000 014F 					ByteReverse((unsigned long*)&ucPacket[0]);
-000281 e6e0      	LDI  R30,LOW(_ucPacket)
-000282 e0f2      	LDI  R31,HIGH(_ucPacket)
-000283 93fa      	ST   -Y,R31
-000284 93ea      	ST   -Y,R30
-000285 940e 033d 	CALL _ByteReverse
-                 ; 0000 0150 					PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
-000287 91e0 0260 	LDS  R30,_ucPacket
-000289 91f0 0261 	LDS  R31,_ucPacket+1
-00028b 9160 0262 	LDS  R22,_ucPacket+2
-00028d 9170 0263 	LDS  R23,_ucPacket+3
-00028f 940e 03b5 	CALL __PUTPARD1
-000291 defb      	RCALL _PLM_SetControlRegister
-                 ; 0000 0151 					break;
-000292 c005      	RJMP _0x46
-                 ; 0000 0152 			    }
-                 ; 0000 0153                 case COM_SET_PLM:
-                 _0x4B:
-000293 30e3      	CPI  R30,LOW(0x3)
-000294 e0a0      	LDI  R26,HIGH(0x3)
-000295 07fa      	CPC  R31,R26
-000296 f409      	BRNE _0x4C
+000237 cff4      	RJMP _0x40
+                 _0x41:
+                 ; 0000 0150             // kiem tra gia tri dau tien cua ucPacket
+                 ; 0000 0151             switch(ucCommand){
+000238 91e0 0371 	LDS  R30,_ucCommand
+00023a e0f0      	LDI  R31,0
+                 ; 0000 0152                 // doc thanh ghi st7538/7540
+                 ; 0000 0153                 case COM_GET_CTR:
+00023b 9730      	SBIW R30,0
+00023c f541      	BRNE _0x44
                  ; 0000 0154                 {
-                 ; 0000 0155 					PLM_Stop();
-000297 deb9      	RCALL _PLM_Stop
-                 ; 0000 0156 
-                 ; 0000 0157 //					uiLastFCS = CalcCRC(&ucPacket[0], 72);
-                 ; 0000 0158 //					*(unsigned int*)&ucPacket[72] = uiLastFCS;
-                 ; 0000 0159 //
-                 ; 0000 015A //                    ucPostableBits = 8-((78 * 14) % 8);
-                 ; 0000 015B //
-                 ; 0000 015C                     // truyen khong co ack
-                 ; 0000 015D //					PLM_TransmitData(74, 0);
-                 ; 0000 015E //                    while(PLM_pinCD_PD == 1);
-                 ; 0000 015F //                    pin_TASK = 1;
-                 ; 0000 0160 //					while(PLM_IsRunning() != 0);
-                 ; 0000 0161 //                    PLM_ReceiveData(74);
-                 ; 0000 0162 					break;
-                 ; 0000 0163 			    }
-                 ; 0000 0164                 case COM_GET_PLM:
-                 _0x4C:
-                 ; 0000 0165                 {
-                 ; 0000 0166 //                    PLM_ReceiveData(74);
-                 ; 0000 0167 					break;
-                 ; 0000 0168 			    }
-                 ; 0000 0169             }
-                 _0x46:
-                 ; 0000 016A         }
-                 ; 0000 016B //        while(RS232_IsRunning()!=0);
-                 ; 0000 016C //
-                 ; 0000 016D //        delay_ms(100);
+                 ; 0000 0155                     // get control register (comm)
+                 ; 0000 0156 			        *((unsigned long*)&ucPacket[3]) = PLM_GetControlRegister();
+00023d df57      	RCALL _PLM_GetControlRegister
+                +
+00023e 93e0 0263+STS _ucPacket + 3 , R30
+000240 93f0 0264+STS _ucPacket + 3 + 1 , R31
+000242 9360 0265+STS _ucPacket + 3 + 2 , R22
+000244 9370 0266+STS _ucPacket + 3 + 3 , R23
+                 	__PUTD1MN _ucPacket,3
+                 ; 0000 0157 					ByteReverse((unsigned long*)&ucPacket[3]);
+                +
+000246 e6e3     +LDI R30 , LOW ( _ucPacket + 3 )
+000247 e0f2     +LDI R31 , HIGH ( _ucPacket + 3 )
+                 	__POINTW1MN _ucPacket,3
+000248 93fa      	ST   -Y,R31
+000249 93ea      	ST   -Y,R30
+00024a 940e 0312 	CALL _ByteReverse
+                 ; 0000 0158                     *ucPacket = TX_START;// them header
+00024c eaea      	LDI  R30,LOW(170)
+00024d 93e0 0260 	STS  _ucPacket,R30
+                 ; 0000 0159                     *(ucPacket + 1) = ucCommand;// them code
+00024f 91e0 0371 	LDS  R30,_ucCommand
+                +
+000251 93e0 0261+STS _ucPacket + 1 , R30
+                 	__PUTB1MN _ucPacket,1
+                 ; 0000 015A                     *(ucPacket + 2) = 3;// them do dai
+000253 e0e3      	LDI  R30,LOW(3)
+                +
+000254 93e0 0262+STS _ucPacket + 2 , R30
+                 	__PUTB1MN _ucPacket,2
+                 ; 0000 015B 					//RS232_SetData(ucPacket, 7);
+                 ; 0000 015C                     for(i=0;i<7;i++){
+                +
+000256 e000     +LDI R16 , LOW ( 0 )
+000257 e010     +LDI R17 , HIGH ( 0 )
+                 	__GETWRN 16,17,0
+                 _0x47:
+                +
+000258 3007     +CPI R16 , LOW ( 7 )
+000259 e0e0     +LDI R30 , HIGH ( 7 )
+00025a 071e     +CPC R17 , R30
+                 	__CPWRN 16,17,7
+00025b f44c      	BRGE _0x48
+                 ; 0000 015D                         delay_ms(10);
+00025c e0ea      	LDI  R30,LOW(10)
+00025d e0f0      	LDI  R31,HIGH(10)
+00025e 940e 0351 	CALL SUBOPT_0x2
+                 ; 0000 015E                         putchar(ucPacket[i]);
+000260 940e 0355 	CALL SUBOPT_0x3
+                 ; 0000 015F                     }
+                +
+000262 5f0f     +SUBI R16 , LOW ( - 1 )
+000263 4f1f     +SBCI R17 , HIGH ( - 1 )
+                 	__ADDWRN 16,17,1
+000264 cff3      	RJMP _0x47
+                 _0x48:
+                 ; 0000 0160 					break;
+                 ; 0000 0161 			    }
+                 ; 0000 0162 
+                 ; 0000 0163 //                 ghi thanh ghi st7538/7540
+                 ; 0000 0164 //		        case COM_SET_CTR:
+                 ; 0000 0165 //                {
+                 ; 0000 0166 //                     set control register (comm, byte0, byte1, byte2, byte3)
+                 ; 0000 0167 //					ByteReverse((unsigned long*)&ucPacket[0]);
+                 ; 0000 0168 //					PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
+                 ; 0000 0169 //					break;
+                 ; 0000 016A //			    }
+                 ; 0000 016B //                case COM_SET_PLM:
+                 ; 0000 016C //                {
+                 ; 0000 016D //					PLM_Stop();
                  ; 0000 016E 
-                 ; 0000 016F //		if(PLM_IsRunning() != 0){
-                 ; 0000 0170 //            if(PLM_pinCD_PD == 0){
-                 ; 0000 0171 //                pin_TASK = 1;
-                 ; 0000 0172 //            }
-                 ; 0000 0173 //        }
-                 ; 0000 0174 
-                 ; 0000 0175 //        if(PLM_IsRunning()==0){
-                 ; 0000 0176 //            if(!PLM_IsAck()){
-                 ; 0000 0177 //                if(*(unsigned int*)&ucPacket[72] == CalcCRC(ucPacket, 72)){
-                 ; 0000 0178 //                    RS232_SetData(ucPacket, 72);
-                 ; 0000 0179 //                }
-                 ; 0000 017A //            }
-                 ; 0000 017B //        }
-                 ; 0000 017C     };
-                 _0x43:
-000298 cf84      	RJMP _0x3C
-                 ; 0000 017D }
-                 _0x4E:
-000299 cfff      	RJMP _0x4E
+                 ; 0000 016F //					uiLastFCS = CalcCRC(&ucPacket[0], 72);
+                 ; 0000 0170 //					*(unsigned int*)&ucPacket[72] = uiLastFCS;
+                 ; 0000 0171 //
+                 ; 0000 0172 //                    ucPostableBits = 8-((78 * 14) % 8);
+                 ; 0000 0173 //
+                 ; 0000 0174 //                     truyen khong co ack
+                 ; 0000 0175 //					PLM_TransmitData(74, 0);
+                 ; 0000 0176 //                    while(PLM_pinCD_PD == 1);
+                 ; 0000 0177 //                    pin_TASK = 1;
+                 ; 0000 0178 //					while(PLM_IsRunning() != 0);
+                 ; 0000 0179 //                    PLM_ReceiveData(74);
+                 ; 0000 017A //					break;
+                 ; 0000 017B //			    }
+                 ; 0000 017C //                case COM_GET_PLM:
+                 ; 0000 017D //                {
+                 ; 0000 017E //                    PLM_ReceiveData(74);
+                 ; 0000 017F //					break;
+                 ; 0000 0180 //			    }
+                 ; 0000 0181             }
+                 _0x44:
+                 ; 0000 0182         }
+                 ; 0000 0183 //        while(RS232_IsRunning()!=0);
+                 ; 0000 0184 //
+                 ; 0000 0185 //        delay_ms(100);
+                 ; 0000 0186 
+                 ; 0000 0187 //		if(PLM_IsRunning() != 0){
+                 ; 0000 0188 //            if(PLM_pinCD_PD == 0){
+                 ; 0000 0189 //                pin_TASK = 1;
+                 ; 0000 018A //            }
+                 ; 0000 018B //        }
+                 ; 0000 018C 
+                 ; 0000 018D //        if(PLM_IsRunning()==0){
+                 ; 0000 018E //            if(!PLM_IsAck()){
+                 ; 0000 018F //                if(*(unsigned int*)&ucPacket[72] == CalcCRC(ucPacket, 72)){
+                 ; 0000 0190 //                    RS232_SetData(ucPacket, 72);
+                 ; 0000 0191 //                }
+                 ; 0000 0192 //            }
+                 ; 0000 0193 //        }
+                 ; 0000 0194     };
+                 _0x3E:
+000265 cf9a      	RJMP _0x37
+                 ; 0000 0195 }
+                 _0x49:
+000266 cfff      	RJMP _0x49
                  ;#include <mega32.h>
                  	#ifndef __SLEEP_DEFINED__
                  	#endif
@@ -2136,11 +2119,11 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  ; 0001 0006     // Func7=Out Func6=Out Func5=In Func4=Out Func3=Out Func2=In Func1=In Func0=In
                  ; 0001 0007     // State7=0 State6=0 State5=T State4=0 State3=0 State2=T State1=T State0=T
                  ; 0001 0008     PORTA=0x00;
-00029a e0e0      	LDI  R30,LOW(0)
-00029b bbeb      	OUT  0x1B,R30
+000267 e0e0      	LDI  R30,LOW(0)
+000268 bbeb      	OUT  0x1B,R30
                  ; 0001 0009     DDRA=0xD8;
-00029c ede8      	LDI  R30,LOW(216)
-00029d bbea      	OUT  0x1A,R30
+000269 ede8      	LDI  R30,LOW(216)
+00026a bbea      	OUT  0x1A,R30
                  ; 0001 000A 
                  ; 0001 000B     // Cau hinh cho su dung ngat
                  ; 0001 000C     // Port B initialization
@@ -2152,34 +2135,34 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  ; 0001 0012     // Port B initialization
                  ; 0001 0013     // Func7=In Func6=Out Func5=In Func4=In Func3=In Func2=In Func1=In Func0=In
                  ; 0001 0014     // State7=T State6=0 State5=T State4=P State3=T State2=T State1=T State0=T
-                 ; 0001 0015     PORTB=0x10;
-00029e e1e0      	LDI  R30,LOW(16)
-00029f bbe8      	OUT  0x18,R30
+                 ; 0001 0015     PORTB=0x00;
+00026b e0e0      	LDI  R30,LOW(0)
+00026c bbe8      	OUT  0x18,R30
                  ; 0001 0016     DDRB=0x40;
-0002a0 e4e0      	LDI  R30,LOW(64)
-0002a1 bbe7      	OUT  0x17,R30
+00026d e4e0      	LDI  R30,LOW(64)
+00026e bbe7      	OUT  0x17,R30
                  ; 0001 0017 
                  ; 0001 0018     // Port C initialization
                  ; 0001 0019     // Func7=In Func6=Out Func5=Out Func4=In Func3=Out Func2=In Func1=In Func0=Out
                  ; 0001 001A     // State7=T State6=0 State5=0 State4=T State3=0 State2=T State1=T State0=0
                  ; 0001 001B     PORTC=0x00;
-0002a2 e0e0      	LDI  R30,LOW(0)
-0002a3 bbe5      	OUT  0x15,R30
+00026f e0e0      	LDI  R30,LOW(0)
+000270 bbe5      	OUT  0x15,R30
                  ; 0001 001C     DDRC=0x69;
-0002a4 e6e9      	LDI  R30,LOW(105)
-0002a5 bbe4      	OUT  0x14,R30
+000271 e6e9      	LDI  R30,LOW(105)
+000272 bbe4      	OUT  0x14,R30
                  ; 0001 001D 
                  ; 0001 001E     // Port D initialization
                  ; 0001 001F     // Func7=Out Func6=In Func5=In Func4=In Func3=In Func2=In Func1=Out Func0=In
                  ; 0001 0020     // State7=1 State6=T State5=T State4=T State3=P State2=T State1=0 State0=T
                  ; 0001 0021     PORTD=0x88;
-0002a6 e8e8      	LDI  R30,LOW(136)
-0002a7 bbe2      	OUT  0x12,R30
+000273 e8e8      	LDI  R30,LOW(136)
+000274 bbe2      	OUT  0x12,R30
                  ; 0001 0022     DDRD=0x82;
-0002a8 e8e2      	LDI  R30,LOW(130)
-0002a9 bbe1      	OUT  0x11,R30
+000275 e8e2      	LDI  R30,LOW(130)
+000276 bbe1      	OUT  0x11,R30
                  ; 0001 0023 }
-0002aa 9508      	RET
+000277 9508      	RET
                  ;
                  ;void TimerCounter_Init(void){
                  ; 0001 0025 void TimerCounter_Init(void){
@@ -2190,12 +2173,12 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  ; 0001 0029     // Mode: Normal top=FFh
                  ; 0001 002A     // OC0 output: Disconnected
                  ; 0001 002B     TCCR0=0x00;
-0002ab e0e0      	LDI  R30,LOW(0)
-0002ac bfe3      	OUT  0x33,R30
+000278 e0e0      	LDI  R30,LOW(0)
+000279 bfe3      	OUT  0x33,R30
                  ; 0001 002C     TCNT0=0x00;
-0002ad bfe2      	OUT  0x32,R30
+00027a bfe2      	OUT  0x32,R30
                  ; 0001 002D     OCR0=0x00;
-0002ae bfec      	OUT  0x3C,R30
+00027b bfec      	OUT  0x3C,R30
                  ; 0001 002E 
                  ; 0001 002F     // Timer/Counter 1 initialization
                  ; 0001 0030     // Clock source: System Clock
@@ -2210,25 +2193,25 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  ; 0001 0039     // Compare A Match Interrupt: Off
                  ; 0001 003A     // Compare B Match Interrupt: Off
                  ; 0001 003B     TCCR1A=0x00;
-0002af bdef      	OUT  0x2F,R30
+00027c bdef      	OUT  0x2F,R30
                  ; 0001 003C     TCCR1B=0x00;
-0002b0 bdee      	OUT  0x2E,R30
+00027d bdee      	OUT  0x2E,R30
                  ; 0001 003D     TCNT1H=0x00;
-0002b1 bded      	OUT  0x2D,R30
+00027e bded      	OUT  0x2D,R30
                  ; 0001 003E     TCNT1L=0x00;
-0002b2 bdec      	OUT  0x2C,R30
+00027f bdec      	OUT  0x2C,R30
                  ; 0001 003F     ICR1H=0x00;
-0002b3 bde7      	OUT  0x27,R30
+000280 bde7      	OUT  0x27,R30
                  ; 0001 0040     ICR1L=0x00;
-0002b4 bde6      	OUT  0x26,R30
+000281 bde6      	OUT  0x26,R30
                  ; 0001 0041     OCR1AH=0x00;
-0002b5 bdeb      	OUT  0x2B,R30
+000282 bdeb      	OUT  0x2B,R30
                  ; 0001 0042     OCR1AL=0x00;
-0002b6 bdea      	OUT  0x2A,R30
+000283 bdea      	OUT  0x2A,R30
                  ; 0001 0043     OCR1BH=0x00;
-0002b7 bde9      	OUT  0x29,R30
+000284 bde9      	OUT  0x29,R30
                  ; 0001 0044     OCR1BL=0x00;
-0002b8 bde8      	OUT  0x28,R30
+000285 bde8      	OUT  0x28,R30
                  ; 0001 0045 
                  ; 0001 0046     // Timer/Counter 2 initialization
                  ; 0001 0047     // Clock source: System Clock
@@ -2236,17 +2219,17 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  ; 0001 0049     // Mode: Normal top=FFh
                  ; 0001 004A     // OC2 output: Disconnected
                  ; 0001 004B     ASSR=0x00;
-0002b9 bde2      	OUT  0x22,R30
+000286 bde2      	OUT  0x22,R30
                  ; 0001 004C     TCCR2=0x00;
-0002ba bde5      	OUT  0x25,R30
+000287 bde5      	OUT  0x25,R30
                  ; 0001 004D     TCNT2=0x00;
-0002bb bde4      	OUT  0x24,R30
+000288 bde4      	OUT  0x24,R30
                  ; 0001 004E     OCR2=0x00;
-0002bc bde3      	OUT  0x23,R30
+000289 bde3      	OUT  0x23,R30
                  ; 0001 004F 
                  ; 0001 0050 
                  ; 0001 0051 }
-0002bd 9508      	RET
+00028a 9508      	RET
                  ;
                  ;void ExtInterupt_Init(void){
                  ; 0001 0053 void ExtInterupt_Init(void){
@@ -2260,49 +2243,62 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  ; 0001 005B     MCUCSR=0x00;
                  ; 0001 005C     GIFR=0x80;
                  ; 0001 005D 
-                 ; 0001 005E     // Timer(s)/Counter(s) Interrupt(s) initialization
-                 ; 0001 005F     TIMSK=0x00;
+                 ; 0001 005E 
+                 ; 0001 005F 
                  ; 0001 0060 
-                 ; 0001 0061     // Analog Comparator initialization
-                 ; 0001 0062     // Analog Comparator: Off
-                 ; 0001 0063     // Analog Comparator Input Capture by Timer/Counter 1: Off
-                 ; 0001 0064     ACSR=0x80;
-                 ; 0001 0065     SFIOR=0x00;
-                 ; 0001 0066 
-                 ; 0001 0067 
-                 ; 0001 0068 
-                 ; 0001 0069 
-                 ; 0001 006A }
+                 ; 0001 0061 }
                  ;
+                 ;void AnalogCompare_Init(void){
+                 ; 0001 0063 void AnalogCompare_Init(void){
+                 _AnalogCompare_Init:
+                 ; 0001 0064     // Analog Comparator initialization
+                 ; 0001 0065     // Analog Comparator: Off
+                 ; 0001 0066     // Analog Comparator Input Capture by Timer/Counter 1: Off
+                 ; 0001 0067     ACSR=0x80;
+00028b e8e0      	LDI  R30,LOW(128)
+00028c b9e8      	OUT  0x8,R30
+                 ; 0001 0068     SFIOR=0x00;
+00028d e0e0      	LDI  R30,LOW(0)
+00028e bfe0      	OUT  0x30,R30
+                 ; 0001 0069 }
+00028f 9508      	RET
                  ;
-                 ;
+                 ;void TimerCounterInter_Init(void){
+                 ; 0001 006B void TimerCounterInter_Init(void){
+                 _TimerCounterInter_Init:
+                 ; 0001 006C     // Timer(s)/Counter(s) Interrupt(s) initialization
+                 ; 0001 006D     TIMSK=0x00;
+000290 e0e0      	LDI  R30,LOW(0)
+000291 bfe9      	OUT  0x39,R30
+                 ; 0001 006E }
+000292 9508      	RET
                  ;
                  ;void RS232_Init(void){
-                 ; 0001 006F void RS232_Init(void){
+                 ; 0001 0070 void RS232_Init(void){
                  _RS232_Init:
-                 ; 0001 0070     // USART initialization
-                 ; 0001 0071     // Communication Parameters: 8 Data, 1 Stop, No Parity
-                 ; 0001 0072     // USART Receiver: On
-                 ; 0001 0073     // USART Transmitter: On
-                 ; 0001 0074     // USART Mode: Asynchronous
-                 ; 0001 0075     // USART Baud Rate: 9600
-                 ; 0001 0076     UCSRA=0x00;
-0002be e0e0      	LDI  R30,LOW(0)
-0002bf b9eb      	OUT  0xB,R30
-                 ; 0001 0077     UCSRB=0xD8;
-0002c0 ede8      	LDI  R30,LOW(216)
-0002c1 b9ea      	OUT  0xA,R30
-                 ; 0001 0078     UCSRC=0x86;
-0002c2 e8e6      	LDI  R30,LOW(134)
-0002c3 bde0      	OUT  0x20,R30
-                 ; 0001 0079     UBRRH=0x00;
-0002c4 e0e0      	LDI  R30,LOW(0)
-0002c5 bde0      	OUT  0x20,R30
-                 ; 0001 007A     UBRRL=0x47;
-0002c6 e4e7      	LDI  R30,LOW(71)
-0002c7 b9e9      	OUT  0x9,R30
-                 ; 0001 007B }
-0002c8 9508      	RET
+                 ; 0001 0071     // USART initialization
+                 ; 0001 0072     // Communication Parameters: 8 Data, 1 Stop, No Parity
+                 ; 0001 0073     // USART Receiver: On
+                 ; 0001 0074     // USART Transmitter: On
+                 ; 0001 0075     // USART Mode: Asynchronous
+                 ; 0001 0076     // USART Baud Rate: 9600
+                 ; 0001 0077     UCSRA=0x00;
+000293 e0e0      	LDI  R30,LOW(0)
+000294 b9eb      	OUT  0xB,R30
+                 ; 0001 0078     UCSRB=0xD8;
+000295 ede8      	LDI  R30,LOW(216)
+000296 b9ea      	OUT  0xA,R30
+                 ; 0001 0079     UCSRC=0x86;
+000297 e8e6      	LDI  R30,LOW(134)
+000298 bde0      	OUT  0x20,R30
+                 ; 0001 007A     UBRRH=0x00;
+000299 e0e0      	LDI  R30,LOW(0)
+00029a bde0      	OUT  0x20,R30
+                 ; 0001 007B     UBRRL=0x47;
+00029b e4e7      	LDI  R30,LOW(71)
+00029c b9e9      	OUT  0x9,R30
+                 ; 0001 007C }
+00029d 9508      	RET
                  ;#include <mega32.h>
                  	#ifndef __SLEEP_DEFINED__
                  	#endif
@@ -2342,71 +2338,71 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  
                  	.CSEG
                  _usart_rx_isr:
-0002c9 93aa      	ST   -Y,R26
-0002ca 93ba      	ST   -Y,R27
-0002cb 93ea      	ST   -Y,R30
-0002cc 93fa      	ST   -Y,R31
-0002cd b7ef      	IN   R30,SREG
-0002ce 93ea      	ST   -Y,R30
+00029e 93aa      	ST   -Y,R26
+00029f 93ba      	ST   -Y,R27
+0002a0 93ea      	ST   -Y,R30
+0002a1 93fa      	ST   -Y,R31
+0002a2 b7ef      	IN   R30,SREG
+0002a3 93ea      	ST   -Y,R30
                  ; 0002 0023 
                  ; 0002 0024     char status,data;
                  ; 0002 0025     status=UCSRA;
-0002cf 931a      	ST   -Y,R17
-0002d0 930a      	ST   -Y,R16
+0002a4 931a      	ST   -Y,R17
+0002a5 930a      	ST   -Y,R16
                  ;	status -> R17
                  ;	data -> R16
-0002d1 b11b      	IN   R17,11
+0002a6 b11b      	IN   R17,11
                  ; 0002 0026     data=UDR;
-0002d2 b10c      	IN   R16,12
+0002a7 b10c      	IN   R16,12
                  ; 0002 0027     if ((status & (FRAMING_ERROR | PARITY_ERROR | DATA_OVERRUN))==0)
-0002d3 2fa1      	MOV  R26,R17
-0002d4 e0b0      	LDI  R27,0
-0002d5 e1ec      	LDI  R30,LOW(28)
-0002d6 e0f0      	LDI  R31,HIGH(28)
-0002d7 23ea      	AND  R30,R26
-0002d8 23fb      	AND  R31,R27
-0002d9 9730      	SBIW R30,0
-0002da f489      	BRNE _0x40003
+0002a8 2fa1      	MOV  R26,R17
+0002a9 e0b0      	LDI  R27,0
+0002aa e1ec      	LDI  R30,LOW(28)
+0002ab e0f0      	LDI  R31,HIGH(28)
+0002ac 23ea      	AND  R30,R26
+0002ad 23fb      	AND  R31,R27
+0002ae 9730      	SBIW R30,0
+0002af f489      	BRNE _0x40003
                  ; 0002 0028     {
                  ; 0002 0029         rx_buffer[rx_wr_index]=data;
-0002db 2de5      	MOV  R30,R5
-0002dc e0f0      	LDI  R31,0
-0002dd 58ea      	SUBI R30,LOW(-_rx_buffer)
-0002de 4ffc      	SBCI R31,HIGH(-_rx_buffer)
-0002df 8300      	ST   Z,R16
+0002b0 2de5      	MOV  R30,R5
+0002b1 e0f0      	LDI  R31,0
+0002b2 58ea      	SUBI R30,LOW(-_rx_buffer)
+0002b3 4ffc      	SBCI R31,HIGH(-_rx_buffer)
+0002b4 8300      	ST   Z,R16
                  ; 0002 002A 
                  ; 0002 002B         if (++rx_wr_index == RX_BUFFER_SIZE) rx_wr_index=0;
-0002e0 9453      	INC  R5
-0002e1 efef      	LDI  R30,LOW(255)
-0002e2 15e5      	CP   R30,R5
-0002e3 f409      	BRNE _0x40004
-0002e4 2455      	CLR  R5
+0002b5 9453      	INC  R5
+0002b6 efef      	LDI  R30,LOW(255)
+0002b7 15e5      	CP   R30,R5
+0002b8 f409      	BRNE _0x40004
+0002b9 2455      	CLR  R5
                  ; 0002 002C         if (++rx_counter == RX_BUFFER_SIZE)
                  _0x40004:
-0002e5 9473      	INC  R7
-0002e6 efef      	LDI  R30,LOW(255)
-0002e7 15e7      	CP   R30,R7
-0002e8 f419      	BRNE _0x40005
+0002ba 9473      	INC  R7
+0002bb efef      	LDI  R30,LOW(255)
+0002bc 15e7      	CP   R30,R7
+0002bd f419      	BRNE _0x40005
                  ; 0002 002D         {
                  ; 0002 002E             rx_counter=0;
-0002e9 2477      	CLR  R7
+0002be 2477      	CLR  R7
                  ; 0002 002F             rx_buffer_overflow=1;
-0002ea 9468      	SET
-0002eb f821      	BLD  R2,1
+0002bf 9468      	SET
+0002c0 f821      	BLD  R2,1
                  ; 0002 0030         };
                  _0x40005:
                  ; 0002 0031     };
                  _0x40003:
                  ; 0002 0032 }
-0002ec 9109      	LD   R16,Y+
-0002ed 9119      	LD   R17,Y+
-0002ee 91e9      	LD   R30,Y+
-0002ef bfef      	OUT  SREG,R30
-0002f0 91f9      	LD   R31,Y+
-0002f1 91e9      	LD   R30,Y+
-0002f2 91b9      	LD   R27,Y+
-0002f3 91a9      	LD   R26,Y+
-0002f4 9518      	RETI
+0002c1 9109      	LD   R16,Y+
+0002c2 9119      	LD   R17,Y+
+0002c3 91e9      	LD   R30,Y+
+0002c4 bfef      	OUT  SREG,R30
+0002c5 91f9      	LD   R31,Y+
+0002c6 91e9      	LD   R30,Y+
+0002c7 91b9      	LD   R27,Y+
+0002c8 91a9      	LD   R26,Y+
+0002c9 9518      	RETI
                  ;
                  ;#ifndef _DEBUG_TERMINAL_IO_
                  ;// Get a character from the USART Receiver buffer
@@ -2417,34 +2413,34 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  _getchar:
                  ; 0002 003A     char data;
                  ; 0002 003B     while (rx_counter==0);
-0002f5 931a      	ST   -Y,R17
+0002ca 931a      	ST   -Y,R17
                  ;	data -> R17
                  _0x40006:
-0002f6 2077      	TST  R7
-0002f7 f3f1      	BREQ _0x40006
+0002cb 2077      	TST  R7
+0002cc f3f1      	BREQ _0x40006
                  ; 0002 003C     data=rx_buffer[rx_rd_index];
-0002f8 2de4      	MOV  R30,R4
-0002f9 e0f0      	LDI  R31,0
-0002fa 58ea      	SUBI R30,LOW(-_rx_buffer)
-0002fb 4ffc      	SBCI R31,HIGH(-_rx_buffer)
-0002fc 8110      	LD   R17,Z
+0002cd 2de4      	MOV  R30,R4
+0002ce e0f0      	LDI  R31,0
+0002cf 58ea      	SUBI R30,LOW(-_rx_buffer)
+0002d0 4ffc      	SBCI R31,HIGH(-_rx_buffer)
+0002d1 8110      	LD   R17,Z
                  ; 0002 003D     if (++rx_rd_index == RX_BUFFER_SIZE) rx_rd_index=0;
-0002fd 9443      	INC  R4
-0002fe efef      	LDI  R30,LOW(255)
-0002ff 15e4      	CP   R30,R4
-000300 f409      	BRNE _0x40009
-000301 2444      	CLR  R4
+0002d2 9443      	INC  R4
+0002d3 efef      	LDI  R30,LOW(255)
+0002d4 15e4      	CP   R30,R4
+0002d5 f409      	BRNE _0x40009
+0002d6 2444      	CLR  R4
                  ; 0002 003E     #asm("cli")
                  _0x40009:
-000302 94f8      	cli
+0002d7 94f8      	cli
                  ; 0002 003F     --rx_counter;
-000303 947a      	DEC  R7
+0002d8 947a      	DEC  R7
                  ; 0002 0040     #asm("sei")
-000304 9478      	sei
+0002d9 9478      	sei
                  ; 0002 0041     return data;
-000305 2fe1      	MOV  R30,R17
-000306 9119      	LD   R17,Y+
-000307 9508      	RET
+0002da 2fe1      	MOV  R30,R17
+0002db 9119      	LD   R17,Y+
+0002dc 9508      	RET
                  ; 0002 0042 }
                  ;#pragma used-
                  ;#endif
@@ -2463,38 +2459,38 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  ;interrupt [USART_TXC] void usart_tx_isr(void)
                  ; 0002 0052 {
                  _usart_tx_isr:
-000308 93ea      	ST   -Y,R30
-000309 93fa      	ST   -Y,R31
-00030a b7ef      	IN   R30,SREG
-00030b 93ea      	ST   -Y,R30
+0002dd 93ea      	ST   -Y,R30
+0002de 93fa      	ST   -Y,R31
+0002df b7ef      	IN   R30,SREG
+0002e0 93ea      	ST   -Y,R30
                  ; 0002 0053     if (tx_counter)
-00030c 2088      	TST  R8
-00030d f061      	BREQ _0x4000A
+0002e1 2088      	TST  R8
+0002e2 f061      	BREQ _0x4000A
                  ; 0002 0054     {
                  ; 0002 0055         --tx_counter;
-00030e 948a      	DEC  R8
+0002e3 948a      	DEC  R8
                  ; 0002 0056         UDR=tx_buffer[tx_rd_index];
-00030f 2de9      	MOV  R30,R9
-000310 e0f0      	LDI  R31,0
-000311 58eb      	SUBI R30,LOW(-_tx_buffer)
-000312 4ffb      	SBCI R31,HIGH(-_tx_buffer)
-000313 81e0      	LD   R30,Z
-000314 b9ec      	OUT  0xC,R30
+0002e4 2de9      	MOV  R30,R9
+0002e5 e0f0      	LDI  R31,0
+0002e6 58eb      	SUBI R30,LOW(-_tx_buffer)
+0002e7 4ffb      	SBCI R31,HIGH(-_tx_buffer)
+0002e8 81e0      	LD   R30,Z
+0002e9 b9ec      	OUT  0xC,R30
                  ; 0002 0057         if (++tx_rd_index == TX_BUFFER_SIZE) tx_rd_index=0;
-000315 9493      	INC  R9
-000316 efef      	LDI  R30,LOW(255)
-000317 15e9      	CP   R30,R9
-000318 f409      	BRNE _0x4000B
-000319 2499      	CLR  R9
+0002ea 9493      	INC  R9
+0002eb efef      	LDI  R30,LOW(255)
+0002ec 15e9      	CP   R30,R9
+0002ed f409      	BRNE _0x4000B
+0002ee 2499      	CLR  R9
                  ; 0002 0058     };
                  _0x4000B:
                  _0x4000A:
                  ; 0002 0059 }
-00031a 91e9      	LD   R30,Y+
-00031b bfef      	OUT  SREG,R30
-00031c 91f9      	LD   R31,Y+
-00031d 91e9      	LD   R30,Y+
-00031e 9518      	RETI
+0002ef 91e9      	LD   R30,Y+
+0002f0 bfef      	OUT  SREG,R30
+0002f1 91f9      	LD   R31,Y+
+0002f2 91e9      	LD   R30,Y+
+0002f3 9518      	RETI
                  ;
                  ;#ifndef _DEBUG_TERMINAL_IO_
                  ;// Write a character to the USART Transmitter buffer
@@ -2506,49 +2502,49 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  ; 0002 0061     while (tx_counter == TX_BUFFER_SIZE);
                  ;	c -> Y+0
                  _0x4000C:
-00031f efef      	LDI  R30,LOW(255)
-000320 15e8      	CP   R30,R8
-000321 f3e9      	BREQ _0x4000C
+0002f4 efef      	LDI  R30,LOW(255)
+0002f5 15e8      	CP   R30,R8
+0002f6 f3e9      	BREQ _0x4000C
                  ; 0002 0062     #asm("cli")
-000322 94f8      	cli
+0002f7 94f8      	cli
                  ; 0002 0063     if (tx_counter || ((UCSRA & DATA_REGISTER_EMPTY)==0))
-000323 2088      	TST  R8
-000324 f421      	BRNE _0x40010
-000325 b1eb      	IN   R30,0xB
-000326 e0f0      	LDI  R31,0
-000327 72e0      	ANDI R30,LOW(0x20)
-000328 f469      	BRNE _0x4000F
+0002f8 2088      	TST  R8
+0002f9 f421      	BRNE _0x40010
+0002fa b1eb      	IN   R30,0xB
+0002fb e0f0      	LDI  R31,0
+0002fc 72e0      	ANDI R30,LOW(0x20)
+0002fd f469      	BRNE _0x4000F
                  _0x40010:
                  ; 0002 0064     {
                  ; 0002 0065         tx_buffer[tx_wr_index]=c;
-000329 2de6      	MOV  R30,R6
-00032a e0f0      	LDI  R31,0
-00032b 58eb      	SUBI R30,LOW(-_tx_buffer)
-00032c 4ffb      	SBCI R31,HIGH(-_tx_buffer)
-00032d 81a8      	LD   R26,Y
-00032e 83a0      	STD  Z+0,R26
+0002fe 2de6      	MOV  R30,R6
+0002ff e0f0      	LDI  R31,0
+000300 58eb      	SUBI R30,LOW(-_tx_buffer)
+000301 4ffb      	SBCI R31,HIGH(-_tx_buffer)
+000302 81a8      	LD   R26,Y
+000303 83a0      	STD  Z+0,R26
                  ; 0002 0066         if (++tx_wr_index == TX_BUFFER_SIZE) tx_wr_index=0;
-00032f 9463      	INC  R6
-000330 efef      	LDI  R30,LOW(255)
-000331 15e6      	CP   R30,R6
-000332 f409      	BRNE _0x40012
-000333 2466      	CLR  R6
+000304 9463      	INC  R6
+000305 efef      	LDI  R30,LOW(255)
+000306 15e6      	CP   R30,R6
+000307 f409      	BRNE _0x40012
+000308 2466      	CLR  R6
                  ; 0002 0067         ++tx_counter;
                  _0x40012:
-000334 9483      	INC  R8
+000309 9483      	INC  R8
                  ; 0002 0068     }
                  ; 0002 0069     else
-000335 c002      	RJMP _0x40013
+00030a c002      	RJMP _0x40013
                  _0x4000F:
                  ; 0002 006A         UDR=c;
-000336 81e8      	LD   R30,Y
-000337 b9ec      	OUT  0xC,R30
+00030b 81e8      	LD   R30,Y
+00030c b9ec      	OUT  0xC,R30
                  ; 0002 006B     #asm("sei")
                  _0x40013:
-000338 9478      	sei
+00030d 9478      	sei
                  ; 0002 006C }
-000339 9621      	ADIW R28,1
-00033a 9508      	RET
+00030e 9621      	ADIW R28,1
+00030f 9508      	RET
                  ;#pragma used-
                  ;#endif
                  ;
@@ -2557,8 +2553,8 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  ; 0002 0071 unsigned char RS232_IsRunning(void){
                  _RS232_IsRunning:
                  ; 0002 0072     return (unsigned char) rx_counter;
-00033b 2de7      	MOV  R30,R7
-00033c 9508      	RET
+000310 2de7      	MOV  R30,R7
+000311 9508      	RET
                  ; 0002 0073 }
                  ;#include <mega32.h>
                  	#ifndef __SLEEP_DEFINED__
@@ -2608,57 +2604,57 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  ; 0003 0028     unsigned char uc;
                  ; 0003 0029 
                  ; 0003 002A     uc = *((unsigned char*)pul + 0);                                // msb
-00033d 931a      	ST   -Y,R17
+000312 931a      	ST   -Y,R17
                  ;	*pul -> Y+1
                  ;	uc -> R17
-00033e 81a9      	LDD  R26,Y+1
-00033f 81ba      	LDD  R27,Y+1+1
-000340 9610      	ADIW R26,0
-000341 911c      	LD   R17,X
+000313 81a9      	LDD  R26,Y+1
+000314 81ba      	LDD  R27,Y+1+1
+000315 9610      	ADIW R26,0
+000316 911c      	LD   R17,X
                  ; 0003 002B     *((unsigned char*)pul + 0) = *((unsigned char*)pul + 3);        // lsb
-000342 81a9      	LDD  R26,Y+1
-000343 81ba      	LDD  R27,Y+1+1
-000344 9613      	ADIW R26,3
-000345 91ec      	LD   R30,X
+000317 81a9      	LDD  R26,Y+1
+000318 81ba      	LDD  R27,Y+1+1
+000319 9613      	ADIW R26,3
+00031a 91ec      	LD   R30,X
                 +
-000346 81a9     +LDD R26 , Y + 1
-000347 81ba     +LDD R27 , Y + 1 + 1
-000348 9610     +ADIW R26 , 0
-000349 93ec     +ST X , R30
+00031b 81a9     +LDD R26 , Y + 1
+00031c 81ba     +LDD R27 , Y + 1 + 1
+00031d 9610     +ADIW R26 , 0
+00031e 93ec     +ST X , R30
                  	__PUTB1SNS 1,0
                  ; 0003 002C     *((unsigned char*)pul + 3) = uc;
-00034a 81e9      	LDD  R30,Y+1
-00034b 81fa      	LDD  R31,Y+1+1
+00031f 81e9      	LDD  R30,Y+1
+000320 81fa      	LDD  R31,Y+1+1
                 +
-00034c 8313     +STD Z + 3 , R17
+000321 8313     +STD Z + 3 , R17
                  	__PUTBZR 17,3
                  ; 0003 002D 
                  ; 0003 002E     uc = *((unsigned char*)(pul) + 1);                                // msb
-00034d 81a9      	LDD  R26,Y+1
-00034e 81ba      	LDD  R27,Y+1+1
-00034f 9611      	ADIW R26,1
-000350 911c      	LD   R17,X
+000322 81a9      	LDD  R26,Y+1
+000323 81ba      	LDD  R27,Y+1+1
+000324 9611      	ADIW R26,1
+000325 911c      	LD   R17,X
                  ; 0003 002F     *((unsigned char*)pul + 1) = *((unsigned char*)pul + 2);        // lsb
-000351 81a9      	LDD  R26,Y+1
-000352 81ba      	LDD  R27,Y+1+1
-000353 9612      	ADIW R26,2
-000354 91ec      	LD   R30,X
+000326 81a9      	LDD  R26,Y+1
+000327 81ba      	LDD  R27,Y+1+1
+000328 9612      	ADIW R26,2
+000329 91ec      	LD   R30,X
                 +
-000355 81a9     +LDD R26 , Y + 1
-000356 81ba     +LDD R27 , Y + 1 + 1
-000357 9611     +ADIW R26 , 1
-000358 93ec     +ST X , R30
+00032a 81a9     +LDD R26 , Y + 1
+00032b 81ba     +LDD R27 , Y + 1 + 1
+00032c 9611     +ADIW R26 , 1
+00032d 93ec     +ST X , R30
                  	__PUTB1SNS 1,1
                  ; 0003 0030     *((unsigned char*)pul + 2) = uc;
-000359 81e9      	LDD  R30,Y+1
-00035a 81fa      	LDD  R31,Y+1+1
+00032e 81e9      	LDD  R30,Y+1
+00032f 81fa      	LDD  R31,Y+1+1
                 +
-00035b 8312     +STD Z + 2 , R17
+000330 8312     +STD Z + 2 , R17
                  	__PUTBZR 17,2
                  ; 0003 0031 }
-00035c 8118      	LDD  R17,Y+0
-00035d 9623      	ADIW R28,3
-00035e 9508      	RET
+000331 8118      	LDD  R17,Y+0
+000332 9623      	ADIW R28,3
+000333 9508      	RET
                  ;
                  ;unsigned char Sum(unsigned char* pucBuffer, unsigned char ucLength){
                  ; 0003 0033 unsigned char Sum(unsigned char* pucBuffer, unsigned char ucLength){
@@ -2704,43 +2700,44 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  ; 0004 0008     // SPI Clock Phase: Cycle Half
                  ; 0004 0009     // SPI Clock Polarity: Low
                  ; 0004 000A     // SPI Data Order: MSB First
-                 ; 0004 000B     SPCR=0xC0;
-00035f ece0      	LDI  R30,LOW(192)
-000360 b9ed      	OUT  0xD,R30
+                 ; 0004 000B     SPCR=0xC3;
+000334 ece3      	LDI  R30,LOW(195)
+000335 b9ed      	OUT  0xD,R30
                  ; 0004 000C     SPSR=0x00;
-000361 e0e0      	LDI  R30,LOW(0)
-000362 b9ee      	OUT  0xE,R30
+000336 e0e0      	LDI  R30,LOW(0)
+000337 b9ee      	OUT  0xE,R30
                  ; 0004 000D 
                  ; 0004 000E     // Clear the SPI interrupt flag
                  ; 0004 000F     #asm
                  ; 0004 0010     in   r30,spsr
-000363 b1ee          in   r30,spsr
+000338 b1ee          in   r30,spsr
                  ; 0004 0011     in   r30,spdr
-000364 b1ef          in   r30,spdr
+000339 b1ef          in   r30,spdr
                  ; 0004 0012     #endasm
                  ; 0004 0013 
                  ; 0004 0014 
                  ; 0004 0015 }
-000365 9508      	RET
+00033a 9508      	RET
                  ;//Khoi dong SPI
                  ;void Start_SPI(void)
                  ; 0004 0018 {
                  _Start_SPI:
-                 ; 0004 0019     SPCR = SPCR|0x80;
-000366 b1ed      	IN   R30,0xD
-000367 e0f0      	LDI  R31,0
-000368 68e0      	ORI  R30,0x80
-000369 c001      	RJMP _0x2060001
-                 ; 0004 001A }
+                 ; 0004 0019     SPCR = 0xC0;
+00033b ece0      	LDI  R30,LOW(192)
+00033c c001      	RJMP _0x2060001
+                 ; 0004 001A     //pin_SS=0;
+                 ; 0004 001B 
+                 ; 0004 001C }
                  ;void Stop_SPI(void){
-                 ; 0004 001B void Stop_SPI(void){
+                 ; 0004 001D void Stop_SPI(void){
                  _Stop_SPI:
-                 ; 0004 001C     SPCR = 0x40;
-00036a e4e0      	LDI  R30,LOW(64)
+                 ; 0004 001E     SPCR = 0x00;
+00033d e0e0      	LDI  R30,LOW(0)
                  _0x2060001:
-00036b b9ed      	OUT  0xD,R30
-                 ; 0004 001D }
-00036c 9508      	RET
+00033e b9ed      	OUT  0xD,R30
+                 ; 0004 001F     //pin_SS=1;
+                 ; 0004 0020 }
+00033f 9508      	RET
                  
                  	.CSEG
                  	#ifndef __SLEEP_DEFINED__
@@ -2779,109 +2776,102 @@ F:\04.HUT\FINAL\DoAn2010\PLM V2\List\PLM_Project.asm(1031): warning: Register r8
                  	.CSEG
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:6 WORDS
                  SUBOPT_0x0:
-00036d 91e0 036e 	LDS  R30,_ucIndex
-00036f 5fef      	SUBI R30,-LOW(1)
-000370 93e0 036e 	STS  _ucIndex,R30
-000372 50e1      	SUBI R30,LOW(1)
-000373 e0f0      	LDI  R31,0
-000374 5ae0      	SUBI R30,LOW(-_ucPacket)
-000375 4ffd      	SBCI R31,HIGH(-_ucPacket)
-000376 9508      	RET
-                 
-                 ;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:1 WORDS
-                 SUBOPT_0x1:
-000377 93e0 0374 	STS  _ucBitCounter,R30
-000379 e0e3      	LDI  R30,LOW(3)
-00037a 93e0 0373 	STS  _ucByteCounter,R30
-00037c 9aae      	SBI  0x15,6
-00037d 9508      	RET
+000340 91e0 036e 	LDS  R30,_ucIndex
+000342 5fef      	SUBI R30,-LOW(1)
+000343 93e0 036e 	STS  _ucIndex,R30
+000345 50e1      	SUBI R30,LOW(1)
+000346 e0f0      	LDI  R31,0
+000347 5ae0      	SUBI R30,LOW(-_ucPacket)
+000348 4ffd      	SBCI R31,HIGH(-_ucPacket)
+000349 9508      	RET
                  
                  ;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:3 WORDS
-                 SUBOPT_0x2:
-                +
-00037e e0e0     +LDI R30 , LOW ( 0x1C321800 )
-00037f e1f8     +LDI R31 , HIGH ( 0x1C321800 )
-000380 e362     +LDI R22 , BYTE3 ( 0x1C321800 )
-000381 e17c     +LDI R23 , BYTE4 ( 0x1C321800 )
-                 	__GETD1N 0x1C321800
-000382 940e 03b5 	CALL __PUTPARD1
-000384 940c 018d 	JMP  _PLM_SetControlRegister
+                 SUBOPT_0x1:
+00034a 91e0 036f 	LDS  R30,_ucLength
+00034c 01d8      	MOVW R26,R16
+00034d e0f0      	LDI  R31,0
+00034e 17ae      	CP   R26,R30
+00034f 07bf      	CPC  R27,R31
+000350 9508      	RET
                  
-                 ;OPTIMIZER ADDED SUBROUTINE, CALLED 3 TIMES, CODE SIZE REDUCTION:1 WORDS
+                 ;OPTIMIZER ADDED SUBROUTINE, CALLED 4 TIMES, CODE SIZE REDUCTION:3 WORDS
+                 SUBOPT_0x2:
+000351 93fa      	ST   -Y,R31
+000352 93ea      	ST   -Y,R30
+000353 940c 035d 	JMP  _delay_ms
+                 
+                 ;OPTIMIZER ADDED SUBROUTINE, CALLED 2 TIMES, CODE SIZE REDUCTION:3 WORDS
                  SUBOPT_0x3:
-000386 93fa      	ST   -Y,R31
-000387 93ea      	ST   -Y,R30
-000388 940c 038a 	JMP  _delay_ms
+000355 e6a0      	LDI  R26,LOW(_ucPacket)
+000356 e0b2      	LDI  R27,HIGH(_ucPacket)
+000357 0fa0      	ADD  R26,R16
+000358 1fb1      	ADC  R27,R17
+000359 91ec      	LD   R30,X
+00035a 93ea      	ST   -Y,R30
+00035b 940c 02f4 	JMP  _putchar
                  
                  
                  	.CSEG
                  _delay_ms:
-00038a 91e9      	ld   r30,y+
-00038b 91f9      	ld   r31,y+
-00038c 9630      	adiw r30,0
-00038d f039      	breq __delay_ms1
+00035d 91e9      	ld   r30,y+
+00035e 91f9      	ld   r31,y+
+00035f 9630      	adiw r30,0
+000360 f039      	breq __delay_ms1
                  __delay_ms0:
                 +
-00038e ec8d     +LDI R24 , LOW ( 0xACD )
-00038f e09a     +LDI R25 , HIGH ( 0xACD )
+000361 ea80     +LDI R24 , LOW ( 0xFA0 )
+000362 e09f     +LDI R25 , HIGH ( 0xFA0 )
                 +__DELAY_USW_LOOP :
-000390 9701     +SBIW R24 , 1
-000391 f7f1     +BRNE __DELAY_USW_LOOP
-                 	__DELAY_USW 0xACD
-000392 95a8      	wdr
-000393 9731      	sbiw r30,1
-000394 f7c9      	brne __delay_ms0
+000363 9701     +SBIW R24 , 1
+000364 f7f1     +BRNE __DELAY_USW_LOOP
+                 	__DELAY_USW 0xFA0
+000365 95a8      	wdr
+000366 9731      	sbiw r30,1
+000367 f7c9      	brne __delay_ms0
                  __delay_ms1:
-000395 9508      	ret
+000368 9508      	ret
                  
                  __ANEGW1:
-000396 95f1      	NEG  R31
-000397 95e1      	NEG  R30
-000398 40f0      	SBCI R31,0
-000399 9508      	RET
+000369 95f1      	NEG  R31
+00036a 95e1      	NEG  R30
+00036b 40f0      	SBCI R31,0
+00036c 9508      	RET
                  
                  __MULW12U:
-00039a 9ffa      	MUL  R31,R26
-00039b 2df0      	MOV  R31,R0
-00039c 9feb      	MUL  R30,R27
-00039d 0df0      	ADD  R31,R0
-00039e 9fea      	MUL  R30,R26
-00039f 2de0      	MOV  R30,R0
-0003a0 0df1      	ADD  R31,R1
-0003a1 9508      	RET
+00036d 9ffa      	MUL  R31,R26
+00036e 2df0      	MOV  R31,R0
+00036f 9feb      	MUL  R30,R27
+000370 0df0      	ADD  R31,R0
+000371 9fea      	MUL  R30,R26
+000372 2de0      	MOV  R30,R0
+000373 0df1      	ADD  R31,R1
+000374 9508      	RET
                  
                  __MULW12:
-0003a2 d004      	RCALL __CHKSIGNW
-0003a3 dff6      	RCALL __MULW12U
-0003a4 f40e      	BRTC __MULW121
-0003a5 dff0      	RCALL __ANEGW1
+000375 d004      	RCALL __CHKSIGNW
+000376 dff6      	RCALL __MULW12U
+000377 f40e      	BRTC __MULW121
+000378 dff0      	RCALL __ANEGW1
                  __MULW121:
-0003a6 9508      	RET
+000379 9508      	RET
                  
                  __CHKSIGNW:
-0003a7 94e8      	CLT
-0003a8 fff7      	SBRS R31,7
-0003a9 c002      	RJMP __CHKSW1
-0003aa dfeb      	RCALL __ANEGW1
-0003ab 9468      	SET
+00037a 94e8      	CLT
+00037b fff7      	SBRS R31,7
+00037c c002      	RJMP __CHKSW1
+00037d dfeb      	RCALL __ANEGW1
+00037e 9468      	SET
                  __CHKSW1:
-0003ac ffb7      	SBRS R27,7
-0003ad c006      	RJMP __CHKSW2
-0003ae 95a0      	COM  R26
-0003af 95b0      	COM  R27
-0003b0 9611      	ADIW R26,1
-0003b1 f800      	BLD  R0,0
-0003b2 9403      	INC  R0
-0003b3 fa00      	BST  R0,0
+00037f ffb7      	SBRS R27,7
+000380 c006      	RJMP __CHKSW2
+000381 95a0      	COM  R26
+000382 95b0      	COM  R27
+000383 9611      	ADIW R26,1
+000384 f800      	BLD  R0,0
+000385 9403      	INC  R0
+000386 fa00      	BST  R0,0
                  __CHKSW2:
-0003b4 9508      	RET
-                 
-                 __PUTPARD1:
-0003b5 937a      	ST   -Y,R23
-0003b6 936a      	ST   -Y,R22
-0003b7 93fa      	ST   -Y,R31
-0003b8 93ea      	ST   -Y,R30
-0003b9 9508      	RET
+000387 9508      	RET
                  
                  ;END OF CODE MARKER
                  __END_OF_CODE:
@@ -2903,38 +2893,38 @@ counted separately from r26..r31 here.
 
 ATmega32 register use summary:
 r0 :   8 r1 :   3 r2 :   1 r3 :   0 r4 :   4 r5 :   4 r6 :   4 r7 :   6 
-r8 :   5 r9 :   4 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   2 
-r16:  15 r17:  23 r18:   0 r19:   0 r20:   0 r21:   0 r22:   9 r23:   9 
-r24:   8 r25:   4 r26:  45 r27:  21 r28:   4 r29:   1 r30: 222 r31:  59 
-x  :  11 y  :  87 z  :   7 
+r8 :   5 r9 :   4 r10:   0 r11:   0 r12:   0 r13:   0 r14:   0 r15:   3 
+r16:  17 r17:  25 r18:   0 r19:   0 r20:   0 r21:   0 r22:   4 r23:   4 
+r24:   8 r25:   4 r26:  41 r27:  21 r28:   3 r29:   1 r30: 212 r31:  50 
+x  :  11 y  :  77 z  :   7 
 Registers used: 25 out of 35 (71.4%)
 
 ATmega32 instruction use summary:
-adc   :   1 add   :   3 adiw  :  11 and   :   2 andi  :   2 asr   :   0 
+adc   :   1 add   :   3 adiw  :  10 and   :   2 andi  :   2 asr   :   0 
 bclr  :   0 bld   :   2 brbc  :   0 brbs  :   0 brcc  :   0 brcs  :   0 
-break :   0 breq  :   8 brge  :   2 brhc  :   0 brhs  :   0 brid  :   0 
-brie  :   0 brlo  :   2 brlt  :   0 brmi  :   0 brne  :  21 brpl  :   0 
+break :   0 breq  :   6 brge  :   3 brhc  :   0 brhs  :   0 brid  :   0 
+brie  :   0 brlo  :   1 brlt  :   0 brmi  :   0 brne  :  20 brpl  :   0 
 brsh  :   0 brtc  :   1 brts  :   0 brvc  :   0 brvs  :   0 bset  :   0 
-bst   :   1 call  :  24 cbi   :   5 cbr   :   0 clc   :   0 clh   :   0 
-cli   :   3 cln   :   0 clr   :   7 cls   :   0 clt   :   1 clv   :   0 
-clz   :   0 com   :   2 cp    :   7 cpc   :   6 cpi   :  14 cpse  :   0 
+bst   :   1 call  :  21 cbi   :   5 cbr   :   0 clc   :   0 clh   :   0 
+cli   :   3 cln   :   0 clr   :   8 cls   :   0 clt   :   1 clv   :   0 
+clz   :   0 com   :   2 cp    :   7 cpc   :   4 cpi   :  10 cpse  :   0 
 dec   :   3 des   :   0 eor   :   0 fmul  :   0 fmuls :   0 fmulsu:   0 
-icall :   0 ijmp  :   0 in    :  10 inc   :   7 jmp   :  25 ld    :  37 
-ldd   :  21 ldi   :  92 lds   :  22 lpm   :   0 lsl   :   0 lsr   :   0 
+icall :   0 ijmp  :   0 in    :   9 inc   :   7 jmp   :  24 ld    :  37 
+ldd   :  17 ldi   :  89 lds   :  17 lpm   :   0 lsl   :   0 lsr   :   0 
 mov   :   9 movw  :   3 mul   :   3 muls  :   0 mulsu :   0 neg   :   2 
-nop   :   0 or    :   0 ori   :   1 out   :  48 pop   :   2 push  :   2 
-rcall :  17 ret   :  25 reti  :   3 rjmp  :  15 rol   :   0 ror   :   0 
-sbc   :   0 sbci  :   9 sbi   :   5 sbic  :   0 sbis  :   0 sbiw  :   6 
+nop   :   0 or    :   0 ori   :   0 out   :  50 pop   :   2 push  :   2 
+rcall :  15 ret   :  26 reti  :   3 rjmp  :  13 rol   :   0 ror   :   0 
+sbc   :   0 sbci  :  10 sbi   :   6 sbic  :   0 sbis  :   0 sbiw  :   6 
 sbr   :   0 sbrc  :   0 sbrs  :   2 sec   :   0 seh   :   0 sei   :   3 
 sen   :   0 ser   :   0 ses   :   0 set   :   2 sev   :   0 sez   :   0 
-sleep :   0 spm   :   0 st    :  44 std   :   3 sts   :  28 sub   :   0 
-subi  :  12 swap  :   0 tst   :   3 wdr   :   1 
-Instructions used: 53 out of 112 (47.3%)
+sleep :   0 spm   :   0 st    :  38 std   :   3 sts   :  23 sub   :   0 
+subi  :  13 swap  :   0 tst   :   3 wdr   :   1 
+Instructions used: 52 out of 112 (46.4%)
 
 ATmega32 memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x000774   1378    530   1908   32768   5.8%
+[.cseg] 0x000000 0x000710   1278    530   1808   32768   5.5%
 [.dseg] 0x000060 0x000576      0    790    790    2048  38.6%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 
