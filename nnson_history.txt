@@ -20,4 +20,7 @@ Apr 15
 Apr 16
 	- Doc dung duoc gia tri default cua thanh ghi
 	- Chua ghi duoc thanh ghi
+	- Dua ra gia thiet ve do tre
+	- Dua them giai phap ve spi, cung doc dung thanh ghi con ghi thi sai
+	- Phan doan nguyen nhan: bat dau ghi qua som hoac qua muon nen bi mat bit
 	
