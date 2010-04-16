@@ -8,7 +8,7 @@ void SPI_Init(void){
     // SPI Clock Phase: Cycle Half
     // SPI Clock Polarity: Low
     // SPI Data Order: MSB First
-    SPCR=0xC0;
+    SPCR=0xC3;
     SPSR=0x00;
 
     // Clear the SPI interrupt flag
@@ -22,8 +22,11 @@ void SPI_Init(void){
 //Khoi dong SPI
 void Start_SPI(void)
 {
-    SPCR = SPCR|0x80;    
+    SPCR = 0xC0;
+    //pin_SS=0;
+        
 }
 void Stop_SPI(void){
-    SPCR = 0x40;    
+    SPCR = 0x00;
+    //pin_SS=1;    
 }

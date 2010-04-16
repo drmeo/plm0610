@@ -117,7 +117,7 @@ void IO_Init(void)
 PORTA=0x00;
 DDRA=0xD8;
 
-PORTB=0x10;
+PORTB=0x00;
 DDRB=0x40;
 
 PORTC=0x00;
@@ -158,11 +158,17 @@ MCUCR=0x00;
 MCUCSR=0x00;
 GIFR=0x80;
 
-TIMSK=0x00;
+}
+
+void AnalogCompare_Init(void){
 
 ACSR=0x80;
 SFIOR=0x00;
+}
 
+void TimerCounterInter_Init(void){
+
+TIMSK=0x00;
 }
 
 void RS232_Init(void){

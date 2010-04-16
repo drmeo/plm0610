@@ -41,6 +41,8 @@ extern void SPI_Init(void);
 extern void Start_SPI(void);
 extern void Stop_SPI(void);
 extern unsigned int CalcCRC(unsigned char *pucBuffer, unsigned char ucLength);
+extern void AnalogCompare_Init(void);
+extern void TimerCounterInter_Init(void);
 
 volatile unsigned char ucPacket[270];
 volatile unsigned char ucIndex;
@@ -88,7 +90,7 @@ void PLM_Task(void){
             break;
         }
         case PLM_RX_REG:
-        {
+        {   
             ucPacket[ucIndex++] = SPDR;
             ucByteCounter--;
 
@@ -96,12 +98,14 @@ void PLM_Task(void){
                 ucState = PLM_STOP;                        // stop PLM                                
                 PLM_pinRXTX = 1;                        // Rx session
                 PLM_pinREG_DATA = 0;                    // mains access
-
+                
+                Stop_SPI();
                 return;
             }                                        
 
             break;
         }
+        
         case PLM_TX_REG:
         {
            
@@ -146,6 +150,7 @@ void PLM_SetControlRegister(unsigned long ulControlRegister)
 
 //+++lay cac thong so thiet lap cau hinh
 unsigned long PLM_GetControlRegister(void){
+    Stop_SPI();
     ucIndex = 4;
     ucBitCounter = 8;
     ucByteCounter = 3;
@@ -249,11 +254,7 @@ void RS232_GetData(){
 // Trien khai spi
 interrupt [SPI_STC] void spi_isr(void)
 {
-    if(PLM_IsRunning()>0){
-        PLM_Task();
-    }else{
-        Stop_SPI();
-    }
+    PLM_Task();
 }
 
 // Declare your global variables here
@@ -266,27 +267,29 @@ interrupt [SPI_STC] void spi_isr(void)
 void main(void)
 {
     int i;
-    
+    bit a=0;
     // Khai bao bien
 
     // Khoi tao cac gia tri
     IO_Init();
     TimerCounter_Init();
-    RS232_Init();
+    TimerCounterInter_Init(); 
     //pin_TASK = 1;
     //ExtInterupt_Init();
+    RS232_Init();
+    AnalogCompare_Init();
+    
     SPI_Init();
     PLM_Init();
     // ket thuc khoi tao
     
     // khoi tao cho thanh ghi ST
-    PLM_SetControlRegister(DEFAULT_CONTROL_REG);// dummy write
-    while(PLM_IsRunning() != 0);
-    PLM_SetControlRegister(DEFAULT_CONTROL_REG);// dummy write
+//    PLM_SetControlRegister(DEFAULT_CONTROL_REG);// dummy write
+//    while(PLM_IsRunning() != 0);
+//    PLM_SetControlRegister(DEFAULT_CONTROL_REG);// dummy write
     // ket thuc khoi tao cho thanh ghi
     
     ucRS232Started = 0;
-     
     // Global enable interrupts
     #asm("sei")
     
@@ -295,6 +298,20 @@ void main(void)
     // Chuong trinh chinh 
     while (1)
     {   
+//        if((a==0)&&(PLM_pinCLRT==1))
+//        {
+//            a=1;
+//            putchar(1);
+//        }
+//        if((a==1)&&(PLM_pinCLRT==0))
+//        {
+//            putchar(0);
+//            a=0;
+//        }
+        
+        
+     
+        
         // doc va kiem tra khung du lieu tu    
         if((RS232_IsRunning()>0)&&(ucRS232Started==0)){
             if(getchar()== RX_START)
@@ -308,12 +325,17 @@ void main(void)
         }      
         if(ucRS232Started == 1){
             // doc gia tri tu rs232
-            RS232_GetData(); 
+            RS232_GetData();
+            //putchar(ucLength); 
+            for(i=0;i<ucLength;i++){
+                delay_ms(10);
+                putchar(ucPacket[i]);
+            }
             // kiem tra gia tri dau tien cua ucPacket
             switch(ucCommand){
                 // doc thanh ghi st7538/7540
                 case COM_GET_CTR:
-                {											 
+                {								 
                     // get control register (comm)
 			        *((unsigned long*)&ucPacket[3]) = PLM_GetControlRegister();
 					ByteReverse((unsigned long*)&ucPacket[3]);
@@ -328,36 +350,36 @@ void main(void)
 					break;
 			    }
 		
-                // ghi thanh ghi st7538/7540
-		        case COM_SET_CTR:
-                {											
-                    // set control register (comm, byte0, byte1, byte2, byte3)
-					ByteReverse((unsigned long*)&ucPacket[0]);
-					PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
-					break;
-			    }
-                case COM_SET_PLM:
-                {
-					PLM_Stop();
+//                 ghi thanh ghi st7538/7540
+//		        case COM_SET_CTR:
+//                {											
+//                     set control register (comm, byte0, byte1, byte2, byte3)
+//					ByteReverse((unsigned long*)&ucPacket[0]);
+//					PLM_SetControlRegister(*((unsigned long*)&ucPacket[0]));
+//					break;
+//			    }
+//                case COM_SET_PLM:
+//                {
+//					PLM_Stop();
 
 //					uiLastFCS = CalcCRC(&ucPacket[0], 72);
 //					*(unsigned int*)&ucPacket[72] = uiLastFCS;
 //                    
 //                    ucPostableBits = 8-((78 * 14) % 8);
 //                    
-                    // truyen khong co ack
+//                     truyen khong co ack
 //					PLM_TransmitData(74, 0);
 //                    while(PLM_pinCD_PD == 1);
 //                    pin_TASK = 1;
 //					while(PLM_IsRunning() != 0);
 //                    PLM_ReceiveData(74);
-					break;
-			    }
-                case COM_GET_PLM:
-                {
+//					break;
+//			    }
+//                case COM_GET_PLM:
+//                {
 //                    PLM_ReceiveData(74);
-					break;
-			    } 
+//					break;
+//			    } 
             }  
         }
 //        while(RS232_IsRunning()!=0);
