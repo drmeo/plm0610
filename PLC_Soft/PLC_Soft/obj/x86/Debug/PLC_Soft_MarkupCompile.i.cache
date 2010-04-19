@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-\\192.168.1.3\du lieu (d)\NNSon\PLM0610\PLC_Soft\PLC_Soft\obj\x86\Debug\
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\
 PLC_Soft
 none
 false
 DEBUG;TRACE
-\\192.168.1.3\du lieu (d)\NNSon\PLM0610\PLC_Soft\PLC_Soft\App.xaml
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\App.xaml
 41754536346
 
-25317331695
-22-200152870
+25-1980747812
+22565384750
 frmIPConfig.xaml;frmSerialPort.xaml;frmSTRegister.xaml;MainWindow.xaml;
 
 True

@@ -143,7 +143,7 @@ namespace PLC_Soft
 				regByte[1] = (byte)RS232Command.COM_SET_CTR;
 				regByte[0] = (byte)RS232Command.COM_HEADER;
 
-				serial.Write(regByte, 0, 6);
+				serial.Write(regByte, 0, 7);
 
 			}
 			catch (IOException ex)
