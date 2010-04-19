@@ -23,4 +23,7 @@ Apr 16
 	- Dua ra gia thiet ve do tre
 	- Dua them giai phap ve spi, cung doc dung thanh ghi con ghi thi sai
 	- Phan doan nguyen nhan: bat dau ghi qua som hoac qua muon nen bi mat bit
-	
+Apr 19
+	- Phat hien duoc nguyen nhan khong truyen duoc tu host xuong modem
+	- Tung test lai mach xem co loi khong
+	- Dua ra duoc ca bien phap khac phuc
