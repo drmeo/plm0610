@@ -109,6 +109,6 @@ SPCR = SPCR|0x80;
 PORTD.7 = 0;    
 }
 void Stop_SPI(void){
-SPCR = 0x40;
+SPCR = SPCR & 0x7f; 
 PORTD.7 = 1;     
 }

@@ -40,6 +40,7 @@
     #define PLM_pinCD_PD PINC.4
         
     //#define pin_TASK PORTD.7 //bao ngat
+    #define PLM_pinTOUT PIND.4
     #define pin_SS PORTD.7
 #pragma used-
 

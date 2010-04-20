@@ -26,6 +26,6 @@ void Start_SPI(void)
     pin_SS = 0;    
 }
 void Stop_SPI(void){
-    SPCR = 0x40;
+    SPCR = SPCR & 0x7f; 
     pin_SS = 1;     
 }
