@@ -193,6 +193,13 @@ ucState = 0x00;
 PORTC.6 = 0;
 PORTC.5 = 1; 
 }
+void Reset_WD(void)
+{   PORTA.3 = 1;
+delay_ms(1);
+PORTA.3= 0;
+delay_ms(1);
+
+}
 
 void PLM_Task(void){
 static unsigned char ucByte,
@@ -202,6 +209,7 @@ case 0x00:
 {
 PLM_Stop();
 break;
+Reset_WD();
 }
 case 0x02:
 {
@@ -354,13 +362,14 @@ PLM_Init();
 PORTD.7 = 1; 
 
 PLM_SetControlRegister(0x1c321800	);
+while(PLM_IsRunning() != 0);
 
 ucRS232Started = 0;
 
 #asm("sei")
 
 while (1)
-{   
+{   Reset_WD();
 
 if((RS232_IsRunning()>0)&&(ucRS232Started==0)){
 if(getchar()== 0b10101010)

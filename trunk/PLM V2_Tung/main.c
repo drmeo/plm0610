@@ -76,6 +76,13 @@ void PLM_Stop(void){
     PLM_pinREG_DATA = 0;
     PLM_pinRXTX = 1; 
 }
+void Reset_WD(void)
+{   PLM_pinWD = 1;
+    delay_ms(1);
+    PLM_pinWD= 0;
+    delay_ms(1);
+    
+}
 
 //cong viec plm thuc hien
 void PLM_Task(void){
@@ -86,6 +93,7 @@ void PLM_Task(void){
         {
             PLM_Stop();
             break;
+            Reset_WD();
         }
         case PLM_RX_REG:
         {
@@ -260,7 +268,7 @@ interrupt [SPI_STC] void spi_isr(void)
 
 
 
-// dao vi tri byte
+
 
 
 void main(void)
@@ -283,8 +291,8 @@ void main(void)
     
     
     PLM_SetControlRegister(DEFAULT_CONTROL_REG);// dummy write}
-    //while(PLM_IsRunning() != 0);
-    //PLM_SetControlRegister(DEFAULT_CONTROL_REG);// dummy write
+    while(PLM_IsRunning() != 0);
+   
     // ket thuc khoi tao cho thanh ghi
     
     ucRS232Started = 0;
@@ -296,7 +304,7 @@ void main(void)
     
     // Chuong trinh chinh 
     while (1)
-    {   
+    {   Reset_WD();
         // doc va kiem tra khung du lieu tu    
         if((RS232_IsRunning()>0)&&(ucRS232Started==0)){
             if(getchar()== RX_START)
