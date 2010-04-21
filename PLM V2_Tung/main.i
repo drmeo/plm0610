@@ -206,13 +206,13 @@ static unsigned char ucByte,
 ucFec;
 switch(ucState){
 case 0x00:
-{
+
 PLM_Stop();
-break;
 Reset_WD();
-}
+break;
+
 case 0x02:
-{
+
 ucPacket[ucIndex++] = SPDR;
 ucByteCounter--;
 
@@ -225,9 +225,8 @@ return;
 }                                        
 
 break;
-}
+
 case 0x01:
-{
 
 if(ucByteCounter){
 SPDR = ucPacket[ucIndex++];
@@ -243,7 +242,198 @@ return;
 }
 
 break;
+
+case 0x09:
+ucState++;
+break;
+
+case 0x0a:
+
+ucByte = SPDR;
+
+if(ucByte == 0xe9){
+bAck = 1;
+
+ucState++;
 }
+
+if(ucByte == 0x9b){
+bAck = 0;
+
+ucState++;
+}
+
+break;
+
+case 0x0b:
+
+ucByte = SPDR;
+
+if(ucByte == 0x58){
+if(bAck){
+ucByteCounter = 2;                    
+}
+
+ucFec = 0;
+ucState++;
+}
+else{
+ucState = 0x09;
+}
+
+break;
+
+case 0x0c:
+
+ucByte = SPDR;
+ucFec = SPDR;
+if(ucFec & 0x40){
+ucFec ^= 0x39;
+}
+
+ucState++;
+
+break;
+
+case 0x0d:
+
+ucFec = ~SPDR;
+
+if(ucFec & 0x40){
+ucFec ^= 0x39;
+}
+
+ucFec &= 0x3f;
+if(ucFec)
+{
+ucByte ^= ucCRC[ucFec];
+ucCorrectionCounter++;
+}
+
+ucPacket[ucIndex++] = ucByte;
+ucByteCounter--;
+
+if(!ucByteCounter)
+{
+ucState = 0x00;                        
+
+PORTC.5 = 1;                        
+PORTC.6 = 0;                    
+
+return;
+}
+
+ucFec = 0;
+ucState = 0x0c;
+
+break;
+
+case 0x03:
+
+SPDR = 0x55;
+
+if(bAck){
+ucByte = 0xe9;
+}
+else{
+ucByte = 0x9b;
+}
+
+ucState++;
+
+break;
+
+case 0x04:
+{
+if(ucByte & 0x80){
+PORTB.6 = 1;
+}else{
+PORTB.6 = 0;
+}
+ucByte <<= 1;
+ucBitCounter--;
+
+if(!ucBitCounter){
+ucByte = 0x58;
+ucBitCounter = 8;
+ucState++;
+}
+break;
+}
+case 0x05:
+PORTB.6 = ucByte & 0x80;
+ucByte <<= 1;
+ucBitCounter--;
+
+if(!ucBitCounter){
+ucByte = ucPacket[ucIndex++];
+ucBitCounter = 8;
+ucByteCounter--;
+ucFec = 0;
+ucState++;
+}
+
+break;
+
+case 0x06:
+PORTB.6 = ucByte & 0x80;
+ucByte <<= 1;
+ucBitCounter--;
+
+ucFec = (ucFec << 1) | PORTB.6;
+if(ucFec & 0x40){
+ucFec ^= 0x39;
+}
+
+if(!ucBitCounter){
+ucBitCounter = 6;
+while(ucBitCounter){
+ucFec <<= 1;
+if(ucFec & 0x40){
+ucFec ^= 0x39;
+}
+ucBitCounter--;
+}
+ucFec ^= 0xff;
+
+ucBitCounter = 6;
+ucState++;
+}
+break;
+
+case 0x07:
+PORTB.6 = ucFec & 0x20;
+ucFec <<= 1;
+ucBitCounter--;
+
+if(!ucBitCounter){
+if(!ucByteCounter){
+ucFec = PORTB.6 ^ 0x01;
+ucBitCounter = ucPostableBits;
+ucState++;                                
+}
+else{
+ucByte = ucPacket[ucIndex++];
+ucBitCounter = 8;
+ucByteCounter--;
+ucFec = 0;
+ucState = 0x06;
+}
+}
+break;
+
+case 0x08:
+PORTB.6 = ucFec;
+ucBitCounter--;
+
+if(!ucBitCounter){
+ucState = 0x00;
+
+PORTC.5 = 1;                            
+PORTC.6 = 0;                        
+}
+break;
+
 }
 }
 
