@@ -56,5 +56,8 @@
     <Setting Name="STDetectMethod" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
+    <Setting Name="MaxLength" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">72</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

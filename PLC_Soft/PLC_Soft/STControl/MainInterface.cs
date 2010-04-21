@@ -19,12 +19,12 @@ namespace PLC_Soft
             minterfaces = new List<MainInterface>();
             MainInterface minterface;
             minterface = new MainInterface();
-            minterface.DisplayName = "Disable";
+			minterface.DisplayName = "Synchronous";
             minterface.Value = 0;
             minterfaces.Add(minterface);
 
             minterface = new MainInterface();
-            minterface.DisplayName = "Enable";
+			minterface.DisplayName = "Asynchronous";
             minterface.Value = 1;
             minterfaces.Add(minterface);
         }
