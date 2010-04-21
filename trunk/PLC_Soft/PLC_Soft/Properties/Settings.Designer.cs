@@ -238,5 +238,17 @@ namespace PLC_Soft.Properties {
                 this["STDetectMethod"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("72")]
+        public int MaxLength {
+            get {
+                return ((int)(this["MaxLength"]));
+            }
+            set {
+                this["MaxLength"] = value;
+            }
+        }
     }
 }

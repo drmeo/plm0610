@@ -27,9 +27,12 @@ namespace PLC_Soft
 		private SerialPort serial = null;
 		private string textToSend = "";
 		private byte[] bytesToSend;
+		private int maxLength;
+		private string receiveMessage;
 		public MainWindow()
 		{
 			InitializeComponent();
+			maxLength = Settings.Default.MaxLength;
 			if (serial == null)
 				serial = new SerialPort();
 			InitializeControlValue();
@@ -65,18 +68,16 @@ namespace PLC_Soft
 
 		void serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
 		{
-			//Thread.Sleep(serial.ReadTimeout);
-			if (serial.BytesToRead > 0)
-				MessageBox.Show(serial.ReadByte().ToString());
-			//MessageBox.Show(serial.ReadLine());
-			//SerialPort serialPort = sender as SerialPort;
-			//byte[] buffer = null;
-			//buffer = RS232Task.ReadData(serialPort);
-			//txtReg.Dispatcher.BeginInvoke(new Action(delegate()
-			//{
-			//    reg = RS232Task.DataProcess(buffer);
-			//    ControlProcess(reg);
-			//}));
+			Thread.Sleep(serial.ReadTimeout);
+			SerialPort serialPort = sender as SerialPort;
+			byte[] buffer = null;
+			buffer = RS232Task.ReadData(serialPort);
+			rtbChatContent.Dispatcher.BeginInvoke(new Action(delegate()
+			{
+				receiveMessage = RS232Task.DataProcess(buffer);
+				rtbChatContent.AppendText("Friend: ");
+				rtbChatContent.AppendText(receiveMessage+"\n");
+			}));
 		}
 
 		private void OpenPort()
@@ -105,12 +106,21 @@ namespace PLC_Soft
 		private void btnSend_Click(object sender, RoutedEventArgs e)
 		{
 			textToSend = txtMessage.Text;
+			if (textToSend.Length < maxLength)
+			{
+				textToSend.PadLeft(maxLength, ' ');
+			}
 			bytesToSend = new byte[textToSend.Length + 3];
 			System.Text.ASCIIEncoding.ASCII.GetBytes(textToSend, 0, textToSend.Length, bytesToSend, 3);
 			bytesToSend[0] = (byte)RS232Command.COM_HEADER;
 			bytesToSend[1] = (byte)RS232Command.COM_SET_PLM;
 			bytesToSend[2] = (byte)textToSend.Length;
 			serial.Write(bytesToSend, 0, bytesToSend.Length);
+			rtbChatContent.Dispatcher.BeginInvoke(new Action(delegate()
+			{
+				rtbChatContent.AppendText("You: ");
+				rtbChatContent.AppendText(txtMessage.Text+"\n");
+			}));
 		}
 	}
 }

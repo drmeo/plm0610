@@ -39,7 +39,6 @@ namespace PLC_Soft
 		{
 			InitializeComponent();
 			this.serial = serialPort;
-			//InitializeControlValue();
 			Thread.Sleep(100);
 		}
 
@@ -68,7 +67,6 @@ namespace PLC_Soft
 			{
 				MessageBox.Show(this, "Please config RS232 communication.", "Can't connect", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
-
 		}
 
 		void serial_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
@@ -78,30 +76,58 @@ namespace PLC_Soft
 
 		void serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
 		{
-			MessageBox.Show(serial.ReadByte().ToString());
-			//Thread.Sleep(serial.ReadTimeout);
-			//SerialPort serialPort = sender as SerialPort;
-			//byte[] buffer = null;
-			//buffer = RS232Task.ReadData(serialPort);
-			//txtReg.Dispatcher.BeginInvoke(new Action(delegate()
-			//{
-			//    reg = RS232Task.DataProcess(buffer);
-			//    MessageBox.Show(reg);
-			//    //ControlProcess(reg);
-			//}));
+			Thread.Sleep(serial.ReadTimeout);
+			SerialPort serialPort = sender as SerialPort;
+			byte[] buffer = null;
+			buffer = RS232Task.ReadData(serialPort);
+			txtReg.Dispatcher.BeginInvoke(new Action(delegate()
+			{
+				reg = RS232Task.DataProcess(buffer);
+				ControlProcess(reg);
+			}));
 		}
 
 		void ControlProcess(string registerData)
 		{
 			string[] bytes = registerData.Split('-');
+
 			int frequencyIndex = CalculateReg(bytes[2], 7, 0) + CalculateReg(bytes[2], 6, 1) + CalculateReg(bytes[2], 5, 2);
+
 			int baudrateIndex = CalculateReg(bytes[2], 4, 0) + CalculateReg(bytes[2], 3, 1);
-			int deviationIndex = CalculateReg(bytes[2], 7, 0);
+
+			int deviationIndex = CalculateReg(bytes[2], 2, 0);
+
 			int watchdogIndex = CalculateReg(bytes[2], 1, 0);
+
+			int transmitTimeoutIndex = CalculateReg(bytes[2], 0, 0) + CalculateReg(bytes[1], 7, 0);
+
+			int freqDetectionTimeIndex = CalculateReg(bytes[1], 6, 0) + CalculateReg(bytes[1], 5, 1);
+
+			int zeroCrossingIndex = CalculateReg(bytes[1], 4, 0);
+
+			int detectMethodIndex = CalculateReg(bytes[1], 3, 0) + CalculateReg(bytes[1], 2, 1);
+
+			int interfaceModeIndex = CalculateReg(bytes[1], 1, 0);
+
+			int outputClockIndex = CalculateReg(bytes[1], 0, 0) + CalculateReg(bytes[0], 7, 1);
+
+			int sensitiveModeIndex = CalculateReg(bytes[0], 1, 0);
+
+			int inputFilterIndex = CalculateReg(bytes[0], 0, 0);
+
+
 			cmbFrequency.SelectedIndex = frequencyIndex;
 			cmbBaudrate.SelectedIndex = baudrateIndex;
 			cmbWatchdog.SelectedIndex = watchdogIndex;
 			cmbDeviation.SelectedIndex = deviationIndex;
+			cmbTXTimeout.SelectedIndex = transmitTimeoutIndex;
+			cmbDetMethod.SelectedIndex = detectMethodIndex;
+			cmbFreDetTime.SelectedIndex = freqDetectionTimeIndex;
+			cmbZeroCrossingSYNC.SelectedIndex = zeroCrossingIndex;
+			cmbInterface.SelectedIndex = interfaceModeIndex;
+			cmbOutputClock.SelectedIndex = outputClockIndex;
+			cmbSensitiveMode.SelectedIndex = sensitiveModeIndex;
+			cmbInputFilter.SelectedIndex = inputFilterIndex;
 		}
 
 		int CalculateReg(string reg, int position, int powerValue)
@@ -135,9 +161,9 @@ namespace PLC_Soft
 				string[] bytes = regValue.Split('-');
 				byte[] regByte = new byte[7];
 				regByte[6] = 0;
-				regByte[5] = (byte)Convert.ToInt16(bytes[2], 2);
+				regByte[5] = (byte)Convert.ToInt16(bytes[0], 2);
 				regByte[4] = (byte)Convert.ToInt16(bytes[1], 2);
-				regByte[3] = (byte)Convert.ToInt16(bytes[0], 2);
+				regByte[3] = (byte)Convert.ToInt16(bytes[2], 2);
 
 				regByte[2] = 4;
 				regByte[1] = (byte)RS232Command.COM_SET_CTR;
