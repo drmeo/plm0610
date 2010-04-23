@@ -31,3 +31,7 @@ Apr 19
 Apr 21
 	- Da chinh duoc phan truyen du lieu
 	- Mai se co gang hoan thanh phan nhan
+Apr 23
+	- Hoan thanh code chuong trinh truyen nhan (ca vxl va win)
+	- Chuong trinh test tien hanh: test truyen co dieu kien BU -> test nhan co dieu kien CD_PD
+	- Phai thuc hien viec quan ly data tot hon
