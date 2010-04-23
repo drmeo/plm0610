@@ -241,13 +241,49 @@ namespace PLC_Soft.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("72")]
+        [global::System.Configuration.DefaultSettingValueAttribute("36")]
         public int MaxLength {
             get {
                 return ((int)(this["MaxLength"]));
             }
             set {
                 this["MaxLength"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string IPAddress {
+            get {
+                return ((string)(this["IPAddress"]));
+            }
+            set {
+                this["IPAddress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string DomainAddress {
+            get {
+                return ((string)(this["DomainAddress"]));
+            }
+            set {
+                this["DomainAddress"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string MasterAddress {
+            get {
+                return ((string)(this["MasterAddress"]));
+            }
+            set {
+                this["MasterAddress"] = value;
             }
         }
     }

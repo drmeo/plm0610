@@ -24,6 +24,7 @@ namespace PLC_Soft
 	public partial class frmSTRegister : Window
 	{
 		private SerialPort serial = null;
+		private SerialPort oldSerial = null;
 		private string reg;
 
 		public frmSTRegister()
@@ -38,7 +39,11 @@ namespace PLC_Soft
 		public frmSTRegister(SerialPort serialPort)
 		{
 			InitializeComponent();
-			this.serial = serialPort;
+			this.oldSerial = serialPort;
+			this.oldSerial.Close();
+			if (serial == null)
+				serial = new SerialPort();
+			InitializeControlValue();
 			Thread.Sleep(100);
 		}
 
@@ -176,6 +181,20 @@ namespace PLC_Soft
 			{
 				MessageBox.Show(this, "Can't write the ST register", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
+		}
+
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			try
+			{
+				this.serial.Close();
+				this.oldSerial.Open();
+			}
+			catch (IOException ex)
+			{
+				MessageBox.Show(this, "Please config RS232 communication.", "Can't connect", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+
 		}
 
 	}
