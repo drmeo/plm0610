@@ -28,3 +28,6 @@ Apr 19
 	- Phat hien duoc nguyen nhan khong truyen duoc tu host xuong modem
 	- Tung test lai mach xem co loi khong
 	- Dua ra duoc ca bien phap khac phuc
+Apr 21
+	- Da chinh duoc phan truyen du lieu
+	- Mai se co gang hoan thanh phan nhan
