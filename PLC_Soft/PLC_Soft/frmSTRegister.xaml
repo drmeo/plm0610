@@ -6,7 +6,7 @@
         Width="640"
         ResizeMode="NoResize"
         xmlns:my="clr-namespace:PLC_Soft"
-        xmlns:properties="clr-namespace:PLC_Soft.Properties">
+        xmlns:properties="clr-namespace:PLC_Soft.Properties" Closing="Window_Closing">
 
     <Grid Margin="5"
           Height="Auto">
