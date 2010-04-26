@@ -5,7 +5,9 @@
         Title="Serial Port Setting"
         Height="150"
         Width="480"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+		FontFamily="Tahoma"
+		FontSize="13">
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

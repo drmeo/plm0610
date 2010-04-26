@@ -1,25 +1,34 @@
 ﻿<Window x:Class="PLC_Soft.MainWindow"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		Title="MainWindow"
-		Height="431"
-		Width="525">
+		Title="Chat over power line"
+		Height="600"
+		Width="427"
+		FontFamily="Arial"
+		FontSize="13"
+		ResizeMode="NoResize">
 	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="392*" />
-			<ColumnDefinition Width="111*" />
+			<ColumnDefinition Width="Auto" />
 		</Grid.ColumnDefinitions>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
-			<RowDefinition Height="111*" />
-			<RowDefinition Height="202*" />
-			<RowDefinition Height="53*" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="2*" />
 		</Grid.RowDefinitions>
 		<Menu Height="26"
 			  Name="mainMenu"
-			  Grid.ColumnSpan="2">
-			<MenuItem Header="File" />
-			<MenuItem Header="Config">
+			  FontFamily="Tahoma"
+			  FontSize="13">
+			<MenuItem Header="_File">
+				<MenuItem Header="Connect"
+						  Click="MenuItem_Click" />
+				<MenuItem Header="Close"
+						  Click="MenuItem_Click" />
+			</MenuItem>
+			<MenuItem Header="_Config">
 				<MenuItem Header="RS232 Config"
 						  Click="MenuItem_Click" />
 				<MenuItem Header="PLM Config"
@@ -27,43 +36,69 @@
 				<MenuItem Header="IP Config"
 						  Click="MenuItem_Click" />
 			</MenuItem>
-			<MenuItem Header="Help">
-				<MenuItem Header="Help" />
-				<MenuItem Header="About" />
+			<MenuItem Header="_Help">
+				<MenuItem Header="Help"
+						  Click="MenuItem_Click" />
+				<MenuItem Header="About"
+						  Click="MenuItem_Click" />
 			</MenuItem>
 		</Menu>
 		<ListView Grid.Row="1"
-				  Height="87"
+				  Height="130"
 				  HorizontalAlignment="Left"
-				  Margin="12,18,0,0"
+				  Margin="10,40,0,0"
 				  Name="listFriends"
 				  VerticalAlignment="Top"
-				  Width="479"
-				  Grid.ColumnSpan="2" />
+				  Width="226"
+				  IsEnabled="False" />
 		<RichTextBox Grid.Row="2"
-					 Height="180"
-					 HorizontalAlignment="Left"
-					 Margin="12,8,0,0"
+					 Height="300"
+					 Margin="10"
 					 Name="rtbChatContent"
-					 VerticalAlignment="Top"
-					 Width="479"
-					 Grid.ColumnSpan="2" />
+					 Width="400"
+					 VerticalScrollBarVisibility="Auto"
+					 BorderBrush="Black"
+					 BorderThickness="1"
+					 IsEnabled="False" 
+					 IsReadOnly="True"/>
 		<TextBox Grid.Row="3"
 				 Height="23"
 				 HorizontalAlignment="Left"
-				 Margin="12,8,0,0"
+				 Margin="10,10,0,0"
 				 Name="txtMessage"
 				 VerticalAlignment="Top"
-				 Width="369" />
+				 Width="300"
+				 BorderBrush="Black"
+				 BorderThickness="1"
+				 IsEnabled="False" />
 		<Button Content="Send"
 				Grid.Row="3"
 				Height="23"
-				HorizontalAlignment="Left"
-				Margin="11,7,0,0"
+				HorizontalAlignment="Right"
+				Margin="10"
 				Name="btnSend"
 				VerticalAlignment="Top"
 				Width="75"
-				Grid.Column="1"
-				Click="btnSend_Click" />
+				Click="btnSend_Click"
+				IsEnabled="False" />
+		<Image Grid.Row="1"
+			   Height="160"
+			   HorizontalAlignment="Right"
+			   Margin="0,10,10,0"
+			   Stretch="Fill"
+			   VerticalAlignment="Top"
+			   Width="160"
+			   Source="/PLC_Soft;component/Images/Tux%20Avatar%20%28124%29.png"
+			   Grid.Column="1"
+			   IsEnabled="False" />
+		<Label Content="Please connect first ...."
+			   Grid.Row="1"
+			   Height="25"
+			   HorizontalAlignment="Left"
+			   Margin="12,9,0,0"
+			   Name="lbInform"
+			   VerticalAlignment="Top"
+			   Width="224" 
+			   IsEnabled="False"/>
 	</Grid>
 </Window>

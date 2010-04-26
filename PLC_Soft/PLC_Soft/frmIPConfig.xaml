@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="IP Config" Height="186" Width="361" ResizeMode="NoResize"
         xmlns:my="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Luna"
-		xmlns:properties="clr-namespace:PLC_Soft.Properties">
+		xmlns:properties="clr-namespace:PLC_Soft.Properties"
+		FontFamily="Tahoma"
+		FontSize="13">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*" />
