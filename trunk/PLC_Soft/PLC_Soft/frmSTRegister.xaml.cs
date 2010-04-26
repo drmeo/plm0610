@@ -40,7 +40,11 @@ namespace PLC_Soft
 		{
 			InitializeComponent();
 			this.oldSerial = serialPort;
-			this.oldSerial.Close();
+			if (this.oldSerial != null)
+			{
+				this.oldSerial.Close();
+			}
+
 			if (serial == null)
 				serial = new SerialPort();
 			InitializeControlValue();
@@ -188,7 +192,11 @@ namespace PLC_Soft
 			try
 			{
 				this.serial.Close();
-				this.oldSerial.Open();
+				if (this.oldSerial != null)
+				{
+					this.oldSerial.Open();
+				}
+
 			}
 			catch (IOException ex)
 			{

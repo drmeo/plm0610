@@ -32,17 +32,17 @@ namespace PLC_Soft
 		public MainWindow()
 		{
 			InitializeComponent();
-			maxLength = Settings.Default.MaxLength;
-			if (serial == null)
-				serial = new SerialPort();
-			InitializeControlValue();
-			Thread.Sleep(100);
+
 		}
 
 		private void InitializeControlValue()
 		{
+
 			try
 			{
+				maxLength = Settings.Default.MaxLength;
+				if (serial == null)
+					serial = new SerialPort();
 				serial.BaudRate = Settings.Default.BaudRate;
 				serial.DataBits = Settings.Default.DataBits;
 				serial.Parity = Settings.Default.Parity;
@@ -53,12 +53,13 @@ namespace PLC_Soft
 				OpenPort();
 				serial.DataReceived += new SerialDataReceivedEventHandler(serial_DataReceived);
 				serial.ErrorReceived += new SerialErrorReceivedEventHandler(serial_ErrorReceived);
+				MessageBox.Show(this, "Connect success.", "Connect success", MessageBoxButton.OK, MessageBoxImage.Information);
 			}
 			catch (IOException ex)
 			{
-				MessageBox.Show(this, "Please config RS232 communication.", "Can't connect", MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show(this, "Cann't connect to device, Please config RS232 communication and your device.", "Can't connect", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
-
+			Thread.Sleep(100);
 		}
 
 		void serial_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
@@ -76,10 +77,13 @@ namespace PLC_Soft
 			{
 				receiveMessage = RS232Task.DataProcess(buffer);
 				rtbChatContent.AppendText("Friend: ");
-				rtbChatContent.AppendText(receiveMessage+"\n");
+				rtbChatContent.AppendText(receiveMessage + "\n");
 			}));
 		}
 
+		/// <summary>
+		/// Connect to RS232
+		/// </summary>
 		private void OpenPort()
 		{
 			if (!serial.IsOpen)
@@ -100,9 +104,37 @@ namespace PLC_Soft
 				case "IP Config":
 					new frmIPConfig().ShowDialog();
 					break;
+				case "About":
+					new About().ShowDialog();
+					break;
+				case "Help":
+					new Help().ShowDialog();
+					break;
+				case "Connect":
+					InitializeControlValue();
+					EnableControl();
+					break;
+				case "Close":
+					this.Close();
+					break;
 			}
 		}
 
+		private void EnableControl()
+		{
+			btnSend.IsEnabled = true;
+			txtMessage.IsEnabled = true;
+			rtbChatContent.IsEnabled = true;
+			listFriends.IsEnabled = true;
+			lbInform.IsEnabled = true;
+			lbInform.Content = "Friends list";
+		}
+
+		/// <summary>
+		/// Send data to RS232
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void btnSend_Click(object sender, RoutedEventArgs e)
 		{
 			textToSend = txtMessage.Text;
@@ -119,7 +151,8 @@ namespace PLC_Soft
 			rtbChatContent.Dispatcher.BeginInvoke(new Action(delegate()
 			{
 				rtbChatContent.AppendText("You: ");
-				rtbChatContent.AppendText(txtMessage.Text+"\n");
+				rtbChatContent.AppendText(txtMessage.Text + "\n");
+				rtbChatContent.ScrollToEnd();
 			}));
 		}
 	}

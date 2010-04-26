@@ -64,8 +64,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmIPConfig.xaml.cs">
       <DependentUpon>frmIPConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Help.xaml.cs">
+      <DependentUpon>Help.xaml</DependentUpon>
     </Compile>
     <Compile Include="STControl\BaudRate.cs" />
     <Compile Include="STControl\ChipType.cs" />
@@ -82,6 +88,10 @@
     <Compile Include="STControl\TXTimeOut.cs" />
     <Compile Include="STControl\WatchDog.cs" />
     <Compile Include="STControl\ZeroCrossingSYNC.cs" />
+    <Page Include="About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmIPConfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -91,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmSTRegister.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Help.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -147,6 +161,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="RS232Control\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Tux Avatar %28124%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
