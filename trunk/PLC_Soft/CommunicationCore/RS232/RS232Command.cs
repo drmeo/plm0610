@@ -11,6 +11,8 @@ namespace CommunicationCore.RS232
         COM_SET_CTR = 1,
         COM_GET_PLM = 2,
         COM_SET_PLM = 3,
+		COM_GET_MAXLENGTH = 4,
+		COM_SET_MAXLENGTH = 5,
         COM_HEADER = 170,
     }
 }
