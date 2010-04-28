@@ -10,6 +10,11 @@ namespace CommunicationCore.RS232
 {
 	public class RS232Task
 	{
+		/// <summary>
+		/// Read data from rs232
+		/// </summary>
+		/// <param name="serialPort">SerialPort object</param>
+		/// <returns>data from rs232</returns>
 		public static byte[] ReadData(SerialPort serialPort)
 		{
 			byte[] buffer = null;
@@ -26,6 +31,13 @@ namespace CommunicationCore.RS232
 			return buffer;
 		}
 
+		/// <summary>
+		/// Add header before send to rs2323
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="header"></param>
+		/// <param name="code"></param>
+		/// <returns></returns>
 		public static byte[] AddHeaderInformation(byte[] data, byte header, byte code)
 		{
 			byte[] processedData = new byte[data.Length + 3];
@@ -34,11 +46,21 @@ namespace CommunicationCore.RS232
 				processedData[i + 3] = data[i];
 			}
 			processedData[0] = header;
-			processedData[0] = code;
-			processedData[0] = (byte)data.Length;
-			return data;
+			processedData[1] = code;
+			processedData[2] = (byte)data.Length;
+			return processedData;
 		}
 
+
+		public static bool ContinueProcess(byte[] data, int domainAdd, int IPAdd)
+		{
+			bool reVal = false;
+			if ((data[0] == (byte)domainAdd) && (data[3] == (byte)IPAdd))
+			{
+				reVal = true;
+			}
+			return reVal;
+		}
 
 		public static string DataProcess(byte[] data)
 		{
@@ -49,6 +71,30 @@ namespace CommunicationCore.RS232
 				{
 					case ((byte)RS232Command.COM_GET_CTR):
 						for (int i = 2; i < (int)(data[1]+1); i++)
+							result = result + (System.Convert.ToString(data[i], 2)).PadLeft(8, '0') + "-";
+						result = result.Remove(result.Length - 1, 1);
+						break;
+					case ((byte)RS232Command.COM_SET_CTR):
+						result = "ST Control register was written successful";
+						break;
+					default:
+						result = result + Encoding.ASCII.GetString(data, 2, data[1]);
+						break;
+				}
+			}
+
+			return result;
+		}
+
+		public static string DataProcessWithIPAddress(byte[] data)
+		{
+			string result = "";
+			if (data != null)
+			{
+				switch (data[0])
+				{
+					case ((byte)RS232Command.COM_GET_CTR):
+						for (int i = 2; i < (int)(data[1] + 1); i++)
 							result = result + (System.Convert.ToString(data[i], 2)).PadLeft(8, '0') + "-";
 						result = result.Remove(result.Length - 1, 1);
 						break;

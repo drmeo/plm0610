@@ -45,11 +45,6 @@ namespace CommunicationCore.PLM
 		public static byte[] DataPreProcessing(String data, int maxLength, byte domainAdd, byte transAdd, byte receiAdd, byte control, byte total, byte current, byte repeatition)
 		{
 			byte[] processedData = new byte[maxLength + 7];
-
-			if (data.Length < maxLength)
-			{
-				data = data.PadLeft(maxLength, ' ');
-			}
 			System.Text.ASCIIEncoding.ASCII.GetBytes(data, 0, data.Length, processedData, 7);
 			processedData[0] = domainAdd;
 			processedData[1] = transAdd;
