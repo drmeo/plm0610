@@ -48,9 +48,9 @@ namespace CommunicationCore.RS232
 				switch (data[0])
 				{
 					case ((byte)RS232Command.COM_GET_CTR):
-						for (int i = 2; i < (int)data[1]; i++)
-							result = result + (System.Convert.ToString(i, 2)).PadLeft(8, '0') + "-";
-						//result = result.Remove(result.Length - 1, 1);
+						for (int i = 2; i < (int)(data[1]+1); i++)
+							result = result + (System.Convert.ToString(data[i], 2)).PadLeft(8, '0') + "-";
+						result = result.Remove(result.Length - 1, 1);
 						break;
 					case ((byte)RS232Command.COM_SET_CTR):
 						result = "ST Control register was written successful";

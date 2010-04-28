@@ -49,7 +49,7 @@ namespace PLC_Soft
 				serial.StopBits = Settings.Default.StopBits;
 				serial.PortName = Settings.Default.PortName;
 				serial.WriteTimeout = 500;
-				serial.ReadTimeout = 5000;
+				serial.ReadTimeout = 500;
 				OpenPort();
 				serial.DataReceived += new SerialDataReceivedEventHandler(serial_DataReceived);
 				serial.ErrorReceived += new SerialErrorReceivedEventHandler(serial_ErrorReceived);
@@ -138,10 +138,10 @@ namespace PLC_Soft
 		private void btnSend_Click(object sender, RoutedEventArgs e)
 		{
 			textToSend = txtMessage.Text;
-			if (textToSend.Length < maxLength)
-			{
-				textToSend.PadLeft(maxLength, ' ');
-			}
+			//if (textToSend.Length < maxLength)
+			//{
+			//    textToSend.PadLeft(maxLength, ' ');
+			//}
 			bytesToSend = new byte[textToSend.Length + 3];
 			System.Text.ASCIIEncoding.ASCII.GetBytes(textToSend, 0, textToSend.Length, bytesToSend, 3);
 			bytesToSend[0] = (byte)RS232Command.COM_HEADER;
