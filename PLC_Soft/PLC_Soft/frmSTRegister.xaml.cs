@@ -85,30 +85,34 @@ namespace PLC_Soft
 
 		void serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
 		{
-			Thread.Sleep(serial.ReadTimeout);
-			SerialPort serialPort = sender as SerialPort;
-			byte[] buffer = null;
-			buffer = RS232Task.ReadData(serialPort);
-			txtReg.Dispatcher.BeginInvoke(new Action(delegate()
+			Thread.Sleep(500);
+			if (serial.BytesToRead > 0)
 			{
+				SerialPort serialPort = sender as SerialPort;
+				byte[] buffer = null;
+				buffer = RS232Task.ReadData(serialPort);
 				reg = RS232Task.DataProcess(buffer);
-				ControlProcess(reg);
-			}));
+				txtReg.Dispatcher.BeginInvoke(new Action(delegate()
+				{
+					ControlProcess(reg);
+				}));
+			}
+
 		}
 
 		void ControlProcess(string registerData)
 		{
 			string[] bytes = registerData.Split('-');
 
-			int frequencyIndex = CalculateReg(bytes[2], 7, 0) + CalculateReg(bytes[2], 6, 1) + CalculateReg(bytes[2], 5, 2);
+			int frequencyIndex = CalculateReg(bytes[0], 7, 0) + CalculateReg(bytes[0], 6, 1) + CalculateReg(bytes[0], 5, 2);
 
-			int baudrateIndex = CalculateReg(bytes[2], 4, 0) + CalculateReg(bytes[2], 3, 1);
+			int baudrateIndex = CalculateReg(bytes[0], 4, 0) + CalculateReg(bytes[0], 3, 1);
 
-			int deviationIndex = CalculateReg(bytes[2], 2, 0);
+			int deviationIndex = CalculateReg(bytes[0], 2, 0);
 
-			int watchdogIndex = CalculateReg(bytes[2], 1, 0);
+			int watchdogIndex = CalculateReg(bytes[0], 1, 0);
 
-			int transmitTimeoutIndex = CalculateReg(bytes[2], 0, 0) + CalculateReg(bytes[1], 7, 0);
+			int transmitTimeoutIndex = CalculateReg(bytes[0], 0, 0) + CalculateReg(bytes[1], 7, 0);
 
 			int freqDetectionTimeIndex = CalculateReg(bytes[1], 6, 0) + CalculateReg(bytes[1], 5, 1);
 
@@ -118,11 +122,11 @@ namespace PLC_Soft
 
 			int interfaceModeIndex = CalculateReg(bytes[1], 1, 0);
 
-			int outputClockIndex = CalculateReg(bytes[1], 0, 0) + CalculateReg(bytes[0], 7, 1);
+			int outputClockIndex = CalculateReg(bytes[1], 0, 0) + CalculateReg(bytes[2], 7, 1);
 
-			int sensitiveModeIndex = CalculateReg(bytes[0], 1, 0);
+			int sensitiveModeIndex = CalculateReg(bytes[2], 1, 0);
 
-			int inputFilterIndex = CalculateReg(bytes[0], 0, 0);
+			int inputFilterIndex = CalculateReg(bytes[2], 0, 0);
 
 
 			cmbFrequency.SelectedIndex = frequencyIndex;
@@ -139,9 +143,9 @@ namespace PLC_Soft
 			cmbInputFilter.SelectedIndex = inputFilterIndex;
 		}
 
-		int CalculateReg(string reg, int position, int powerValue)
+		int CalculateReg(string bByte, int position, int powerValue)
 		{
-			return (int)Math.Pow(2, powerValue) * (int)Convert.ToInt16(reg[position].ToString());
+			return (int)Math.Pow(2, powerValue) * (int)Convert.ToInt16(bByte[position].ToString());
 		}
 
 		private void btnReadRegister_Click(object sender, RoutedEventArgs e)
