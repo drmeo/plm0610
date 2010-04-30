@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/tux%20avatar%20(124).png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/powerlinecommunications.jpg")]
 
 

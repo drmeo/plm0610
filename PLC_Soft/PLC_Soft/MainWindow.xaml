@@ -6,7 +6,8 @@
 		Width="427"
 		FontFamily="Arial"
 		FontSize="13"
-		ResizeMode="NoResize">
+		ResizeMode="NoResize"
+		Closing="Window_Closing" Icon="/PLC_Soft;component/Images/network-connection-icon.png" KeyUp="Window_KeyUp">
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto" />
@@ -50,7 +51,21 @@
 				  Name="listFriends"
 				  VerticalAlignment="Top"
 				  Width="226"
-				  IsEnabled="False" />
+				  IsEnabled="False"
+				  SelectionChanged="listFriends_SelectionChanged">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="IP"
+									DisplayMemberBinding="{Binding Path=FriendID}"
+									Width="20"/>
+					<GridViewColumn Header="Domain"
+									DisplayMemberBinding="{Binding Path=DomainID}"
+									Width="50"/>
+					<GridViewColumn Header="Last Broadcast"
+									DisplayMemberBinding="{Binding Path=LastBroadCast}" />
+				</GridView>
+			</ListView.View>
+		</ListView>
 		<RichTextBox Grid.Row="2"
 					 Height="300"
 					 Margin="10"
@@ -88,7 +103,7 @@
 			   Stretch="Fill"
 			   VerticalAlignment="Top"
 			   Width="160"
-			   Source="/PLC_Soft;component/Images/Tux%20Avatar%20%28124%29.png"
+			   Source="/PLC_Soft;component/Images/network-connection-icon.png"
 			   Grid.Column="1"
 			   IsEnabled="False" />
 		<Label Content="Please connect first ...."

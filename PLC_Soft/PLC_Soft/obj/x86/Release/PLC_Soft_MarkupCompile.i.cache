@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\04.HUT\FINAL\PLC_Soft\PLC_Soft\obj\x86\Release\
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Release\
 PLC_Soft
 none
 false
 TRACE
-F:\04.HUT\FINAL\PLC_Soft\PLC_Soft\App.xaml
-41754536346
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\App.xaml
+6714912964
 
-25-1980747812
-22-1509188914
-frmIPConfig.xaml;frmSerialPort.xaml;frmSTRegister.xaml;MainWindow.xaml;
+271719271967
+22-893246143
+About.xaml;frmIPConfig.xaml;frmSerialPort.xaml;frmSTRegister.xaml;Help.xaml;MainWindow.xaml;
 
 True
 

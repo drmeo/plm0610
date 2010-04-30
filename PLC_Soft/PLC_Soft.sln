@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLC_Soft", "PLC_Soft\PLC_So
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunicationCore", "CommunicationCore\CommunicationCore.csproj", "{8C4136F1-8278-424E-A38B-6D2EB731B571}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "PLM_Setup", "PLM_Setup\PLM_Setup.vdproj", "{2F1DFDCE-3268-4668-A0DC-96FF4ECB1013}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,12 @@ Global
 		{8C4136F1-8278-424E-A38B-6D2EB731B571}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{8C4136F1-8278-424E-A38B-6D2EB731B571}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8C4136F1-8278-424E-A38B-6D2EB731B571}.Release|x86.ActiveCfg = Release|Any CPU
+		{2F1DFDCE-3268-4668-A0DC-96FF4ECB1013}.Debug|Any CPU.ActiveCfg = Debug
+		{2F1DFDCE-3268-4668-A0DC-96FF4ECB1013}.Debug|Mixed Platforms.ActiveCfg = Debug
+		{2F1DFDCE-3268-4668-A0DC-96FF4ECB1013}.Debug|x86.ActiveCfg = Debug
+		{2F1DFDCE-3268-4668-A0DC-96FF4ECB1013}.Release|Any CPU.ActiveCfg = Release
+		{2F1DFDCE-3268-4668-A0DC-96FF4ECB1013}.Release|Mixed Platforms.ActiveCfg = Release
+		{2F1DFDCE-3268-4668-A0DC-96FF4ECB1013}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -52,62 +52,38 @@ namespace CommunicationCore.RS232
 		}
 
 
-		public static bool ContinueProcess(byte[] data, int domainAdd, int IPAdd)
-		{
-			bool reVal = false;
-			if ((data[0] == (byte)domainAdd) && (data[3] == (byte)IPAdd))
-			{
-				reVal = true;
-			}
-			return reVal;
-		}
-
-		public static string DataProcess(byte[] data)
+		public static string GetPLMRegister(byte[] data)
 		{
 			string result = "";
 			if (data != null)
 			{
-				switch (data[0])
-				{
-					case ((byte)RS232Command.COM_GET_CTR):
-						for (int i = 2; i < (int)(data[1]+1); i++)
-							result = result + (System.Convert.ToString(data[i], 2)).PadLeft(8, '0') + "-";
-						result = result.Remove(result.Length - 1, 1);
-						break;
-					case ((byte)RS232Command.COM_SET_CTR):
-						result = "ST Control register was written successful";
-						break;
-					default:
-						result = result + Encoding.ASCII.GetString(data, 2, data[1]);
-						break;
-				}
+
+				for (int i = 2; i < (int)(data[1] + 1); i++)
+					result = result + (System.Convert.ToString(data[i], 2)).PadLeft(8, '0') + "-";
+				result = result.Remove(result.Length - 1, 1);
 			}
 
 			return result;
 		}
 
-		public static string DataProcessWithIPAddress(byte[] data)
+		public static string GetDataFromPLM(byte[] data)
 		{
 			string result = "";
 			if (data != null)
 			{
-				switch (data[0])
-				{
-					case ((byte)RS232Command.COM_GET_CTR):
-						for (int i = 2; i < (int)(data[1] + 1); i++)
-							result = result + (System.Convert.ToString(data[i], 2)).PadLeft(8, '0') + "-";
-						result = result.Remove(result.Length - 1, 1);
-						break;
-					case ((byte)RS232Command.COM_SET_CTR):
-						result = "ST Control register was written successful";
-						break;
-					default:
-						result = result + Encoding.ASCII.GetString(data, 2, data[1]);
-						break;
-				}
+				result = result + Encoding.ASCII.GetString(data, 9, data[1] - 7);
 			}
-
 			return result;
+		}
+
+		/// <summary>
+		/// get the command of frame
+		/// </summary>
+		/// <param name="data"></param>
+		/// <returns></returns>
+		public static byte GetCommand(byte[] data)
+		{
+			return data[0];
 		}
 
 	}
