@@ -42,17 +42,32 @@ namespace CommunicationCore.PLM
 										0x8213, 0x0216, 0x021c, 0x8219, 0x0208, 0x820d, 0x8207, 0x0202
 										};
 
-		public static byte[] DataPreProcessing(String data, int maxLength, byte domainAdd, byte transAdd, byte receiAdd, byte control, byte total, byte current, byte repeatition)
+		/// <summary>
+		/// Them cac thong tin lam header cho ban tin
+		/// </summary>
+		/// <param name="data">du lieu gui di</param>
+		/// <param name="domainAdd">dia chi domain</param>
+		/// <param name="transAdd">dia chi gui</param>
+		/// <param name="receiAdd">dia chi nhan</param>
+		/// <param name="control"> byte dieu khien</param>
+		/// <param name="total">tong so khung</param>
+		/// <param name="current">khung hien thoi</param>
+		/// <param name="repetition">so lan gui lai cua khung</param>
+		/// <returns></returns>
+		public static byte[] DataPreProcessing(byte[] data,byte domainAdd, byte transAdd, byte receiAdd, byte control, byte total, byte current, byte repetition)
 		{
-			byte[] processedData = new byte[maxLength + 7];
-			System.Text.ASCIIEncoding.ASCII.GetBytes(data, 0, data.Length, processedData, 7);
+			byte[] processedData = new byte[data.Length + 7];
+			for (int i = 0; i < data.Length; i++)
+			{
+				processedData[i + 7] = data[i];
+			}
 			processedData[0] = domainAdd;
 			processedData[1] = transAdd;
 			processedData[2] = receiAdd;
 			processedData[3] = control;
 			processedData[4] = total;
 			processedData[5] = current;
-			processedData[6] = repeatition;
+			processedData[6] = repetition;
 			return processedData;
 		}
 
@@ -78,5 +93,42 @@ namespace CommunicationCore.PLM
 			processedData[data.Length + 1] = (byte)(FSC & 0x00ff);
 			return processedData;
 		}
+
+		/// <summary>
+		/// Kiem tra IP co dung khong
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="domainAdd"></param>
+		/// <param name="IPAdd"></param>
+		/// <returns></returns>
+		public static bool CheckIP(byte[] data, byte domainAdd, byte IPAdd)
+		{
+			bool reVal = false;
+			if ((data[2] == domainAdd) && (data[4] == IPAdd))
+			{
+				reVal = true;
+			}
+			return reVal;
+		}
+
+		public static bool IsBroadCastMessage(byte[] data, byte domainAdd)
+		{
+			bool reVal = false;
+			if ((data[2] == domainAdd) && (data[4] == 255))
+			{
+				reVal = true;
+			}
+			return reVal;
+		}
+
+		public static IPInformation GetNewFriend(byte[] data)
+		{
+			IPInformation friend = new IPInformation();
+			friend.DomainID = data[2];
+			friend.FriendID = data[3];
+			friend.LastBroadCast = DateTime.Now;
+			return friend;
+		}
+
 	}
 }

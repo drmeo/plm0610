@@ -5,7 +5,7 @@
         xmlns:my="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Luna"
 		xmlns:properties="clr-namespace:PLC_Soft.Properties"
 		FontFamily="Tahoma"
-		FontSize="13">
+		FontSize="13" Icon="/PLC_Soft;component/Images/network-connection-icon.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*" />

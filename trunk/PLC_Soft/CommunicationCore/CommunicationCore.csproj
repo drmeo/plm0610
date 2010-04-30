@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PLM\IPInformation.cs" />
     <Compile Include="PLM\PLMTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RS232\RS232Command.cs" />

@@ -15,6 +15,7 @@ using System.IO.Ports;
 using System.IO;
 using CommunicationCore.RS232;
 using System.Threading;
+using CommunicationCore.PLM;
 
 namespace PLC_Soft
 {
@@ -26,7 +27,13 @@ namespace PLC_Soft
 		private SerialPort serial = null;
 		private SerialPort oldSerial = null;
 		private string reg;
+		private bool closeNow = false;
+		private Thread subThread = null;
+		#region Construtor
 
+		/// <summary>
+		/// ham khoi tao khong tham so
+		/// </summary>
 		public frmSTRegister()
 		{
 			InitializeComponent();
@@ -36,21 +43,36 @@ namespace PLC_Soft
 			Thread.Sleep(100);
 		}
 
-		public frmSTRegister(SerialPort serialPort)
+		/// <summary>
+		/// ham khoi tao
+		/// </summary>
+		/// <param name="serialPort"></param>
+		public frmSTRegister(SerialPort serialPort, Thread thread)
 		{
 			InitializeComponent();
 			this.oldSerial = serialPort;
 			if (this.oldSerial != null)
 			{
 				this.oldSerial.Close();
+				subThread = thread;
+				subThread.Suspend();
+				
 			}
 
 			if (serial == null)
 				serial = new SerialPort();
+
 			InitializeControlValue();
 			Thread.Sleep(100);
 		}
 
+		#endregion
+
+		#region Private Methods
+
+		/// <summary>
+		/// mo port de giao tiep
+		/// </summary>
 		private void OpenPort()
 		{
 			if (!serial.IsOpen)
@@ -74,32 +96,15 @@ namespace PLC_Soft
 			}
 			catch (IOException ex)
 			{
-				MessageBox.Show(this, "Please config RS232 communication.", "Can't connect", MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show(this, "Please check the connection and try to config RS232 communication.", "Can't connect", MessageBoxButton.OK, MessageBoxImage.Error);
+				closeNow = true;
 			}
 		}
 
-		void serial_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
-		{
-			MessageBox.Show(this, "The process has some problems", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-		}
-
-		void serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
-		{
-			Thread.Sleep(500);
-			if (serial.BytesToRead > 0)
-			{
-				SerialPort serialPort = sender as SerialPort;
-				byte[] buffer = null;
-				buffer = RS232Task.ReadData(serialPort);
-				reg = RS232Task.DataProcess(buffer);
-				txtReg.Dispatcher.BeginInvoke(new Action(delegate()
-				{
-					ControlProcess(reg);
-				}));
-			}
-
-		}
-
+		/// <summary>
+		/// xu ly thong tin nhan duoc de phuc vu hien thi
+		/// </summary>
+		/// <param name="registerData"></param>
 		void ControlProcess(string registerData)
 		{
 			string[] bytes = registerData.Split('-');
@@ -143,11 +148,51 @@ namespace PLC_Soft
 			cmbInputFilter.SelectedIndex = inputFilterIndex;
 		}
 
+		/// <summary>
+		/// tinh toan gia tri de hien thi len cac combobox
+		/// </summary>
+		/// <param name="bByte"></param>
+		/// <param name="position"></param>
+		/// <param name="powerValue"></param>
+		/// <returns></returns>
 		int CalculateReg(string bByte, int position, int powerValue)
 		{
 			return (int)Math.Pow(2, powerValue) * (int)Convert.ToInt16(bByte[position].ToString());
 		}
 
+
+		#endregion
+
+		#region Events
+
+		void serial_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
+		{
+			MessageBox.Show(this, "The process has some problems", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+		}
+
+		void serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
+		{
+			Thread.Sleep(500);
+
+			SerialPort serialPort = sender as SerialPort;
+			byte[] buffer = null;
+			buffer = RS232Task.ReadData(serialPort);
+			try
+			{
+				if (RS232Task.GetCommand(buffer) == (byte)RS232Command.COM_GET_CTR)
+				{
+					reg = RS232Task.GetPLMRegister(buffer);
+					txtReg.Dispatcher.BeginInvoke(new Action(delegate()
+					{
+						ControlProcess(reg);
+					}));
+				}
+			}
+			catch (IOException ex)
+			{
+				MessageBox.Show(this, "The process has some problems/nPlease check the connection and try again", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+		}
 		private void btnReadRegister_Click(object sender, RoutedEventArgs e)
 		{
 			try
@@ -163,7 +208,6 @@ namespace PLC_Soft
 			{
 				MessageBox.Show(this, "Can't read the ST register", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
-
 		}
 
 		private void btnWriteRegister_Click(object sender, RoutedEventArgs e)
@@ -191,6 +235,11 @@ namespace PLC_Soft
 			}
 		}
 
+		/// <summary>
+		/// xu ly mo lai port cho chuon trinh chinh khi dong
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			try
@@ -199,15 +248,25 @@ namespace PLC_Soft
 				if (this.oldSerial != null)
 				{
 					this.oldSerial.Open();
+					subThread.Resume();
 				}
 
 			}
 			catch (IOException ex)
 			{
-				MessageBox.Show(this, "Please config RS232 communication.", "Can't connect", MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show(this, "Please check the connection.", "Can't connect", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 
 		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			if (closeNow)
+				this.Close();
+		}
+
+
+		#endregion
 
 	}
 }

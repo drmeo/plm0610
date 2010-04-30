@@ -77,3 +77,8 @@ F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\About.baml
 F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\About.g.cs
 F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\Help.baml
 F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\Help.g.cs
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\bin\Debug\PLC_Soft.exe.manifest
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\bin\Debug\PLC_Soft.application
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\PLC_Soft.TrustInfo.xml
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\PLC_Soft.exe.manifest
+F:\04.HUT\FINAL\DoAn2010\PLC_Soft\PLC_Soft\obj\x86\Debug\PLC_Soft.application
