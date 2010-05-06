@@ -21,9 +21,11 @@ namespace CommunicationCore.RS232
 			byte start = (byte)serialPort.ReadByte();
 			if (start == (byte)RS232Command.COM_HEADER)
 			{
+				Thread.Sleep(20);
 				byte command = (byte)serialPort.ReadByte();
 				byte length = (byte)serialPort.ReadByte();
 				buffer = new byte[length + 2];
+				Thread.Sleep(2 * length);
 				serialPort.Read(buffer, 2, length);
 				buffer[0] = command;
 				buffer[1] = length;

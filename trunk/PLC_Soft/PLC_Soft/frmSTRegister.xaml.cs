@@ -55,7 +55,7 @@ namespace PLC_Soft
 			{
 				this.oldSerial.Close();
 				subThread = thread;
-				subThread.Suspend();
+				//subThread.Suspend();
 				
 			}
 
@@ -248,7 +248,7 @@ namespace PLC_Soft
 				if (this.oldSerial != null)
 				{
 					this.oldSerial.Open();
-					subThread.Resume();
+					//subThread.Resume();
 				}
 
 			}
