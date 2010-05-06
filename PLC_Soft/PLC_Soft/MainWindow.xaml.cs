@@ -125,51 +125,59 @@ namespace PLC_Soft
 			Thread.Sleep(500);
 			SerialPort serialPort = sender as SerialPort;
 			byte[] buffer = null;
-			// doc tu rs232
-			buffer = RS232Task.ReadData(serialPort);
-			// get command
-			command = RS232Task.GetCommand(buffer);
-			switch (command)
+			
+			try
 			{
-				case ((byte)RS232Command.COM_GET_PLM):
-					// kiem tra dieu kien IP
-					if (PLMTask.CheckIP(buffer, domainAdrress, transmitAddress))
-					{
+				// doc tu rs232
+				buffer = RS232Task.ReadData(serialPort);
+				// get command
+				command = RS232Task.GetCommand(buffer);
+				switch (command)
+				{
+					case ((byte)RS232Command.COM_GET_PLM):
+						// kiem tra dieu kien IP
+						//if (PLMTask.CheckIP(buffer, domainAdrress, transmitAddress))
+						//{
 						receiveMessage = RS232Task.GetDataFromPLM(buffer);
 						rtbChatContent.Dispatcher.BeginInvoke(new Action(delegate()
 						{
 							rtbChatContent.AppendText("Friend: " + receiveMessage + "\n");
 							rtbChatContent.ScrollToEnd();
 						}));
-					}
-					break;
-				case ((byte)RS232Command.COM_BROADCAST):
-					if (PLMTask.IsBroadCastMessage(buffer, domainAdrress))
-					{
-						IPInformation newFriend = PLMTask.GetNewFriend(buffer);
-						if (friendsList.Count == 0)
-							friendsList.Add(newFriend);
-						else
+						//}
+						break;
+					case ((byte)RS232Command.COM_BROADCAST):
+						if (PLMTask.IsBroadCastMessage(buffer, domainAdrress))
 						{
-							if (!IsContainFriend(newFriend))
-							{
+							IPInformation newFriend = PLMTask.GetNewFriend(buffer);
+							if (friendsList.Count == 0)
 								friendsList.Add(newFriend);
-							}
 							else
 							{
-								foreach (var oldFriend in friendsList)
+								if (!IsContainFriend(newFriend))
 								{
-									if (oldFriend.FriendID == newFriend.FriendID)
+									friendsList.Add(newFriend);
+								}
+								else
+								{
+									foreach (var oldFriend in friendsList)
 									{
-										oldFriend.LastBroadCast = newFriend.LastBroadCast;
-										break;
+										if (oldFriend.FriendID == newFriend.FriendID)
+										{
+											oldFriend.LastBroadCast = newFriend.LastBroadCast;
+											break;
+										}
 									}
 								}
 							}
 						}
-					}
-					break;
+						break;
+				}
 			}
+			catch (IOException ex)
+			{
+			}
+			
 		}
 
 		private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -199,7 +207,7 @@ namespace PLC_Soft
 					{
 						EnableControl();
 						InitializeIPAddress();
-						broadcastThread.Start();
+						//broadcastThread.Start();
 					}
 					break;
 				case "Close":
@@ -233,7 +241,7 @@ namespace PLC_Soft
 		{
 			currentFriend = (IPInformation)listFriends.SelectedItem;
 			transmitAddress = currentFriend.FriendID;
-			MessageBox.Show(transmitAddress.ToString());
+			//MessageBox.Show(transmitAddress.ToString());
 		}
 		#endregion
 
@@ -297,11 +305,5 @@ namespace PLC_Soft
 			}
 		}
 		#endregion
-
-
-
-
-
-
 	}
 }

@@ -80,19 +80,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>jaGE1Zou/MyM5ZaHct55zAsL9f0=</dsig:DigestValue>
+        <dsig:DigestValue>lwfccqn4P9Xz6fhODfMPuapQcAg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PLC_Soft.exe" size="709632">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PLC_Soft.exe" size="709120">
       <assemblyIdentity name="PLC_Soft" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>V56iHyK7Asm6UhaIsXT4obM/a1g=</dsig:DigestValue>
+        <dsig:DigestValue>dyNOLCsmwSP5hMSbQ4uwUHlooPw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

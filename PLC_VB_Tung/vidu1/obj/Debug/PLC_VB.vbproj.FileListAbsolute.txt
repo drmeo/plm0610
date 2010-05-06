@@ -1,6 +1,0 @@
-C:\Documents and Settings\pham van thanh tung.BACH-AB7B91221E\My Documents\Visual Studio 2008\Projects\PLC_VB\vidu1\obj\Debug\Vidu1.exe
-C:\Documents and Settings\pham van thanh tung.BACH-AB7B91221E\My Documents\Visual Studio 2008\Projects\PLC_VB\vidu1\obj\Debug\Vidu1.xml
-C:\Documents and Settings\pham van thanh tung.BACH-AB7B91221E\My Documents\Visual Studio 2008\Projects\PLC_VB\vidu1\obj\Debug\Vidu1.pdb
-C:\Documents and Settings\pham van thanh tung.BACH-AB7B91221E\Desktop\Do_An\PLC_VB_Tung\vidu1\obj\Debug\Vidu1.exe
-C:\Documents and Settings\pham van thanh tung.BACH-AB7B91221E\Desktop\Do_An\PLC_VB_Tung\vidu1\obj\Debug\Vidu1.xml
-C:\Documents and Settings\pham van thanh tung.BACH-AB7B91221E\Desktop\Do_An\PLC_VB_Tung\vidu1\obj\Debug\Vidu1.pdb
